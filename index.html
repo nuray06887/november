@@ -4,14 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Жасанды интеллект — Курс</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Merriweather:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --bg: #f8f9fa;
+            --surface: #ffffff;
+            --primary: #1e293b; /* Қара-көк */
+            --accent: #d97706; /* Алтын */
+            --accent-hover: #b45309;
+            --text: #334155;
+            --text-light: #64748b;
+            --border: #e2e8f0;
+            --success: #059669;
+            --danger: #dc2626;
+            --radius: 16px;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
+        }
+
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: Arial, 'Segoe UI', sans-serif;
-            background-color: #f5f5f0;
-            color: #1a1a1a;
-            font-size: 20px;
+            font-family: 'Merriweather', Georgia, serif; /* Оқуға ыңғайлы классикалық шрифт */
+            background-color: var(--bg);
+            color: var(--text);
+            font-size: 18px;
             line-height: 1.8;
             min-height: 100vh;
             display: flex;
@@ -20,43 +38,46 @@
 
         /* ================= БҮЙІР ПАНЕЛЬ ================= */
         .sidebar {
-            width: 340px;
-            background: #ffffff;
-            border-right: 3px solid #1a4a7a;
-            padding: 25px 20px;
+            width: 320px;
+            background: var(--primary);
+            color: #f8fafc;
+            padding: 30px 20px;
             position: fixed;
             top: 0; bottom: 0; left: 0;
             overflow-y: auto;
-            transition: transform 0.35s ease;
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             z-index: 200;
+            box-shadow: 4px 0 24px rgba(0,0,0,0.1);
         }
 
         .sidebar.hidden {
             transform: translateX(-100%);
         }
 
-        /* Панельдің ішіндегі жасыру батырмасы */
         .sidebar-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 25px;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
         }
 
         .sidebar h2 {
-            font-size: 1.4em;
-            color: #1a4a7a;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.3em;
+            font-weight: 700;
+            letter-spacing: 0.5px;
             margin: 0;
+            color: #ffffff;
         }
 
         .close-sidebar-btn {
-            background: #e8f0fa;
-            color: #1a4a7a;
+            background: rgba(255,255,255,0.1);
+            color: #fff;
             border: none;
-            width: 36px;
-            height: 36px;
-            border-radius: 8px;
-            font-size: 1.2em;
+            width: 32px; height: 32px;
+            border-radius: 50%;
             cursor: pointer;
             display: flex;
             align-items: center;
@@ -64,123 +85,133 @@
             transition: 0.2s;
         }
 
-        .close-sidebar-btn:hover {
-            background: #d0e2f5;
-        }
+        .close-sidebar-btn:hover { background: rgba(255,255,255,0.2); }
 
-        /* ================= АШУ БАТЫРМАСЫ (панель жабық кезде) ================= */
+        /* Ашу батырмасы */
         .open-sidebar-btn {
             position: fixed;
-            top: 20px;
-            left: 20px;
+            top: 20px; left: 20px;
             z-index: 150;
-            background: #1a4a7a;
+            background: var(--primary);
             color: white;
             border: none;
             padding: 12px 20px;
-            border-radius: 10px;
-            font-size: 1em;
-            font-weight: bold;
+            border-radius: 12px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.95em;
+            font-weight: 600;
             cursor: pointer;
             display: none;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+            box-shadow: var(--shadow-md);
             transition: 0.2s;
             align-items: center;
             gap: 8px;
         }
 
-        .open-sidebar-btn.show {
-            display: flex;
-        }
+        .open-sidebar-btn.show { display: flex; }
+        .open-sidebar-btn:hover { background: #0f172a; transform: translateY(-2px); }
 
-        .open-sidebar-btn:hover {
-            background: #143a63;
-        }
-
-        /* ================= ПРОГРЕСС ================= */
-        .progress-wrap {
-            background: #e0e0e0;
-            border-radius: 10px;
-            height: 24px;
-            margin-bottom: 8px;
+        /* Прогресс */
+        .progress-container {
+            background: rgba(0,0,0,0.2);
+            border-radius: 20px;
+            height: 8px;
+            margin-bottom: 10px;
             overflow: hidden;
-            border: 2px solid #1a4a7a;
         }
 
         .progress-bar {
             height: 100%;
-            background: #2c8a3e;
+            background: var(--accent);
             width: 0%;
-            transition: width 0.5s ease;
+            transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            border-radius: 20px;
         }
 
         .progress-text {
-            text-align: center;
-            font-size: 0.85em;
-            color: #1a4a7a;
-            margin-bottom: 25px;
-            font-weight: bold;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.8em;
+            color: #cbd5e1;
+            margin-bottom: 30px;
+            text-align: right;
         }
 
-        /* ================= АПТА / САБАҚ ТІЗІМІ ================= */
-        .week-group { margin-bottom: 25px; }
+        /* Апталар мен сабақтар */
+        .week-group { margin-bottom: 30px; }
 
         .week-header {
-            font-size: 1.05em;
-            font-weight: bold;
-            color: #1a4a7a;
-            padding: 10px 12px;
-            background: #e8f0fa;
-            border-radius: 8px;
-            margin-bottom: 10px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.85em;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--accent);
+            margin-bottom: 12px;
+            padding-left: 10px;
         }
 
         .lesson-link {
             display: flex;
             align-items: center;
             gap: 12px;
-            padding: 14px 15px;
-            color: #1a1a1a;
+            padding: 12px 15px;
+            color: #e2e8f0;
             text-decoration: none;
-            border-radius: 8px;
+            border-radius: 10px;
             margin-bottom: 6px;
-            font-size: 1em;
-            transition: 0.2s;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.95em;
+            transition: all 0.2s;
             cursor: pointer;
-            border: 2px solid #e0e0e0;
-            background: #fafafa;
+            position: relative;
+            border: 1px solid transparent;
         }
 
         .lesson-link .circle {
-            width: 32px; height: 32px;
-            border-radius: 50%;
-            background: #1a4a7a;
-            color: white;
+            width: 28px; height: 28px;
+            border-radius: 8px; /* Шаршыға жақын стиль */
+            background: rgba(255,255,255,0.1);
+            color: #fff;
             flex-shrink: 0;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: bold;
+            font-weight: 600;
+            font-size: 0.85em;
+            transition: 0.2s;
         }
 
-        .lesson-link:hover { background: #e8f0fa; border-color: #1a4a7a; }
-        .lesson-link.active { background: #1a4a7a; color: white; border-color: #1a4a7a; }
-        .lesson-link.active .circle { background: white; color: #1a4a7a; }
-        .lesson-link.done { background: #e8f5e9; border-color: #2c8a3e; }
-        .lesson-link.done .title { text-decoration: line-through; text-decoration-thickness: 2px; color: #555; }
-        .lesson-link.done .circle { background: #2c8a3e; }
-        .lesson-link.done.active { background: #2c8a3e; color: white; border-color: #2c8a3e; }
-        .lesson-link.done.active .circle { background: white; color: #2c8a3e; }
+        .lesson-link:hover {
+            background: rgba(255,255,255,0.05);
+            color: #fff;
+        }
+        
+        .lesson-link.active {
+            background: rgba(217, 119, 6, 0.15);
+            border-color: rgba(217, 119, 6, 0.3);
+            color: #fff;
+        }
+        
+        .lesson-link.active .circle {
+            background: var(--accent);
+            color: #fff;
+        }
 
-        /* ================= НЕГІЗГІ МАЗМҰН (ОРТАҒА КОЮ) ================= */
+        /* Өтілген сабақ */
+        .lesson-link.done { opacity: 0.6; }
+        .lesson-link.done .title { text-decoration: line-through; text-decoration-color: var(--text-light); }
+        .lesson-link.done .circle { background: var(--success); color: white; }
+        .lesson-link.done.active { opacity: 1; background: rgba(5, 150, 105, 0.15); border-color: rgba(5, 150, 105, 0.3); }
+        .lesson-link.done.active .circle { background: var(--success); }
+
+        /* ================= НЕГІЗГІ МАЗМҰН ================= */
         .main {
-            /* Панель ашық кезде сол жақтан 340px шегеріп, контентті ортаға қоямыз */
-            margin-left: 340px;
-            width: calc(100% - 340px);
+            margin-left: 320px;
+            width: calc(100% - 320px);
             display: flex;
-            justify-content: center; /* Контентті көлденеңінен ортаға қою */
-            padding: 50px 20px;
-            transition: margin-left 0.35s ease, width 0.35s ease;
+            justify-content: center;
+            padding: 60px 40px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .main.expanded {
@@ -190,67 +221,78 @@
 
         .content-wrapper {
             width: 100%;
-            max-width: 900px; /* Контенттің максималды ені */
+            max-width: 850px;
         }
 
         /* ================= САБАҚ КАРТОЧКАСЫ ================= */
         .lesson-content {
             display: none;
-            background: #ffffff;
-            border-radius: 12px;
-            padding: 45px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-            border: 1px solid #ddd;
+            background: var(--surface);
+            border-radius: var(--radius);
+            padding: 50px;
+            box-shadow: var(--shadow-lg);
+            animation: fadeUp 0.5s ease-out;
         }
 
         .lesson-content.active { display: block; }
 
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         .lesson-badge {
             display: inline-block;
-            background: #e8f0fa;
-            color: #1a4a7a;
-            font-size: 0.85em;
-            padding: 6px 16px;
-            border-radius: 8px;
-            margin-bottom: 15px;
-            font-weight: bold;
-            border: 1px solid #1a4a7a;
+            background: #f1f5f9;
+            color: var(--text-light);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.75em;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding: 6px 14px;
+            border-radius: 6px;
+            margin-bottom: 20px;
         }
 
         .lesson-content h1 {
-            color: #1a4a7a;
-            font-size: 2em;
-            margin-bottom: 10px;
-            line-height: 1.3;
+            font-family: 'Montserrat', sans-serif;
+            color: var(--primary);
+            font-size: 2.2em;
+            font-weight: 700;
+            margin-bottom: 15px;
+            line-height: 1.2;
+            letter-spacing: -0.5px;
         }
 
         .lesson-content .subtitle {
-            color: #555;
-            font-size: 1.1em;
-            margin-bottom: 30px;
-            padding-bottom: 20px;
-            border-bottom: 2px solid #e0e0e0;
+            color: var(--text-light);
+            font-size: 1.15em;
+            margin-bottom: 40px;
+            font-style: italic;
+            padding-bottom: 30px;
+            border-bottom: 1px solid var(--border);
         }
 
-        .lesson-content p { margin-bottom: 20px; }
+        .lesson-content p { margin-bottom: 24px; }
 
         .lesson-content h2.section-title {
-            color: #1a4a7a;
-            font-size: 1.3em;
-            margin: 30px 0 15px;
-            padding-bottom: 8px;
-            border-bottom: 2px solid #e8f0fa;
+            font-family: 'Montserrat', sans-serif;
+            color: var(--primary);
+            font-size: 1.4em;
+            font-weight: 600;
+            margin: 40px 0 20px;
         }
 
         /* ===== СУРЕТ ===== */
         .lesson-image {
             width: 100%;
-            height: 300px;
+            height: 380px;
             border-radius: 12px;
-            margin-bottom: 30px;
+            margin-bottom: 40px;
             overflow: hidden;
-            border: 3px solid #e8f0fa;
-            background: #f0f6fc;
+            background: #f1f5f9;
+            box-shadow: var(--shadow-sm);
         }
 
         .lesson-image img {
@@ -258,209 +300,299 @@
             height: 100%;
             object-fit: cover;
             display: block;
+            transition: transform 0.5s;
         }
 
-        /* ===== БЛОКТАР ===== */
+        .lesson-image:hover img {
+            transform: scale(1.02);
+        }
+
+        /* ===== БЛОКТАР (МАҚСАТ, МЫСАЛ, Т.Б.) ===== */
+        .goal, .example, .practice {
+            padding: 24px 30px;
+            border-radius: 12px;
+            margin: 30px 0;
+            font-size: 1.05em;
+            position: relative;
+        }
+
+        .goal {
+            background: #f8fafc;
+            border-left: 4px solid var(--primary);
+        }
+        .goal strong { color: var(--primary); font-family: 'Montserrat', sans-serif; }
+
+        .example {
+            background: #fffbeb;
+            border-left: 4px solid var(--accent);
+        }
+        .example strong { color: var(--accent-hover); font-family: 'Montserrat', sans-serif; }
+
+        .practice {
+            background: #ecfdf5;
+            border-left: 4px solid var(--success);
+        }
+        .practice strong { color: var(--success); font-family: 'Montserrat', sans-serif; }
+
+        /* ===== КЕҢЕС ===== */
         .daily-tip {
-            background: linear-gradient(135deg, #2c8a3e, #1e6b2e);
+            background: var(--primary);
             color: white;
-            padding: 25px 30px;
+            padding: 30px;
             border-radius: 12px;
-            margin: 30px 0;
-            box-shadow: 0 4px 12px rgba(44,138,62,0.3);
+            margin: 40px 0;
+            position: relative;
+            overflow: hidden;
         }
-        .daily-tip::before {
-            content: "💡 БҮГІНГІ КЕҢЕС";
-            display: block;
-            font-size: 0.8em;
-            font-weight: bold;
-            letter-spacing: 1px;
-            margin-bottom: 10px;
-            opacity: 0.9;
-        }
-        .daily-tip p { font-size: 1.15em; font-weight: bold; margin: 0; }
 
-        .think-box {
-            background: #fff8e1;
-            border: 3px dashed #d4a017;
-            padding: 25px 30px;
-            border-radius: 12px;
-            margin: 30px 0;
+        .daily-tip::before {
+            content: "💡";
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            font-size: 4em;
+            opacity: 0.1;
         }
+
+        .daily-tip::after {
+            content: "БҮГІНГІ КЕҢЕС";
+            display: block;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.75em;
+            font-weight: 600;
+            letter-spacing: 1px;
+            color: var(--accent);
+            margin-bottom: 12px;
+        }
+
+        .daily-tip p {
+            font-size: 1.15em;
+            font-weight: 500;
+            margin: 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ===== ОЙЛАНЫҢЫЗ ===== */
+        .think-box {
+            background: #f8fafc;
+            border: 2px dashed #cbd5e1;
+            padding: 30px;
+            border-radius: 12px;
+            margin: 40px 0;
+        }
+
         .think-box::before {
             content: "🤔 ОЙЛАНЫҢЫЗ";
             display: block;
-            font-size: 0.85em;
-            font-weight: bold;
-            color: #8a6d00;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.75em;
+            font-weight: 600;
+            color: var(--text-light);
             letter-spacing: 1px;
-            margin-bottom: 12px;
+            margin-bottom: 15px;
         }
-        .think-box p { font-size: 1.1em; font-style: italic; color: #5c4a00; margin: 0; }
 
-        .quiz-box {
-            background: #e8f0fa;
-            border: 3px solid #1a4a7a;
-            border-radius: 12px;
-            padding: 30px;
-            margin: 30px 0;
+        .think-box p {
+            font-size: 1.1em;
+            font-style: italic;
+            color: var(--text);
+            margin: 0;
         }
+
+        /* ===== ТЕСТ ===== */
+        .quiz-box {
+            background: #f1f5f9;
+            border-radius: 16px;
+            padding: 35px;
+            margin: 40px 0;
+        }
+
         .quiz-box::before {
             content: "❓ ТЕКСЕРІП КӨРІҢІЗ";
             display: block;
-            font-size: 0.85em;
-            font-weight: bold;
-            color: #1a4a7a;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.75em;
+            font-weight: 600;
+            color: var(--primary);
             letter-spacing: 1px;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
         }
-        .quiz-question { font-weight: bold; font-size: 1.1em; margin-bottom: 15px; color: #1a1a1a; }
+
+        .quiz-question {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 1.15em;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+
         .quiz-option {
             display: block;
             width: 100%;
             text-align: left;
-            padding: 15px 20px;
-            margin-bottom: 10px;
+            padding: 16px 24px;
+            margin-bottom: 12px;
             background: white;
-            border: 2px solid #b8cfe6;
+            border: 2px solid var(--border);
             border-radius: 10px;
             font-size: 1em;
-            cursor: pointer;
-            transition: 0.2s;
             font-family: inherit;
-            color: #1a1a1a;
+            color: var(--text);
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: var(--shadow-sm);
         }
-        .quiz-option:hover { background: #f0f6fc; border-color: #1a4a7a; }
-        .quiz-option.correct { background: #e8f5e9; border-color: #2c8a3e; color: #1e6b2e; font-weight: bold; }
-        .quiz-option.wrong { background: #fdecea; border-color: #c62828; color: #c62828; }
+
+        .quiz-option:hover { border-color: var(--primary); transform: translateY(-2px); }
+        .quiz-option.correct { background: #ecfdf5; border-color: var(--success); color: var(--success); font-weight: bold; }
+        .quiz-option.wrong { background: #fef2f2; border-color: var(--danger); color: var(--danger); }
 
         .quiz-feedback {
-            margin-top: 15px;
-            padding: 15px 20px;
+            margin-top: 20px;
+            padding: 16px 24px;
             border-radius: 10px;
-            font-weight: bold;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
             display: none;
         }
-        .quiz-feedback.show { display: block; }
-        .quiz-feedback.good { background: #e8f5e9; color: #1e6b2e; border-left: 5px solid #2c8a3e; }
-        .quiz-feedback.bad { background: #fdecea; color: #c62828; border-left: 5px solid #c62828; }
 
+        .quiz-feedback.show { display: block; animation: fadeUp 0.3s ease-out; }
+        .quiz-feedback.good { background: #ecfdf5; color: var(--success); }
+        .quiz-feedback.bad { background: #fef2f2; color: var(--danger); }
+
+        /* ===== ТАПСЫРМА ===== */
         .action-box {
-            background: #f3e5f5;
-            border-left: 6px solid #7b1fa2;
-            padding: 25px 30px;
+            background: #eef2ff;
+            border-left: 4px solid #6366f1;
+            padding: 24px 30px;
             border-radius: 12px;
-            margin: 30px 0;
+            margin: 40px 0;
         }
+
         .action-box::before {
             content: "🎯 БҮГІН ІСТЕП КӨРІҢІЗ";
             display: block;
-            font-size: 0.85em;
-            font-weight: bold;
-            color: #7b1fa2;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.75em;
+            font-weight: 600;
+            color: #4f46e5;
             letter-spacing: 1px;
             margin-bottom: 12px;
         }
+
         .action-box p { font-size: 1.05em; margin: 0; }
 
-        .goal { background: #e8f0fa; padding: 20px 25px; border-radius: 10px; margin: 25px 0; border-left: 6px solid #1a4a7a; font-size: 1.05em; }
-        .goal strong { color: #1a4a7a; }
+        /* ===== ЕСКЕРТУЛЕР ===== */
+        .warning, .health-warning {
+            border-radius: 12px;
+            padding: 30px;
+            margin: 40px 0;
+        }
 
-        .example { background: #fff8e1; border-left: 6px solid #d4a017; padding: 20px 25px; border-radius: 10px; margin: 25px 0; font-size: 1.05em; }
-        .example strong { color: #8a6d00; }
+        .warning { background: #fef2f2; border: 2px solid #fecaca; }
+        .warning h4 { font-family: 'Montserrat', sans-serif; color: var(--danger); margin-bottom: 15px; font-size: 1.2em; }
 
-        .practice { background: #e8f5e9; border-left: 6px solid #2c8a3e; padding: 20px 25px; border-radius: 10px; margin: 25px 0; font-size: 1.05em; }
-        .practice strong { color: #1e6b2e; }
+        .health-warning { background: #fff7ed; border: 2px solid #fed7aa; }
+        .health-warning h4 { font-family: 'Montserrat', sans-serif; color: #ea580c; margin-bottom: 15px; font-size: 1.2em; }
 
-        .warning { background: #fdecea; border: 3px solid #c62828; padding: 25px 30px; border-radius: 10px; margin: 25px 0; }
-        .warning h4 { color: #c62828; margin-bottom: 15px; font-size: 1.2em; }
-        .warning ul { margin-left: 25px; }
-        .warning li { margin-bottom: 10px; font-size: 1.05em; }
+        .warning ul, .health-warning ul { margin-left: 20px; }
+        .warning li, .health-warning li { margin-bottom: 12px; }
 
-        .health-warning { background: #fff3e0; border: 3px solid #e65100; padding: 25px 30px; border-radius: 10px; margin: 25px 0; }
-        .health-warning h4 { color: #e65100; margin-bottom: 15px; font-size: 1.2em; }
-        .health-warning ul { margin-left: 25px; }
-        .health-warning li { margin-bottom: 10px; font-size: 1.05em; }
-
+        /* ===== АЯҚТАУ БАТЫРМАСЫ ===== */
         .finish-btn {
             display: block;
             width: 100%;
-            margin-top: 40px;
-            padding: 22px;
-            background: #2c8a3e;
+            margin-top: 50px;
+            padding: 20px;
+            background: var(--primary);
             color: white;
             border: none;
-            border-radius: 10px;
-            font-size: 1.2em;
-            font-weight: bold;
+            border-radius: 12px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.1em;
+            font-weight: 600;
             cursor: pointer;
-            transition: 0.2s;
+            transition: all 0.3s;
+            box-shadow: var(--shadow-md);
         }
-        .finish-btn:hover { background: #1e6b2e; }
-        .finish-btn.finished { background: #888; cursor: default; }
-        .finish-btn.finished:hover { background: #888; }
+
+        .finish-btn:hover { background: #0f172a; transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+        .finish-btn.finished { background: var(--success); cursor: default; transform: none; box-shadow: none; }
 
         /* ================= МАРАПАТ ================= */
         .reward-popup {
             position: fixed;
             top: 50%; left: 50%;
-            transform: translate(-50%, -50%) scale(0);
+            transform: translate(-50%, -50%) scale(0.9);
             background: white;
-            padding: 40px 50px;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            padding: 50px;
+            border-radius: 24px;
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
             text-align: center;
             z-index: 1000;
-            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-            border: 4px solid #2c8a3e;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
             max-width: 90%;
+            opacity: 0;
+            pointer-events: none;
         }
-        .reward-popup.show { transform: translate(-50%, -50%) scale(1); }
-        .reward-popup .reward-emoji { font-size: 4em; margin-bottom: 15px; }
-        .reward-popup .reward-title { font-size: 1.5em; font-weight: bold; color: #2c8a3e; margin-bottom: 10px; }
-        .reward-popup .reward-text { color: #555; font-size: 1.1em; }
+
+        .reward-popup.show {
+            transform: translate(-50%, -50%) scale(1);
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .reward-popup .reward-emoji { font-size: 5em; margin-bottom: 20px; }
+        .reward-popup .reward-title { font-family: 'Montserrat', sans-serif; font-size: 1.8em; font-weight: 700; color: var(--primary); margin-bottom: 15px; }
+        .reward-popup .reward-text { color: var(--text-light); font-size: 1.1em; }
 
         .reward-overlay {
             position: fixed;
             top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0,0,0,0.4);
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(4px);
             z-index: 999;
             display: none;
+            opacity: 0;
+            transition: opacity 0.3s;
         }
-        .reward-overlay.show { display: block; }
+
+        .reward-overlay.show { display: block; opacity: 1; }
 
         /* ================= МОБИЛЬДІ ================= */
         @media (max-width: 900px) {
-            body { font-size: 18px; }
+            body { font-size: 17px; }
             .sidebar { transform: translateX(-100%); }
             .sidebar.open { transform: translateX(0); }
-            .main { margin-left: 0; width: 100%; padding: 20px 15px; }
+            .main { margin-left: 0; width: 100%; padding: 30px 20px; }
             .open-sidebar-btn { top: 15px; left: 15px; }
-            .lesson-content { padding: 25px 20px; }
-            .lesson-content h1 { font-size: 1.5em; }
-            .lesson-image { height: 200px; }
-            .reward-popup { padding: 30px 25px; }
+            .lesson-content { padding: 30px 25px; border-radius: 12px; }
+            .lesson-content h1 { font-size: 1.7em; }
+            .lesson-image { height: 250px; }
+            .goal, .example, .practice, .daily-tip, .think-box, .quiz-box, .action-box, .warning, .health-warning { padding: 20px; }
+            .reward-popup { padding: 30px 20px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- ================= АШУ БАТЫРМАСЫ (Панель жабық кезде көрінеді) ================= -->
+    <!-- Ашу батырмасы -->
     <button class="open-sidebar-btn" id="openSidebarBtn" onclick="toggleSidebar()">
         ☰ Мәзір
     </button>
 
-    <!-- ================= БҮЙІР ПАНЕЛЬ ================= -->
+    <!-- БҮЙІР ПАНЕЛЬ -->
     <aside class="sidebar" id="sidebar">
         <div class="sidebar-header">
-            <h2>Жасанды интеллект</h2>
+            <h2>ЖИ Курсы</h2>
             <button class="close-sidebar-btn" onclick="toggleSidebar()" title="Жасыру">✕</button>
         </div>
 
-        <div class="progress-wrap">
+        <div class="progress-container">
             <div class="progress-bar" id="progressBar"></div>
         </div>
-        <p class="progress-text" id="progressText">0 / 8 сабақ өтілді</p>
+        <div class="progress-text" id="progressText">0 / 8 өтілді</div>
 
         <div class="week-group">
             <div class="week-header">1-апта: Танысу</div>
@@ -483,7 +615,7 @@
         </div>
     </aside>
 
-    <!-- ================= НЕГІЗГІ МАЗМҰН ================= -->
+    <!-- НЕГІЗГІ МАЗМҰН -->
     <main class="main" id="main">
         <div class="content-wrapper">
             
@@ -691,19 +823,19 @@
                 </div>
 
                 <h2 class="section-title">✅ Не сұрауға БОЛАДЫ (қауіпсіз):</h2>
-                <ul style="margin-left: 25px; margin-bottom: 20px;">
-                    <li style="margin-bottom: 10px;">«Қан қысымы деген не? Ол қалай өлшенеді?»</li>
-                    <li style="margin-bottom: 10px;">«Дәрігерге баруға қалай дайындалу керек?»</li>
-                    <li style="margin-bottom: 10px;">«Қант диабеті бар адам қандай тағамдарды жеуге болмайды?»</li>
-                    <li style="margin-bottom: 10px;">«Қан қысымын өлшейтін аспапты қалай дұрыс қолдану керек?»</li>
+                <ul style="margin-left: 25px; margin-bottom: 30px;">
+                    <li style="margin-bottom: 12px;">«Қан қысымы деген не? Ол қалай өлшенеді?»</li>
+                    <li style="margin-bottom: 12px;">«Дәрігерге баруға қалай дайындалу керек?»</li>
+                    <li style="margin-bottom: 12px;">«Қант диабеті бар адам қандай тағамдарды жеуге болмайды?»</li>
+                    <li style="margin-bottom: 12px;">«Қан қысымын өлшейтін аспапты қалай дұрыс қолдану керек?»</li>
                 </ul>
 
                 <h2 class="section-title">❌ Не сұрауға БОЛМАЙДЫ (қауіпті):</h2>
-                <ul style="margin-left: 25px; margin-bottom: 20px;">
-                    <li style="margin-bottom: 10px;">«Менің басым ауырады. Қандай дәрі ішейін?»</li>
-                    <li style="margin-bottom: 10px;">«Менің қан қысымым 160/100. Бұл не деген?»</li>
-                    <li style="margin-bottom: 10px;">«Менің белгілерім қандай ауруға ұқсайды?»</li>
-                    <li style="margin-bottom: 10px;">«Дәрігер тағайындаған дәріні тоқтатуға бола ма?»</li>
+                <ul style="margin-left: 25px; margin-bottom: 30px;">
+                    <li style="margin-bottom: 12px;">«Менің басым ауырады. Қандай дәрі ішейін?»</li>
+                    <li style="margin-bottom: 12px;">«Менің қан қысымым 160/100. Бұл не деген?»</li>
+                    <li style="margin-bottom: 12px;">«Менің белгілерім қандай ауруға ұқсайды?»</li>
+                    <li style="margin-bottom: 12px;">«Дәрігер тағайындаған дәріні тоқтатуға бола ма?»</li>
                 </ul>
 
                 <div class="daily-tip">
@@ -874,7 +1006,7 @@
         </div>
     </main>
 
-    <!-- ================= МАРАПАТ POPUP ================= -->
+    <!-- МАРАПАТ POPUP -->
     <div class="reward-overlay" id="rewardOverlay" onclick="closeReward()"></div>
     <div class="reward-popup" id="rewardPopup">
         <div class="reward-emoji" id="rewardEmoji">🏆</div>
@@ -882,7 +1014,7 @@
         <div class="reward-text" id="rewardText">Сіз бұл сабақты аяқтадыңыз!</div>
     </div>
 
-    <!-- ================= JAVASCRIPT ================= -->
+    <!-- JAVASCRIPT -->
     <script>
         const lessonLinks = document.querySelectorAll('.lesson-link');
         const lessonContents = document.querySelectorAll('.lesson-content');
@@ -896,7 +1028,6 @@
         let completed = JSON.parse(localStorage.getItem('completedLessons')) || [];
         let sidebarHidden = localStorage.getItem('sidebarHidden') === 'true';
 
-        // Панельді жасыру/көрсету
         function toggleSidebar() {
             sidebarHidden = !sidebarHidden;
             applySidebarState();
@@ -933,7 +1064,7 @@
             const done = completed.length;
             const percent = (done / total) * 100;
             progressBar.style.width = percent + '%';
-            progressText.textContent = `${done} / ${total} сабақ өтілді`;
+            progressText.textContent = `${done} / ${total} өтілді`;
         }
 
         function markCompleted() {
@@ -1016,7 +1147,6 @@
         lessonLinks.forEach(link => {
             link.addEventListener('click', () => {
                 openLesson(link.dataset.lesson);
-                // Мобильде сабақ таңдағанда панельді жабу
                 if (window.innerWidth <= 900) {
                     sidebarHidden = true;
                     applySidebarState();
@@ -1036,7 +1166,6 @@
             });
         });
 
-        // Бастапқы күй
         applySidebarState();
         openLesson(1);
         markCompleted();
