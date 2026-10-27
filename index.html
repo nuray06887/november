@@ -3,24 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Жасанды интеллект — Курс</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Merriweather:wght@300;400;700&display=swap" rel="stylesheet">
+    <title>Жасанды интеллект — Білім деңгейін тексеру</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Merriweather:wght@300;400;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
     <style>
         :root {
             --bg: #f8f9fa;
             --surface: #ffffff;
             --primary: #1e293b;
             --accent: #d97706;
-            --accent-hover: #b45309;
             --text: #334155;
             --text-light: #64748b;
             --border: #e2e8f0;
             --success: #059669;
             --danger: #dc2626;
-            --radius: 16px;
-            --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
-            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
-            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -32,1193 +28,603 @@
             font-size: 18px;
             line-height: 1.8;
             min-height: 100vh;
+        }
+
+        /* ================= ЭКРАНДАР ================= */
+        .screen {
+            display: none;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+        .screen.active { display: block; }
+
+        /* ================= 1. БАСТЫ ЭКРАН (LED үшін) ================= */
+        .presentation-screen {
             display: flex;
             flex-direction: column;
-        }
-
-        /* ================= БҮЙІР ПАНЕЛЬ ================= */
-        .sidebar {
-            width: 320px;
-            background: var(--primary);
-            color: #f8fafc;
-            padding: 30px 20px;
-            position: fixed;
-            top: 0; bottom: 0; left: 0;
-            overflow-y: auto;
-            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            z-index: 200;
-            box-shadow: 4px 0 24px rgba(0,0,0,0.1);
-            display: flex;
-            flex-direction: column;
-        }
-
-        .sidebar.hidden {
-            transform: translateX(-100%);
-        }
-
-        .sidebar-header {
-            display: flex;
-            justify-content: space-between;
             align-items: center;
-            margin-bottom: 30px;
-            padding-bottom: 20px;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
+            justify-content: center;
+            text-align: center;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: white;
+            min-height: 100vh;
+            padding: 60px 40px;
         }
 
-        .sidebar h2 {
+        .presentation-screen h1 {
             font-family: 'Montserrat', sans-serif;
-            font-size: 1.3em;
-            font-weight: 700;
-            letter-spacing: 0.5px;
-            margin: 0;
+            font-size: 3.5em;
+            font-weight: 800;
+            margin-bottom: 20px;
             color: #ffffff;
         }
 
-        .close-sidebar-btn {
-            background: rgba(255,255,255,0.1);
-            color: #fff;
-            border: none;
-            width: 32px; height: 32px;
-            border-radius: 50%;
-            cursor: pointer;
+        .presentation-screen .subtitle {
+            font-size: 1.5em;
+            color: #cbd5e1;
+            margin-bottom: 50px;
+        }
+
+        .qr-container {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            margin-bottom: 40px;
+        }
+
+        .qr-container img, .qr-container canvas {
+            display: block;
+            width: 350px !important;
+            height: 350px !important;
+        }
+
+        .qr-instruction {
+            font-size: 1.4em;
+            color: #fbbf24;
+            font-weight: 600;
+            margin-bottom: 20px;
             display: flex;
             align-items: center;
+            gap: 15px;
+        }
+
+        .qr-steps {
+            background: rgba(255,255,255,0.1);
+            padding: 25px 40px;
+            border-radius: 16px;
+            font-size: 1.1em;
+            color: #e2e8f0;
+            text-align: left;
+        }
+
+        /* ================= 2. АТЫ-ЖӨНІ ЕНГІЗУ ================= */
+        .name-screen {
+            display: flex;
+            flex-direction: column;
             justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .name-card {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .name-card h1 {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--primary);
+            font-size: 1.8em;
+            margin-bottom: 10px;
+        }
+
+        .name-card p {
+            color: var(--text-light);
+            margin-bottom: 30px;
+        }
+
+        .name-input {
+            width: 100%;
+            padding: 16px 20px;
+            font-size: 1.1em;
+            font-family: inherit;
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            margin-bottom: 20px;
             transition: 0.2s;
         }
 
-        .close-sidebar-btn:hover { background: rgba(255,255,255,0.2); }
+        .name-input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
 
-        /* Ашу батырмасы */
-        .open-sidebar-btn {
-            position: fixed;
-            top: 20px; left: 20px;
-            z-index: 150;
+        .start-btn {
+            width: 100%;
+            padding: 18px;
             background: var(--primary);
             color: white;
             border: none;
-            padding: 12px 20px;
             border-radius: 12px;
             font-family: 'Montserrat', sans-serif;
-            font-size: 0.95em;
+            font-size: 1.1em;
             font-weight: 600;
             cursor: pointer;
-            display: none;
-            box-shadow: var(--shadow-md);
             transition: 0.2s;
-            align-items: center;
-            gap: 8px;
         }
 
-        .open-sidebar-btn.show { display: flex; }
-        .open-sidebar-btn:hover { background: #0f172a; transform: translateY(-2px); }
+        .start-btn:hover { background: #0f172a; }
+        .start-btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
-        /* Прогресс */
-        .progress-container {
-            background: rgba(0,0,0,0.2);
-            border-radius: 20px;
-            height: 8px;
+        /* ================= 3. ТЕСТ ЭКРАНЫ ================= */
+        .quiz-container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .quiz-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .quiz-header h1 {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--primary);
+            font-size: 1.8em;
             margin-bottom: 10px;
+        }
+
+        .quiz-progress {
+            background: #e2e8f0;
+            height: 12px;
+            border-radius: 10px;
+            margin-bottom: 30px;
             overflow: hidden;
         }
 
-        .progress-bar {
+        .quiz-progress-bar {
             height: 100%;
             background: var(--accent);
             width: 0%;
-            transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-            border-radius: 20px;
-        }
-
-        .progress-text {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 0.8em;
-            color: #cbd5e1;
-            margin-bottom: 20px;
-            text-align: right;
-        }
-
-        /* Апталар мен сабақтар */
-        .week-group { margin-bottom: 30px; }
-
-        .week-header {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 0.85em;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--accent);
-            margin-bottom: 12px;
-            padding-left: 10px;
-        }
-
-        .lesson-link {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 12px 15px;
-            color: #e2e8f0;
-            text-decoration: none;
+            transition: width 0.4s ease;
             border-radius: 10px;
-            margin-bottom: 6px;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 0.95em;
-            transition: all 0.2s;
-            cursor: pointer;
-            position: relative;
-            border: 1px solid transparent;
         }
 
-        .lesson-link .circle {
-            width: 28px; height: 28px;
-            border-radius: 8px;
-            background: rgba(255,255,255,0.1);
-            color: #fff;
-            flex-shrink: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 600;
-            font-size: 0.85em;
-            transition: 0.2s;
+        .question-card {
+            background: white;
+            border-radius: 16px;
+            padding: 30px 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
+            animation: slideIn 0.4s ease-out;
         }
 
-        .lesson-link:hover {
-            background: rgba(255,255,255,0.05);
-            color: #fff;
-        }
-        
-        .lesson-link.active {
-            background: rgba(217, 119, 6, 0.15);
-            border-color: rgba(217, 119, 6, 0.3);
-            color: #fff;
-        }
-        
-        .lesson-link.active .circle {
-            background: var(--accent);
-            color: #fff;
-        }
-
-        /* Өтілген сабақ */
-        .lesson-link.done { opacity: 0.6; }
-        .lesson-link.done .title { text-decoration: line-through; text-decoration-color: var(--text-light); }
-        .lesson-link.done .circle { background: var(--success); color: white; }
-        .lesson-link.done.active { opacity: 1; background: rgba(5, 150, 105, 0.15); border-color: rgba(5, 150, 105, 0.3); }
-        .lesson-link.done.active .circle { background: var(--success); }
-
-        /* Тазалау батырмасы */
-        .reset-btn {
-            margin-top: auto;
-            background: rgba(220, 38, 38, 0.1);
-            color: #fca5a5;
-            border: 1px solid rgba(220, 38, 38, 0.2);
-            padding: 12px;
-            border-radius: 8px;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 0.85em;
-            font-weight: 600;
-            cursor: pointer;
-            transition: 0.2s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-        .reset-btn:hover {
-            background: rgba(220, 38, 38, 0.2);
-            color: #fecaca;
-        }
-
-        /* ================= НЕГІЗГІ МАЗМҰН ================= */
-        .main {
-            margin-left: 320px;
-            width: calc(100% - 320px);
-            display: flex;
-            justify-content: center;
-            padding: 60px 40px;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .main.expanded {
-            margin-left: 0;
-            width: 100%;
-        }
-
-        .content-wrapper {
-            width: 100%;
-            max-width: 850px;
-        }
-
-        /* ================= САБАҚ КАРТОЧКАСЫ ================= */
-        .lesson-content {
-            display: none;
-            background: var(--surface);
-            border-radius: var(--radius);
-            padding: 50px;
-            box-shadow: var(--shadow-lg);
-            animation: fadeUp 0.5s ease-out;
-        }
-
-        .lesson-content.active { display: block; }
-
-        @keyframes fadeUp {
+        @keyframes slideIn {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        .lesson-badge {
-            display: inline-block;
-            background: #f1f5f9;
-            color: var(--text-light);
+        .question-number {
             font-family: 'Montserrat', sans-serif;
-            font-size: 0.75em;
+            font-size: 0.85em;
             font-weight: 600;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            padding: 6px 14px;
-            border-radius: 6px;
-            margin-bottom: 20px;
-        }
-
-        .lesson-content h1 {
-            font-family: 'Montserrat', sans-serif;
-            color: var(--primary);
-            font-size: 2.2em;
-            font-weight: 700;
-            margin-bottom: 15px;
-            line-height: 1.2;
-            letter-spacing: -0.5px;
-        }
-
-        .lesson-content .subtitle {
-            color: var(--text-light);
-            font-size: 1.15em;
-            margin-bottom: 40px;
-            font-style: italic;
-            padding-bottom: 30px;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .lesson-content p { margin-bottom: 24px; }
-
-        .lesson-content h2.section-title {
-            font-family: 'Montserrat', sans-serif;
-            color: var(--primary);
-            font-size: 1.4em;
-            font-weight: 600;
-            margin: 40px 0 20px;
-        }
-
-        /* ===== СУРЕТ ===== */
-        .lesson-image {
-            width: 100%;
-            height: 380px;
-            border-radius: 12px;
-            margin-bottom: 40px;
-            overflow: hidden;
-            background: #f1f5f9;
-            box-shadow: var(--shadow-sm);
-        }
-
-        .lesson-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-            transition: transform 0.5s;
-        }
-
-        .lesson-image:hover img {
-            transform: scale(1.02);
-        }
-
-        /* ===== БЛОКТАР ===== */
-        .goal, .example, .practice {
-            padding: 24px 30px;
-            border-radius: 12px;
-            margin: 30px 0;
-            font-size: 1.05em;
-            position: relative;
-        }
-
-        .goal { background: #f8fafc; border-left: 4px solid var(--primary); }
-        .goal strong { color: var(--primary); font-family: 'Montserrat', sans-serif; }
-
-        .example { background: #fffbeb; border-left: 4px solid var(--accent); }
-        .example strong { color: var(--accent-hover); font-family: 'Montserrat', sans-serif; }
-
-        .practice { background: #ecfdf5; border-left: 4px solid var(--success); }
-        .practice strong { color: var(--success); font-family: 'Montserrat', sans-serif; }
-
-        /* ===== КЕҢЕС ===== */
-        .daily-tip {
-            background: var(--primary);
-            color: white;
-            padding: 30px;
-            border-radius: 12px;
-            margin: 40px 0;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .daily-tip::before {
-            content: "💡";
-            position: absolute;
-            right: 20px;
-            top: 20px;
-            font-size: 4em;
-            opacity: 0.1;
-        }
-
-        .daily-tip::after {
-            content: "БҮГІНГІ КЕҢЕС";
-            display: block;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 0.75em;
-            font-weight: 600;
-            letter-spacing: 1px;
             color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 1px;
             margin-bottom: 12px;
         }
 
-        .daily-tip p {
-            font-size: 1.15em;
-            font-weight: 500;
-            margin: 0;
-            position: relative;
-            z-index: 1;
-        }
-
-        /* ===== ОЙЛАНЫҢЫЗ ===== */
-        .think-box {
-            background: #f8fafc;
-            border: 2px dashed #cbd5e1;
-            padding: 30px;
-            border-radius: 12px;
-            margin: 40px 0;
-        }
-
-        .think-box::before {
-            content: "🤔 ОЙЛАНЫҢЫЗ";
-            display: block;
+        .question-text {
             font-family: 'Montserrat', sans-serif;
-            font-size: 0.75em;
-            font-weight: 600;
-            color: var(--text-light);
-            letter-spacing: 1px;
-            margin-bottom: 15px;
-        }
-
-        .think-box p {
-            font-size: 1.1em;
-            font-style: italic;
-            color: var(--text);
-            margin: 0;
-        }
-
-        /* ===== ТЕСТ ===== */
-        .quiz-box {
-            background: #f1f5f9;
-            border-radius: 16px;
-            padding: 35px;
-            margin: 40px 0;
-        }
-
-        .quiz-box::before {
-            content: "❓ ТЕКСЕРІП КӨРІҢІЗ";
-            display: block;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 0.75em;
+            font-size: 1.3em;
             font-weight: 600;
             color: var(--primary);
-            letter-spacing: 1px;
             margin-bottom: 25px;
+            line-height: 1.4;
         }
 
-        .quiz-question {
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 600;
-            font-size: 1.15em;
-            margin-bottom: 20px;
-            color: var(--primary);
-        }
-
-        .quiz-option {
+        .option-btn {
             display: block;
             width: 100%;
             text-align: left;
-            padding: 16px 24px;
+            padding: 18px 22px;
             margin-bottom: 12px;
-            background: white;
+            background: #f8fafc;
             border: 2px solid var(--border);
-            border-radius: 10px;
-            font-size: 1em;
+            border-radius: 12px;
+            font-size: 1.05em;
             font-family: inherit;
             color: var(--text);
             cursor: pointer;
             transition: all 0.2s;
-            box-shadow: var(--shadow-sm);
         }
 
-        .quiz-option:hover { border-color: var(--primary); transform: translateY(-2px); }
-        .quiz-option.correct { background: #ecfdf5; border-color: var(--success); color: var(--success); font-weight: bold; }
-        .quiz-option.wrong { background: #fef2f2; border-color: var(--danger); color: var(--danger); }
+        .option-btn:hover { border-color: var(--primary); background: #f1f5f9; }
+        .option-btn.selected { background: #1e293b; border-color: #1e293b; color: white; font-weight: 600; }
 
-        .quiz-feedback {
+        .quiz-nav {
+            display: flex;
+            gap: 12px;
             margin-top: 20px;
-            padding: 16px 24px;
-            border-radius: 10px;
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 600;
-            display: none;
         }
 
-        .quiz-feedback.show { display: block; animation: fadeUp 0.3s ease-out; }
-        .quiz-feedback.good { background: #ecfdf5; color: var(--success); }
-        .quiz-feedback.bad { background: #fef2f2; color: var(--danger); }
-
-        /* ===== ТАПСЫРМА ===== */
-        .action-box {
-            background: #eef2ff;
-            border-left: 4px solid #6366f1;
-            padding: 24px 30px;
+        .nav-btn {
+            flex: 1;
+            padding: 16px;
             border-radius: 12px;
-            margin: 40px 0;
-        }
-
-        .action-box::before {
-            content: "🎯 БҮГІН ІСТЕП КӨРІҢІЗ";
-            display: block;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 0.75em;
-            font-weight: 600;
-            color: #4f46e5;
-            letter-spacing: 1px;
-            margin-bottom: 12px;
-        }
-
-        .action-box p { font-size: 1.05em; margin: 0; }
-
-        /* ===== ЕСКЕРТУЛЕР ===== */
-        .warning, .health-warning {
-            border-radius: 12px;
-            padding: 30px;
-            margin: 40px 0;
-        }
-
-        .warning { background: #fef2f2; border: 2px solid #fecaca; }
-        .warning h4 { font-family: 'Montserrat', sans-serif; color: var(--danger); margin-bottom: 15px; font-size: 1.2em; }
-
-        .health-warning { background: #fff7ed; border: 2px solid #fed7aa; }
-        .health-warning h4 { font-family: 'Montserrat', sans-serif; color: #ea580c; margin-bottom: 15px; font-size: 1.2em; }
-
-        .warning ul, .health-warning ul { margin-left: 20px; }
-        .warning li, .health-warning li { margin-bottom: 12px; }
-
-        /* ===== АЯҚТАУ БАТЫРМАСЫ ===== */
-        .finish-btn {
-            display: block;
-            width: 100%;
-            margin-top: 50px;
-            padding: 20px;
-            background: var(--primary);
-            color: white;
             border: none;
-            border-radius: 12px;
             font-family: 'Montserrat', sans-serif;
-            font-size: 1.1em;
+            font-size: 1em;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s;
-            box-shadow: var(--shadow-md);
+            transition: 0.2s;
         }
 
-        .finish-btn:hover { background: #0f172a; transform: translateY(-2px); box-shadow: var(--shadow-lg); }
-        
-        /* Аяқталған батырманың стилі (қайта басуға болады) */
-        .finish-btn.finished {
-            background: transparent;
-            color: var(--success);
-            border: 2px solid var(--success);
-            box-shadow: none;
-        }
-        .finish-btn.finished:hover {
-            background: #ecfdf5;
-            transform: none;
-        }
+        .nav-btn.prev { background: #e2e8f0; color: var(--text); }
+        .nav-btn.next { background: var(--primary); color: white; }
+        .nav-btn:disabled { opacity: 0.4; cursor: not-allowed; }
 
-        /* ================= МАРАПАТ ================= */
-        .reward-popup {
-            position: fixed;
-            top: 50%; left: 50%;
-            transform: translate(-50%, -50%) scale(0.9);
+        /* ================= 4. НӘТИЖЕ ЭКРАНЫ ================= */
+        .result-container {
+            max-width: 600px;
+            margin: 0 auto;
             background: white;
-            padding: 50px;
-            border-radius: 24px;
-            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
+            border-radius: 20px;
+            padding: 40px 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
             text-align: center;
-            z-index: 1000;
-            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-            max-width: 90%;
-            opacity: 0;
-            pointer-events: none;
+            animation: slideIn 0.5s ease-out;
         }
 
-        .reward-popup.show {
-            transform: translate(-50%, -50%) scale(1);
-            opacity: 1;
-            pointer-events: auto;
+        .result-emoji { font-size: 5em; margin-bottom: 20px; }
+        .result-title { font-family: 'Montserrat', sans-serif; font-size: 1.8em; font-weight: 700; margin-bottom: 15px; }
+
+        .result-level {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.3em;
+            font-weight: 600;
+            padding: 8px 20px;
+            border-radius: 30px;
+            display: inline-block;
+            margin-bottom: 25px;
         }
 
-        .reward-popup .reward-emoji { font-size: 5em; margin-bottom: 20px; }
-        .reward-popup .reward-title { font-family: 'Montserrat', sans-serif; font-size: 1.8em; font-weight: 700; color: var(--primary); margin-bottom: 15px; }
-        .reward-popup .reward-text { color: var(--text-light); font-size: 1.1em; }
+        .level-beginner { background: #fef2f2; color: var(--danger); }
+        .level-intermediate { background: #fef3c7; color: #b45309; }
+        .level-advanced { background: #ecfdf5; color: var(--success); }
 
-        .reward-overlay {
-            position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(15, 23, 42, 0.6);
-            backdrop-filter: blur(4px);
-            z-index: 999;
-            display: none;
-            opacity: 0;
-            transition: opacity 0.3s;
+        .result-description { font-size: 1.1em; margin-bottom: 30px; }
+
+        .result-recommendation {
+            background: #f8fafc;
+            border-left: 4px solid var(--accent);
+            padding: 20px 25px;
+            border-radius: 12px;
+            text-align: left;
+            margin-bottom: 20px;
         }
 
-        .reward-overlay.show { display: block; opacity: 1; }
+        .result-recommendation h3 { font-family: 'Montserrat', sans-serif; color: var(--primary); font-size: 1.1em; margin-bottom: 10px; }
 
         /* ================= МОБИЛЬДІ ================= */
-        @media (max-width: 900px) {
-            body { font-size: 17px; }
-            .sidebar { transform: translateX(-100%); }
-            .sidebar.open { transform: translateX(0); }
-            .main { margin-left: 0; width: 100%; padding: 30px 20px; }
-            .open-sidebar-btn { top: 15px; left: 15px; }
-            .lesson-content { padding: 30px 25px; border-radius: 12px; }
-            .lesson-content h1 { font-size: 1.7em; }
-            .lesson-image { height: 250px; }
-            .goal, .example, .practice, .daily-tip, .think-box, .quiz-box, .action-box, .warning, .health-warning { padding: 20px; }
-            .reward-popup { padding: 30px 20px; }
+        @media (max-width: 600px) {
+            .presentation-screen h1 { font-size: 2em; }
+            .presentation-screen .subtitle { font-size: 1.1em; }
+            .qr-container img, .qr-container canvas { width: 250px !important; height: 250px !important; }
+            .question-text { font-size: 1.15em; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Ашу батырмасы -->
-    <button class="open-sidebar-btn" id="openSidebarBtn" onclick="toggleSidebar()">
-        ☰ Мәзір
-    </button>
+    <!-- ================= 1. БАСТЫ ЭКРАН (LED үшін) ================= -->
+    <div class="screen active" id="presentationScreen">
+        <div class="presentation-screen">
+            <h1>🤖 Жасанды интеллект</h1>
+            <p class="subtitle">Білім деңгейін тексеру тесті</p>
 
-    <!-- БҮЙІР ПАНЕЛЬ -->
-    <aside class="sidebar" id="sidebar">
-        <div class="sidebar-header">
-            <h2>ЖИ Курсы</h2>
-            <button class="close-sidebar-btn" onclick="toggleSidebar()" title="Жасыру">✕</button>
+            <div class="qr-instruction">
+                📱 Телефоныңызбен QR кодты сканерлеңіз
+            </div>
+
+            <div class="qr-container">
+                <div id="qrcode"></div>
+            </div>
+
+            <div class="qr-steps">
+                <ol>
+                    <li>Телефоныңыздағы камераны ашыңыз</li>
+                    <li>Осы QR кодты камераға бағыттаңыз</li>
+                    <li>Пайда болған сілтемені басыңыз</li>
+                    <li>Аты-жөніңізді жазып, тестті бастаңыз</li>
+                </ol>
+            </div>
         </div>
-
-        <div class="progress-container">
-            <div class="progress-bar" id="progressBar"></div>
-        </div>
-        <div class="progress-text" id="progressText">0 / 8 өтілді</div>
-
-        <div class="week-group">
-            <div class="week-header">1-апта: Танысу</div>
-            <a class="lesson-link" data-lesson="1"><span class="circle">1</span><span class="title">Кіріспе және танысу</span></a>
-            <a class="lesson-link" data-lesson="2"><span class="circle">2</span><span class="title">ЖИ-мен сөйлесу</span></a>
-            <a class="lesson-link" data-lesson="3"><span class="circle">3</span><span class="title">ЖИ қайда бар?</span></a>
-        </div>
-
-        <div class="week-group">
-            <div class="week-header">2-апта: Қауіпсіздік</div>
-            <a class="lesson-link" data-lesson="4"><span class="circle">4</span><span class="title">Қауіпсіздік ережелері</span></a>
-            <a class="lesson-link" data-lesson="5"><span class="circle">5</span><span class="title">Денсаулық және ЖИ</span></a>
-            <a class="lesson-link" data-lesson="6"><span class="circle">6</span><span class="title">ЖИ-ге сенуге бола ма?</span></a>
-        </div>
-
-        <div class="week-group">
-            <div class="week-header">3-апта: Тәжірибе</div>
-            <a class="lesson-link" data-lesson="7"><span class="circle">7</span><span class="title">ЖИ құралдары</span></a>
-            <a class="lesson-link" data-lesson="8"><span class="circle">8</span><span class="title">Қорытынды</span></a>
-        </div>
-
-        <!-- Прогресті тазалау батырмасы -->
-        <button class="reset-btn" onclick="resetProgress()">
-            🔄 Прогресті тазалау
-        </button>
-    </aside>
-
-    <!-- НЕГІЗГІ МАЗМҰН -->
-    <main class="main" id="main">
-        <div class="content-wrapper">
-            
-            <!-- ===== САБАҚ 1 ===== -->
-            <div class="lesson-content" id="lesson-1">
-                <span class="lesson-badge">1-сабақ · 1-апта</span>
-                <h1>Кіріспе және танысу</h1>
-                <p class="subtitle">«ЖИ деген не және ол қайда бар?»</p>
-
-                <div class="lesson-image">
-                    <img src="images/lesson-1.jpg" alt="Кіріспе және танысу">
-                </div>
-
-                <div class="goal">
-                    <strong>🎯 Мақсаты:</strong> ЖИ-дің «бөтен» нәрсе емес, күнделікті өмірде бұрыннан бар екенін көрсету.
-                </div>
-
-                <p><strong>Мазмұны:</strong> ЖИ-ді «өте білімді көмекші» ретінде таныстыру. Олардың күнделікті қолданатын нәрселерінде ЖИ бар екенін айту: телефондағы дауыспен іздеу, YouTube ұсыныстары, аударма құралдары.</p>
-
-                <div class="example">
-                    <strong>💡 Өмірден мысал:</strong> «Кеше ғана немереңізбен сөйлескенде, телефон сізге қарсы беттегі дүкен туралы хабарлама жіберді. Бұл — ЖИ сіздің орналасқан жеріңізді біліп, көмектесіп жатқаны».
-                </div>
-
-                <div class="daily-tip">
-                    <p>Телефоныңызға «Сәлем» деп айтыңыз — дауыс көмекшісі жауап береді. Бұл — ЖИ!</p>
-                </div>
-
-                <div class="think-box">
-                    <p>Сіздің ойыңызша, ЖИ сізге қандай жұмыста көмектесе алады?</p>
-                </div>
-
-                <div class="quiz-box">
-                    <div class="quiz-question">Телефондағы дауыс көмекшісі — бұл ЖИ-дің бір түрі ме?</div>
-                    <button class="quiz-option" onclick="checkAnswer(this, true, 'quiz-1')">Иә, дұрыс!</button>
-                    <button class="quiz-option" onclick="checkAnswer(this, false, 'quiz-1')">Жоқ, бұл ЖИ емес</button>
-                    <div class="quiz-feedback" id="quiz-1"></div>
-                </div>
-
-                <div class="action-box">
-                    <p>Бүгін телефондағы дауыс көмекшісіне «Бүгін ауа райы қандай?» деп сұрақ қойып көріңіз.</p>
-                </div>
-
-                <button class="finish-btn" data-finish="1">Сабақты аяқтау</button>
-            </div>
-
-            <!-- ===== САБАҚ 2 ===== -->
-            <div class="lesson-content" id="lesson-2">
-                <span class="lesson-badge">2-сабақ · 1-апта</span>
-                <h1>ЖИ-мен қалай сөйлесуге болады?</h1>
-                <p class="subtitle">Дауыспен басқару</p>
-
-                <div class="lesson-image">
-                    <img src="images/lesson-2.jpg" alt="ЖИ-мен сөйлесу">
-                </div>
-
-                <div class="goal">
-                    <strong>🎯 Мақсаты:</strong> Пернетақтаға баспай-ақ, дауыспен сөйлесуге үйрету.
-                </div>
-
-                <p><strong>Мазмұны:</strong> Дауыс көмекшілерінің режимін көрсету. Тыныш, анық сөйлеу керектігін түсіндіру.</p>
-
-                <div class="practice">
-                    <strong>✅ Тәжірибе:</strong> Әр қатысушы микрофонға «Бүгін ауа райы қандай?» немесе «Менің қан қысымымды қалай төмендетуге болады?» деп сұрақ қояды.
-                </div>
-
-                <div class="daily-tip">
-                    <p>Микрофонға асықпай, анық сөйлеңіз. ЖИ сізді түсінеді!</p>
-                </div>
-
-                <div class="think-box">
-                    <p>Сіз ЖИ-ге қандай сұрақ қоғыңыз келеді? Ойлап көріңіз.</p>
-                </div>
-
-                <div class="quiz-box">
-                    <div class="quiz-question">ЖИ-мен сөйлескенде қалай сөйлеу керек?</div>
-                    <button class="quiz-option" onclick="checkAnswer(this, false, 'quiz-2')">Тез және қатты</button>
-                    <button class="quiz-option" onclick="checkAnswer(this, true, 'quiz-2')">Тыныш және анық</button>
-                    <button class="quiz-option" onclick="checkAnswer(this, false, 'quiz-2')">Қатты және тез</button>
-                    <div class="quiz-feedback" id="quiz-2"></div>
-                </div>
-
-                <div class="action-box">
-                    <p>Бүгін ЖИ-ге бір сұрақ қойып көріңіз: «Бүгін ауа райы қандай?»</p>
-                </div>
-
-                <button class="finish-btn" data-finish="2">Сабақты аяқтау</button>
-            </div>
-
-            <!-- ===== САБАҚ 3 ===== -->
-            <div class="lesson-content" id="lesson-3">
-                <span class="lesson-badge">3-сабақ · 1-апта</span>
-                <h1>ЖИ қайда бар?</h1>
-                <p class="subtitle">Күнделікті өмірдегі ЖИ</p>
-
-                <div class="lesson-image">
-                    <img src="images/lesson-3.jpg" alt="ЖИ қайда бар">
-                </div>
-
-                <div class="goal">
-                    <strong>🎯 Мақсаты:</strong> ЖИ-дің күнделікті өмірдегі көріністерін тану.
-                </div>
-
-                <p><strong>Мазмұны:</strong> Телефондағы дауыс көмекшісі, YouTube ұсыныстары, карта бағдары, ауа райы болжамы — осының барлығында ЖИ бар.</p>
-
-                <div class="example">
-                    <strong>💡 Өмірден мысал:</strong> «Карта қосымшасы сізге кептелісті айналып өтуді ұсынса — бұл ЖИ сізге уақытты үнемдеп жатқаны».
-                </div>
-
-                <div class="daily-tip">
-                    <p>YouTube сізге ұнайтын видеоларды ұсынса — бұл да ЖИ жұмысы.</p>
-                </div>
-
-                <div class="think-box">
-                    <p>Сіз күнделікті қандай қосымшаларды қолданасыз? Олардың қайсысында ЖИ бар деп ойлайсыз?</p>
-                </div>
-
-                <div class="quiz-box">
-                    <div class="quiz-question">YouTube сізге видео ұсынса — бұл ЖИ жұмысы ма?</div>
-                    <button class="quiz-option" onclick="checkAnswer(this, true, 'quiz-3')">Иә, дұрыс!</button>
-                    <button class="quiz-option" onclick="checkAnswer(this, false, 'quiz-3')">Жоқ, бұл кездейсоқтық</button>
-                    <div class="quiz-feedback" id="quiz-3"></div>
-                </div>
-
-                <div class="action-box">
-                    <p>Бүгін телефоныңыздағы карта қосымшасын ашып, бір мекенжайды іздеп көріңіз.</p>
-                </div>
-
-                <button class="finish-btn" data-finish="3">Сабақты аяқтау</button>
-            </div>
-
-            <!-- ===== САБАҚ 4 ===== -->
-            <div class="lesson-content" id="lesson-4">
-                <span class="lesson-badge">4-сабақ · 2-апта</span>
-                <h1>Қауіпсіздік ережелері</h1>
-                <p class="subtitle">«Не нәрсені ЖИ-ге жазбау керек?»</p>
-
-                <div class="lesson-image">
-                    <img src="images/lesson-4.jpg" alt="Қауіпсіздік ережелері">
-                </div>
-
-                <div class="goal">
-                    <strong>🎯 Мақсаты:</strong> Жеке деректерді қорғау дағдысын қалыптастыру.
-                </div>
-
-                <div class="warning">
-                    <h4>⚠️ Ешқашан ЖИ-ге жазбаңыз:</h4>
-                    <ul>
-                        <li>🔑 Парольдер</li>
-                        <li>💳 Банк картасының нөмірі</li>
-                        <li>🏠 Үй мекенжайы</li>
-                        <li>🪪 Жеке куәлік деректері</li>
-                    </ul>
-                </div>
-
-                <div class="example">
-                    <strong>💡 Өмірден мысал:</strong> «Егер көшеде бөтен адам: „Ағай, банк картаңыздың нөмірін айтыңызшы“, — десе, бересіз бе? ЖИ-ге де солай — ол сіздің жеке деректеріңізді сұрамауы керек».
-                </div>
-
-                <div class="daily-tip">
-                    <p>Парольді тек өзіңіз біліңіз. ЖИ-ге де, бөтен адамға да айтпаңыз!</p>
-                </div>
-
-                <div class="think-box">
-                    <p>Сіз интернетте қандай қауіпті жағдайларға тап болдыңыз? Қалай сақтандыңыз?</p>
-                </div>
-
-                <div class="quiz-box">
-                    <div class="quiz-question">ЖИ-ге банк картасының нөмірін жазуға бола ма?</div>
-                    <button class="quiz-option" onclick="checkAnswer(this, false, 'quiz-4')">Иә, болады</button>
-                    <button class="quiz-option" onclick="checkAnswer(this, true, 'quiz-4')">Жоқ, ешқашан!</button>
-                    <div class="quiz-feedback" id="quiz-4"></div>
-                </div>
-
-                <div class="action-box">
-                    <p>Бүгін телефондағы парольдеріңізді тексеріңіз — олар сенімді ме?</p>
-                </div>
-
-                <button class="finish-btn" data-finish="4">Сабақты аяқтау</button>
-            </div>
-
-            <!-- ===== САБАҚ 5 ===== -->
-            <div class="lesson-content" id="lesson-5">
-                <span class="lesson-badge">5-сабақ · 2-апта</span>
-                <h1>Денсаулық және ЖИ</h1>
-                <p class="subtitle">«ЖИ дәрігер емес! Не сұрауға болады, не сұрауға болмайды?»</p>
-
-                <div class="lesson-image">
-                    <img src="images/lesson-5.jpg" alt="Денсаулық және ЖИ">
-                </div>
-
-                <div class="goal">
-                    <strong>🎯 Мақсаты:</strong> Денсаулық туралы ЖИ-ден көмек сұраудың дұрыс жолын үйрету.
-                </div>
-
-                <div class="health-warning">
-                    <h4>🏥 ЕҢ МАҢЫЗДЫ ЕРЕЖЕ:</h4>
-                    <p style="font-size: 1.15em; margin-bottom: 15px;"><strong>Жасанды интеллект — дәрігер ЕМЕС!</strong></p>
-                    <p>Ол сізге нақты диагноз қоя алмайды, дәрі тағайындай алмайды, емдеу жоспарын жасай алмайды. Себебі:</p>
-                    <ul>
-                        <li>ЖИ сіздің денеңізді көрмейді, талдау нәтижелерін тексермейді</li>
-                        <li>ЖИ кейде қате жазады — оның жауабы әрдайым дұрыс емес</li>
-                        <li>ЖИ сіздің басқа ауруларыңызды, дәрілеріңізді білмейді</li>
-                        <li>Тек дәрігер ғана нақты ем тағайындай алады</li>
-                    </ul>
-                </div>
-
-                <h2 class="section-title">✅ Не сұрауға БОЛАДЫ (қауіпсіз):</h2>
-                <ul style="margin-left: 25px; margin-bottom: 30px;">
-                    <li style="margin-bottom: 12px;">«Қан қысымы деген не? Ол қалай өлшенеді?»</li>
-                    <li style="margin-bottom: 12px;">«Дәрігерге баруға қалай дайындалу керек?»</li>
-                    <li style="margin-bottom: 12px;">«Қант диабеті бар адам қандай тағамдарды жеуге болмайды?»</li>
-                    <li style="margin-bottom: 12px;">«Қан қысымын өлшейтін аспапты қалай дұрыс қолдану керек?»</li>
-                </ul>
-
-                <h2 class="section-title">❌ Не сұрауға БОЛМАЙДЫ (қауіпті):</h2>
-                <ul style="margin-left: 25px; margin-bottom: 30px;">
-                    <li style="margin-bottom: 12px;">«Менің басым ауырады. Қандай дәрі ішейін?»</li>
-                    <li style="margin-bottom: 12px;">«Менің қан қысымым 160/100. Бұл не деген?»</li>
-                    <li style="margin-bottom: 12px;">«Менің белгілерім қандай ауруға ұқсайды?»</li>
-                    <li style="margin-bottom: 12px;">«Дәрігер тағайындаған дәріні тоқтатуға бола ма?»</li>
-                </ul>
-
-                <div class="daily-tip">
-                    <p>ЖИ-ден жалпы ақпарат алыңыз → дәрігерге барыңыз → нақты диагноз бен емді дәрігерден алыңыз.</p>
-                </div>
-
-                <div class="think-box">
-                    <p>Сіз денсаулық туралы ЖИ-ге сұрақ қойдыңыз ба? Қандай сұрақ еді? Жауабы дұрыс болды ма?</p>
-                </div>
-
-                <div class="quiz-box">
-                    <div class="quiz-question">ЖИ-ге «Маған қандай дәрі ішу керек?» деп сұрауға бола ма?</div>
-                    <button class="quiz-option" onclick="checkAnswer(this, false, 'quiz-5')">Иә, болады</button>
-                    <button class="quiz-option" onclick="checkAnswer(this, true, 'quiz-5')">Жоқ, бұл дәрігердің жұмысы</button>
-                    <div class="quiz-feedback" id="quiz-5"></div>
-                </div>
-
-                <div class="action-box">
-                    <p>Бүгін дәрігерге баратын болсаңыз, ЖИ-ге «Кардиологқа қандай сұрақтар дайындау керек?» деп сұраңыз.</p>
-                </div>
-
-                <button class="finish-btn" data-finish="5">Сабақты аяқтау</button>
-            </div>
-
-            <!-- ===== САБАҚ 6 ===== -->
-            <div class="lesson-content" id="lesson-6">
-                <span class="lesson-badge">6-сабақ · 2-апта</span>
-                <h1>ЖИ-ге сенуге бола ма?</h1>
-                <p class="subtitle">Фейк жаңалықтар мен алаяқтық</p>
-
-                <div class="lesson-image">
-                    <img src="images/lesson-6.jpg" alt="ЖИ-ге сенуге бола ма">
-                </div>
-
-                <div class="goal">
-                    <strong>🎯 Мақсаты:</strong> Сыни тұрғыдан ойлауға үйрету.
-                </div>
-
-                <p><strong>Мазмұны:</strong> ЖИ кейде қателесетінін, тіпті жалған ақпарат бере алатынын түсіндіру. Суреттер мен дауыстарды ЖИ арқылы жасауға болатынын, сондықтан күмәнді хабарламаларға сенбеу керектігін айту.</p>
-
-                <div class="health-warning">
-                    <h4>⚠️ Денсаулық туралы ЖИ жауабына сенбеңіз:</h4>
-                    <p>ЖИ денсаулық туралы сұраққа жауап бергенде:</p>
-                    <ul>
-                        <li>Кейде ескірген ақпарат береді</li>
-                        <li>Кейде қате жазады, бірақ сенімді дауыспен жазады</li>
-                        <li>Сіздің жеке жағдайыңызды білмейді</li>
-                    </ul>
-                    <p style="margin-top: 15px;"><strong>Ереже:</strong> ЖИ-ден денсаулық туралы жалпы ақпарат алыңыз, бірақ шешімді дәрігермен бірге қабылдаңыз.</p>
-                </div>
-
-                <div class="example">
-                    <strong>💡 Өмірден мысал:</strong> «Егер сізге немереңіздің дауысымен „Апа, ақша керек“ деген қоңырау келсе, бұл — ЖИ алаяқтығы болуы мүмкін. Алдымен немереңізге өзіңіз қоңырау шалып, тексеріңіз».
-                </div>
-
-                <div class="daily-tip">
-                    <p>Күмәнді хабарлама келсе — алдымен тексеріңіз, содан кейін ғана сеніңіз.</p>
-                </div>
-
-                <div class="think-box">
-                    <p>Сізге күмәнді хабарлама келді делік. Сіз қалай тексересіз?</p>
-                </div>
-
-                <div class="quiz-box">
-                    <div class="quiz-question">Немереңіздің дауысымен «Ақша керек» деген қоңырау келсе, не істеу керек?</div>
-                    <button class="quiz-option" onclick="checkAnswer(this, false, 'quiz-6')">Дереу ақша аудару</button>
-                    <button class="quiz-option" onclick="checkAnswer(this, true, 'quiz-6')">Немереңізге өзіңіз қоңырау шалып тексеру</button>
-                    <div class="quiz-feedback" id="quiz-6"></div>
-                </div>
-
-                <div class="action-box">
-                    <p>Бүгін отбасыңызға «Егер күмәнді қоңырау келсе, бір-бірімізге тексерейік» деп айтыңыз.</p>
-                </div>
-
-                <button class="finish-btn" data-finish="6">Сабақты аяқтау</button>
-            </div>
-
-            <!-- ===== САБАҚ 7 ===== -->
-            <div class="lesson-content" id="lesson-7">
-                <span class="lesson-badge">7-сабақ · 3-апта</span>
-                <h1>ЖИ құралдары</h1>
-                <p class="subtitle">Сурет және аударма</p>
-
-                <div class="lesson-image">
-                    <img src="images/lesson-7.jpg" alt="ЖИ құралдары">
-                </div>
-
-                <div class="goal">
-                    <strong>🎯 Мақсаты:</strong> ЖИ-дің шығармашылық мүмкіндіктерін көрсету.
-                </div>
-
-                <p><strong>Мазмұны:</strong> Сурет салу қосымшаларын көрсету: «Маған көктемгі бақша мен гүлдердің суретін салып бер» деп сұрау. Аударма құралдары: шетелдегі туыстарымен сөйлесу үшін пайдалану.</p>
-
-                <div class="practice">
-                    <strong>✅ Тәжірибе:</strong> Әр қатысушы өзіне ұнайтын тақырыпта сурет жасап көреді (мысалы, «менің балалық шағымдағы ауыл»).
-                </div>
-
-                <div class="daily-tip">
-                    <p>ЖИ-ге «Менің балалық шағымдағы ауылдың суретін салып бер» деп айтып көріңіз.</p>
-                </div>
-
-                <div class="think-box">
-                    <p>Сіз қандай суретті жасағыңыз келеді? Ойлап көріңіз.</p>
-                </div>
-
-                <div class="quiz-box">
-                    <div class="quiz-question">ЖИ сурет сала ала ма?</div>
-                    <button class="quiz-option" onclick="checkAnswer(this, true, 'quiz-7')">Иә, дұрыс!</button>
-                    <button class="quiz-option" onclick="checkAnswer(this, false, 'quiz-7')">Жоқ, тек адамдар ғана салады</button>
-                    <div class="quiz-feedback" id="quiz-7"></div>
-                </div>
-
-                <div class="action-box">
-                    <p>Бүгін ЖИ-ге бір сурет салып беруін сұраңыз. Нәтижесін отбасыңызға көрсетіңіз.</p>
-                </div>
-
-                <button class="finish-btn" data-finish="7">Сабақты аяқтау</button>
-            </div>
-
-            <!-- ===== САБАҚ 8 ===== -->
-            <div class="lesson-content" id="lesson-8">
-                <span class="lesson-badge">8-сабақ · 3-апта</span>
-                <h1>Қорытынды</h1>
-                <p class="subtitle">«Мен не үйрендім және әрі қарай қалай жалғастырамын?»</p>
-
-                <div class="lesson-image">
-                    <img src="images/lesson-8.jpg" alt="Қорытынды">
-                </div>
-
-                <div class="goal">
-                    <strong>🎯 Мақсаты:</strong> Білімді бекіту, сенімділік қалыптастыру.
-                </div>
-
-                <p><strong>Мазмұны:</strong> Әр қатысушы өз тәжірибесімен бөліседі. ЖИ-ді күнделікті қолданудың қарапайым ережелерін еске салу.</p>
-
-                <div class="health-warning">
-                    <h4>🏥 Курстың ең басты қорытындысы:</h4>
-                    <ul>
-                        <li><strong>ЖИ — көмекші, бірақ дәрігер емес</strong></li>
-                        <li>Денсаулық туралы жалпы ақпарат алуға болады</li>
-                        <li>Диагноз бен емді тек дәрігер тағайындайды</li>
-                        <li>Күмәнді жағдайда — дәрігерге барыңыз</li>
-                    </ul>
-                </div>
-
-                <div class="daily-tip">
-                    <p>ЖИ — сіздің көмекшіңіз. Оны қауіпсіз әрі пайдалы қолданыңыз!</p>
-                </div>
-
-                <div class="think-box">
-                    <p>Курстан кейін ЖИ-ді қалай қолданасыз? Бір нақты мысал айтыңыз.</p>
-                </div>
-
-                <div class="quiz-box">
-                    <div class="quiz-question">ЖИ денсаулық туралы нақты диагноз қоя ала ма?</div>
-                    <button class="quiz-option" onclick="checkAnswer(this, false, 'quiz-8')">Иә, қоя алады</button>
-                    <button class="quiz-option" onclick="checkAnswer(this, true, 'quiz-8')">Жоқ, тек дәрігер ғана қоя алады</button>
-                    <div class="quiz-feedback" id="quiz-8"></div>
-                </div>
-
-                <div class="action-box">
-                    <p>Апта ішінде ЖИ-ге бір рет нақты сұрақ қойыңыз (мысалы, дәрігерге баруға дайындалу үшін).</p>
-                </div>
-
-                <button class="finish-btn" data-finish="8">Сабақты аяқтау</button>
-            </div>
-
-        </div>
-    </main>
-
-    <!-- МАРАПАТ POPUP -->
-    <div class="reward-overlay" id="rewardOverlay" onclick="closeReward()"></div>
-    <div class="reward-popup" id="rewardPopup">
-        <div class="reward-emoji" id="rewardEmoji">🏆</div>
-        <div class="reward-title" id="rewardTitle">Жарайсыз!</div>
-        <div class="reward-text" id="rewardText">Сіз бұл сабақты аяқтадыңыз!</div>
     </div>
 
-    <!-- JAVASCRIPT -->
+    <!-- ================= 2. АТЫ-ЖӨНІ ЕНГІЗУ ЭКРАНЫ ================= -->
+    <div class="screen" id="nameScreen">
+        <div class="name-screen">
+            <div class="name-card">
+                <h1>Сәлеметсіз бе!</h1>
+                <p>Тестті бастамас бұрын аты-жөніңізді жазыңыз</p>
+                <input type="text" class="name-input" id="userName" placeholder="Аты-жөніңіз..." autocomplete="off">
+                <button class="start-btn" onclick="startQuiz()" id="startBtn" disabled>Тестті бастау →</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= 3. ТЕСТ ЭКРАНЫ ================= -->
+    <div class="screen" id="quizScreen">
+        <div class="quiz-container">
+            <div class="quiz-header">
+                <h1>Білім деңгейін тексеру</h1>
+                <p style="color: var(--text-light);">5 сұрақ · 2 минут</p>
+            </div>
+            <div class="quiz-progress">
+                <div class="quiz-progress-bar" id="quizProgressBar"></div>
+            </div>
+            <div id="questionContainer"></div>
+        </div>
+    </div>
+
+    <!-- ================= 4. НӘТИЖЕ ЭКРАНЫ ================= -->
+    <div class="screen" id="resultScreen">
+        <div class="result-container">
+            <div class="result-emoji" id="resultEmoji">🏆</div>
+            <h1 class="result-title" id="resultTitle">Тест аяқталды!</h1>
+            <div class="result-level" id="resultLevel">Деңгей</div>
+            <p class="result-description" id="resultDescription"></p>
+            <div class="result-recommendation">
+                <h3>💡 Не істеу керек?</h3>
+                <p id="recommendationText"></p>
+            </div>
+            <p style="color: var(--success); font-weight: 600; margin-top: 20px;">✅ Нәтижеңіз мұғалімге жіберілді!</p>
+        </div>
+    </div>
+
     <script>
-        const lessonLinks = document.querySelectorAll('.lesson-link');
-        const lessonContents = document.querySelectorAll('.lesson-content');
-        const finishButtons = document.querySelectorAll('.finish-btn');
-        const progressBar = document.getElementById('progressBar');
-        const progressText = document.getElementById('progressText');
-        const sidebar = document.getElementById('sidebar');
-        const main = document.getElementById('main');
-        const openSidebarBtn = document.getElementById('openSidebarBtn');
-
-        let completed = JSON.parse(localStorage.getItem('completedLessons')) || [];
-        let sidebarHidden = localStorage.getItem('sidebarHidden') === 'true';
-
-        function toggleSidebar() {
-            sidebarHidden = !sidebarHidden;
-            applySidebarState();
-            localStorage.setItem('sidebarHidden', sidebarHidden);
-        }
-
-        function applySidebarState() {
-            if (sidebarHidden) {
-                sidebar.classList.add('hidden');
-                main.classList.add('expanded');
-                openSidebarBtn.classList.add('show');
-            } else {
-                sidebar.classList.remove('hidden');
-                main.classList.remove('expanded');
-                openSidebarBtn.classList.remove('show');
-            }
-        }
-
-        function openLesson(num) {
-            lessonContents.forEach(c => c.classList.remove('active'));
-            lessonLinks.forEach(l => l.classList.remove('active'));
-
-            const content = document.getElementById('lesson-' + num);
-            const link = document.querySelector(`.lesson-link[data-lesson="${num}"]`);
-
-            if (content) content.classList.add('active');
-            if (link) link.classList.add('active');
-
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        function updateProgress() {
-            const total = 8;
-            const done = completed.length;
-            const percent = (done / total) * 100;
-            progressBar.style.width = percent + '%';
-            progressText.textContent = `${done} / ${total} өтілді`;
-        }
-
-        function markCompleted() {
-            lessonLinks.forEach(link => {
-                const num = link.dataset.lesson;
-                if (completed.includes(num)) {
-                    link.classList.add('done');
-                } else {
-                    link.classList.remove('done');
-                }
-            });
-
-            finishButtons.forEach(btn => {
-                const num = btn.dataset.finish;
-                if (completed.includes(num)) {
-                    btn.textContent = '✔ Сабақ аяқталды (қайтару үшін басыңыз)';
-                    btn.classList.add('finished');
-                    btn.disabled = false; // Қайта басуға рұқсат
-                } else {
-                    btn.textContent = 'Сабақты аяқтау';
-                    btn.classList.remove('finished');
-                    btn.disabled = false;
-                }
-            });
-
-            updateProgress();
-        }
-
-        function checkAnswer(btn, isCorrect, feedbackId) {
-            const feedback = document.getElementById(feedbackId);
-            const options = btn.parentElement.querySelectorAll('.quiz-option');
-
-            options.forEach(o => {
-                o.classList.remove('correct', 'wrong');
-                o.disabled = true;
-            });
-
-            if (isCorrect) {
-                btn.classList.add('correct');
-                feedback.textContent = '✅ Дұрыс! Жарайсыз!';
-                feedback.className = 'quiz-feedback show good';
-            } else {
-                btn.classList.add('wrong');
-                feedback.textContent = '❌ Дұрыс емес. Дұрыс жауап жасыл түспен белгіленген.';
-                feedback.className = 'quiz-feedback show bad';
-
-                options.forEach(o => {
-                    if (o.getAttribute('onclick').includes('true')) {
-                        o.classList.add('correct');
-                    }
-                });
-            }
-        }
-
-        function showReward(lessonNum) {
-            const popup = document.getElementById('rewardPopup');
-            const overlay = document.getElementById('rewardOverlay');
-            const total = 8;
-            const done = completed.length;
-
-            if (done === total) {
-                document.getElementById('rewardEmoji').textContent = '🎓';
-                document.getElementById('rewardTitle').textContent = 'Құттықтаймыз!';
-                document.getElementById('rewardText').textContent = 'Сіз барлық 8 сабақты аяқтадыңыз! Курс бітті!';
-            } else {
-                document.getElementById('rewardEmoji').textContent = '🏆';
-                document.getElementById('rewardTitle').textContent = 'Жарайсыз!';
-                document.getElementById('rewardText').textContent = `Сіз ${lessonNum}-сабақты аяқтадыңыз! (${done}/${total})`;
-            }
-
-            popup.classList.add('show');
-            overlay.classList.add('show');
-        }
-
-        function closeReward() {
-            document.getElementById('rewardPopup').classList.remove('show');
-            document.getElementById('rewardOverlay').classList.remove('show');
-        }
-
-        // Прогресті тазалау
-        function resetProgress() {
-            if (confirm('Барлық өтілген сабақтарды тазалап, нөлден бастағыңыз келе ме?')) {
-                completed = [];
-                localStorage.setItem('completedLessons', JSON.stringify(completed));
-                markCompleted();
-            }
-        }
-
-        lessonLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                openLesson(link.dataset.lesson);
-                if (window.innerWidth <= 900) {
-                    sidebarHidden = true;
-                    applySidebarState();
-                }
-            });
+        // ================= GOOGLE SCRIPT СІЛТЕМЕСІ (СІЗДІҢ СІЛТЕМЕҢІЗ) =================
+        const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyqLhqKW6UHD9NoxFUGVf_FkKtl2M8rjdogor8kxFbq1JIrf8i-phRnj3toVyhRnuqD/exec";
+        
+        // ================= QR КОД ЖАСАУ =================
+        const quizUrl = window.location.href + "?test=true";
+        
+        new QRCode(document.getElementById("qrcode"), {
+            text: quizUrl,
+            width: 350,
+            height: 350,
+            colorDark: "#1e293b",
+            colorLight: "#ffffff",
+            correctLevel: QRCode.CorrectLevel.H
         });
 
-        // Өзгертілген батырма басу логикасы
-        finishButtons.forEach(btn => {
-            btn.addEventListener('click', () => {
-                const num = btn.dataset.finish;
-                if (!completed.includes(num)) {
-                    // Аяқтау
-                    completed.push(num);
-                    localStorage.setItem('completedLessons', JSON.stringify(completed));
-                    markCompleted();
-                    showReward(num);
-                } else {
-                    // Қайтару (өшіру)
-                    if (confirm('Бұл сабақты «аяқталмаған» күйге қайтарғыңыз келе ме?')) {
-                        completed = completed.filter(item => item !== num);
-                        localStorage.setItem('completedLessons', JSON.stringify(completed));
-                        markCompleted();
-                    }
-                }
-            });
+        // ================= ТЕСТ СҰРАҚТАРЫ =================
+        const questions = [
+            {
+                q: "Жасанды интеллект (ЖИ) дегеніміз не?",
+                options: [
+                    "Компьютерге салынған ақылды көмекші",
+                    "Жаңа телефон моделі",
+                    "Интернет жылдамдығы",
+                    "Теледидар түрі"
+                ],
+                correct: 0
+            },
+            {
+                q: "Телефондағы дауыс көмекшісі (Siri, Google) — бұл ЖИ-дің бір түрі ме?",
+                options: [
+                    "Иә, бұл ЖИ-дің бір түрі",
+                    "Жоқ, бұл ЖИ емес",
+                    "Бұл тек ойын",
+                    "Бұл тек калькулятор"
+                ],
+                correct: 0
+            },
+            {
+                q: "ЖИ-ге қандай ақпаратты жазбау керек?",
+                options: [
+                    "Ауа райы туралы сұрақ",
+                    "Банк картасының нөмірі мен парольдер",
+                    "Тағам рецептісі",
+                    "Күнделікті жоспар"
+                ],
+                correct: 1
+            },
+            {
+                q: "Егер денсаулық туралы сұрағыңыз болса, кімге жүгіну керек?",
+                options: [
+                    "ЖИ-ге — ол бәрін біледі",
+                    "Дәрігерге — ЖИ дәрігер емес",
+                    "Көршіге",
+                    "Интернеттегі форумға"
+                ],
+                correct: 1
+            },
+            {
+                q: "YouTube сізге ұнайтын видеоларды ұсынса, бұл не?",
+                options: [
+                    "Кездейсоқтық",
+                    "ЖИ жұмысы",
+                    "Телефон ақауы",
+                    "Интернет жылдамдығы"
+                ],
+                correct: 1
+            }
+        ];
+
+        let currentQuestion = 0;
+        let answers = [];
+        let userName = "";
+
+        // ================= АТЫ-ЖӨНІ ЕНГІЗУ =================
+        const nameInput = document.getElementById('userName');
+        const startBtn = document.getElementById('startBtn');
+
+        nameInput.addEventListener('input', () => {
+            startBtn.disabled = nameInput.value.trim().length < 2;
         });
 
-        applySidebarState();
-        openLesson(1);
-        markCompleted();
+        function startQuiz() {
+            userName = nameInput.value.trim();
+            showScreen('quizScreen');
+            renderQuestion();
+        }
+
+        // Экрандарды ауыстыру
+        function showScreen(id) {
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            window.scrollTo(0, 0);
+        }
+
+        // Сұрақты көрсету
+        function renderQuestion() {
+            const q = questions[currentQuestion];
+            const container = document.getElementById('questionContainer');
+            
+            const progress = ((currentQuestion) / questions.length) * 100;
+            document.getElementById('quizProgressBar').style.width = progress + '%';
+
+            let html = `
+                <div class="question-card">
+                    <div class="question-number">Сұрақ ${currentQuestion + 1} / ${questions.length}</div>
+                    <div class="question-text">${q.q}</div>
+            `;
+
+            q.options.forEach((opt, index) => {
+                const isSelected = answers[currentQuestion] === index;
+                html += `
+                    <button class="option-btn ${isSelected ? 'selected' : ''}" onclick="selectAnswer(${index})">
+                        ${opt}
+                    </button>
+                `;
+            });
+
+            html += `</div>`;
+
+            html += `<div class="quiz-nav">`;
+            if (currentQuestion > 0) {
+                html += `<button class="nav-btn prev" onclick="prevQuestion()">← Артқа</button>`;
+            }
+            if (currentQuestion < questions.length - 1) {
+                const disabled = answers[currentQuestion] === undefined ? 'disabled' : '';
+                html += `<button class="nav-btn next" onclick="nextQuestion()" ${disabled}>Келесі →</button>`;
+            } else {
+                const disabled = answers[currentQuestion] === undefined ? 'disabled' : '';
+                html += `<button class="nav-btn next" onclick="finishQuiz()" ${disabled}>Аяқтау ✓</button>`;
+            }
+            html += `</div>`;
+
+            container.innerHTML = html;
+        }
+
+        function selectAnswer(index) {
+            answers[currentQuestion] = index;
+            renderQuestion();
+        }
+
+        function nextQuestion() {
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;
+                renderQuestion();
+            }
+        }
+
+        function prevQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                renderQuestion();
+            }
+        }
+
+        // ================= НӘТИЖЕНІ ЕСЕПТЕУ ЖӘНЕ GOOGLE SHEETS-КЕ ЖІБЕРУ =================
+        function finishQuiz() {
+            let correctCount = 0;
+            questions.forEach((q, i) => {
+                if (answers[i] === q.correct) {
+                    correctCount++;
+                }
+            });
+
+            const percent = Math.round((correctCount / questions.length) * 100);
+            let levelName = "";
+
+            if (percent >= 80) levelName = "Жоғары";
+            else if (percent >= 50) levelName = "Орташа";
+            else levelName = "Бастауыш";
+
+            showResult(correctCount, percent, levelName);
+            sendToGoogleSheets(userName, correctCount, levelName, percent);
+        }
+
+        // Google Sheets-ке деректерді жіберу
+        function sendToGoogleSheets(name, score, level, percent) {
+            fetch(GOOGLE_SCRIPT_URL, {
+                method: 'POST',
+                mode: 'no-cors', // CORS мәселесін болдырмау үшін
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    name: name,
+                    score: score,
+                    level: level,
+                    percent: percent
+                })
+            }).then(() => {
+                console.log("✅ Деректер Google Sheets-ке жіберілді");
+            }).catch((error) => {
+                console.error("❌ Қате:", error);
+            });
+        }
+
+        function showResult(correctCount, percent, levelName) {
+            const emoji = document.getElementById('resultEmoji');
+            const title = document.getElementById('resultTitle');
+            const level = document.getElementById('resultLevel');
+            const desc = document.getElementById('resultDescription');
+            const recText = document.getElementById('recommendationText');
+
+            if (percent >= 80) {
+                emoji.textContent = '🏆';
+                title.textContent = 'Керемет!';
+                level.textContent = 'Жоғары деңгей';
+                level.className = 'result-level level-advanced';
+                desc.textContent = `Сіз ${questions.length} сұрақтың ${correctCount}-не дұрыс жауап бердіңіз. Сіз ЖИ туралы жақсы білесіз!`;
+                recText.textContent = 'Сізге арналған тапсырма: ЖИ-ге бір сурет салып беруін сұрап көріңіз. Мысалы: «Менің балалық шағымдағы ауылдың суретін салып бер».';
+            } else if (percent >= 50) {
+                emoji.textContent = '👍';
+                title.textContent = 'Жақсы!';
+                level.textContent = 'Орташа деңгей';
+                level.className = 'result-level level-intermediate';
+                desc.textContent = `Сіз ${questions.length} сұрақтың ${correctCount}-не дұрыс жауап бердіңіз. Сізде негізгі түсінік бар, бірақ кейбір нәрселерді нақтылау керек.`;
+                recText.textContent = 'Курсты толық өтіп, барлық 8 сабақпен танысыңыз. Әсіресе 4-сабаққа (қауіпсіздік) және 5-сабаққа (денсаулық) назар аударыңыз.';
+            } else {
+                emoji.textContent = '📚';
+                title.textContent = 'Жарайсыз!';
+                level.textContent = 'Бастауыш деңгей';
+                level.className = 'result-level level-beginner';
+                desc.textContent = `Сіз ${questions.length} сұрақтың ${correctCount}-не дұрыс жауап бердіңіз. Бұл — қалыпты жағдай. Біз бірге үйренеміз!`;
+                recText.textContent = 'Курсты толық өтіңіз. 1-сабақтан бастап, ретімен өтіңіз. Әр сабақта ЖИ туралы қарапайым тілмен түсіндіріледі.';
+            }
+
+            showScreen('resultScreen');
+        }
+
+        // ================= СІЛТЕМЕНІ ТЕКСЕРУ =================
+        window.addEventListener('load', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('test') === 'true') {
+                showScreen('nameScreen');
+            }
+        });
     </script>
 
 </body>
