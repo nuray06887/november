@@ -9,8 +9,8 @@
         :root {
             --bg: #f8f9fa;
             --surface: #ffffff;
-            --primary: #1e293b; /* Қара-көк */
-            --accent: #d97706; /* Алтын */
+            --primary: #1e293b;
+            --accent: #d97706;
             --accent-hover: #b45309;
             --text: #334155;
             --text-light: #64748b;
@@ -26,7 +26,7 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: 'Merriweather', Georgia, serif; /* Оқуға ыңғайлы классикалық шрифт */
+            font-family: 'Merriweather', Georgia, serif;
             background-color: var(--bg);
             color: var(--text);
             font-size: 18px;
@@ -48,6 +48,8 @@
             transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             z-index: 200;
             box-shadow: 4px 0 24px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
         }
 
         .sidebar.hidden {
@@ -132,7 +134,7 @@
             font-family: 'Montserrat', sans-serif;
             font-size: 0.8em;
             color: #cbd5e1;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
             text-align: right;
         }
 
@@ -169,7 +171,7 @@
 
         .lesson-link .circle {
             width: 28px; height: 28px;
-            border-radius: 8px; /* Шаршыға жақын стиль */
+            border-radius: 8px;
             background: rgba(255,255,255,0.1);
             color: #fff;
             flex-shrink: 0;
@@ -203,6 +205,29 @@
         .lesson-link.done .circle { background: var(--success); color: white; }
         .lesson-link.done.active { opacity: 1; background: rgba(5, 150, 105, 0.15); border-color: rgba(5, 150, 105, 0.3); }
         .lesson-link.done.active .circle { background: var(--success); }
+
+        /* Тазалау батырмасы */
+        .reset-btn {
+            margin-top: auto;
+            background: rgba(220, 38, 38, 0.1);
+            color: #fca5a5;
+            border: 1px solid rgba(220, 38, 38, 0.2);
+            padding: 12px;
+            border-radius: 8px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.85em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        .reset-btn:hover {
+            background: rgba(220, 38, 38, 0.2);
+            color: #fecaca;
+        }
 
         /* ================= НЕГІЗГІ МАЗМҰН ================= */
         .main {
@@ -307,7 +332,7 @@
             transform: scale(1.02);
         }
 
-        /* ===== БЛОКТАР (МАҚСАТ, МЫСАЛ, Т.Б.) ===== */
+        /* ===== БЛОКТАР ===== */
         .goal, .example, .practice {
             padding: 24px 30px;
             border-radius: 12px;
@@ -316,22 +341,13 @@
             position: relative;
         }
 
-        .goal {
-            background: #f8fafc;
-            border-left: 4px solid var(--primary);
-        }
+        .goal { background: #f8fafc; border-left: 4px solid var(--primary); }
         .goal strong { color: var(--primary); font-family: 'Montserrat', sans-serif; }
 
-        .example {
-            background: #fffbeb;
-            border-left: 4px solid var(--accent);
-        }
+        .example { background: #fffbeb; border-left: 4px solid var(--accent); }
         .example strong { color: var(--accent-hover); font-family: 'Montserrat', sans-serif; }
 
-        .practice {
-            background: #ecfdf5;
-            border-left: 4px solid var(--success);
-        }
+        .practice { background: #ecfdf5; border-left: 4px solid var(--success); }
         .practice strong { color: var(--success); font-family: 'Montserrat', sans-serif; }
 
         /* ===== КЕҢЕС ===== */
@@ -518,7 +534,18 @@
         }
 
         .finish-btn:hover { background: #0f172a; transform: translateY(-2px); box-shadow: var(--shadow-lg); }
-        .finish-btn.finished { background: var(--success); cursor: default; transform: none; box-shadow: none; }
+        
+        /* Аяқталған батырманың стилі (қайта басуға болады) */
+        .finish-btn.finished {
+            background: transparent;
+            color: var(--success);
+            border: 2px solid var(--success);
+            box-shadow: none;
+        }
+        .finish-btn.finished:hover {
+            background: #ecfdf5;
+            transform: none;
+        }
 
         /* ================= МАРАПАТ ================= */
         .reward-popup {
@@ -613,6 +640,11 @@
             <a class="lesson-link" data-lesson="7"><span class="circle">7</span><span class="title">ЖИ құралдары</span></a>
             <a class="lesson-link" data-lesson="8"><span class="circle">8</span><span class="title">Қорытынды</span></a>
         </div>
+
+        <!-- Прогресті тазалау батырмасы -->
+        <button class="reset-btn" onclick="resetProgress()">
+            🔄 Прогресті тазалау
+        </button>
     </aside>
 
     <!-- НЕГІЗГІ МАЗМҰН -->
@@ -1080,9 +1112,9 @@
             finishButtons.forEach(btn => {
                 const num = btn.dataset.finish;
                 if (completed.includes(num)) {
-                    btn.textContent = '✔ Сабақ аяқталды';
+                    btn.textContent = '✔ Сабақ аяқталды (қайтару үшін басыңыз)';
                     btn.classList.add('finished');
-                    btn.disabled = true;
+                    btn.disabled = false; // Қайта басуға рұқсат
                 } else {
                     btn.textContent = 'Сабақты аяқтау';
                     btn.classList.remove('finished');
@@ -1144,6 +1176,15 @@
             document.getElementById('rewardOverlay').classList.remove('show');
         }
 
+        // Прогресті тазалау
+        function resetProgress() {
+            if (confirm('Барлық өтілген сабақтарды тазалап, нөлден бастағыңыз келе ме?')) {
+                completed = [];
+                localStorage.setItem('completedLessons', JSON.stringify(completed));
+                markCompleted();
+            }
+        }
+
         lessonLinks.forEach(link => {
             link.addEventListener('click', () => {
                 openLesson(link.dataset.lesson);
@@ -1154,14 +1195,23 @@
             });
         });
 
+        // Өзгертілген батырма басу логикасы
         finishButtons.forEach(btn => {
             btn.addEventListener('click', () => {
                 const num = btn.dataset.finish;
                 if (!completed.includes(num)) {
+                    // Аяқтау
                     completed.push(num);
                     localStorage.setItem('completedLessons', JSON.stringify(completed));
                     markCompleted();
                     showReward(num);
+                } else {
+                    // Қайтару (өшіру)
+                    if (confirm('Бұл сабақты «аяқталмаған» күйге қайтарғыңыз келе ме?')) {
+                        completed = completed.filter(item => item !== num);
+                        localStorage.setItem('completedLessons', JSON.stringify(completed));
+                        markCompleted();
+                    }
                 }
             });
         });
