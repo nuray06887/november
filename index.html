@@ -180,27 +180,22 @@
             border-bottom: 2px solid #e8f0fa;
         }
 
-        /* ===== СУРЕТ ОРНЫ ===== */
+        /* ===== СУРЕТ ===== */
         .lesson-image {
             width: 100%;
-            height: 240px;
-            background: linear-gradient(135deg, #e8f0fa, #d6e4f5);
+            height: 300px;
             border-radius: 12px;
             margin-bottom: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-            font-size: 5em;
-            color: #1a4a7a;
-            border: 2px dashed #b8cfe6;
+            overflow: hidden;
+            border: 3px solid #e8f0fa;
+            background: #f0f6fc;
         }
 
-        .lesson-image .caption {
-            font-size: 0.25em;
-            color: #555;
-            margin-top: 10px;
-            font-style: italic;
+        .lesson-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
         }
 
         /* ===== БҮГІНГІ КЕҢЕС ===== */
@@ -446,6 +441,7 @@
             .menu-btn { display: block; }
             .lesson-content { padding: 25px 20px; }
             .lesson-content h1 { font-size: 1.5em; }
+            .lesson-image { height: 200px; }
             .reward-popup { padding: 30px 25px; }
         }
     </style>
@@ -493,8 +489,7 @@
             <p class="subtitle">«ЖИ деген не және ол қайда бар?»</p>
 
             <div class="lesson-image">
-                🤖
-                <span class="caption">Жасанды интеллект — сіздің көмекшіңіз</span>
+                <img src="images/lesson-1.jpg" alt="Кіріспе және танысу">
             </div>
 
             <div class="goal">
@@ -536,8 +531,7 @@
             <p class="subtitle">Дауыспен басқару</p>
 
             <div class="lesson-image">
-                🎤
-                <span class="caption">Дауыспен сөйлесу — ең оңай жол</span>
+                <img src="images/lesson-2.jpg" alt="ЖИ-мен сөйлесу">
             </div>
 
             <div class="goal">
@@ -580,8 +574,7 @@
             <p class="subtitle">Күнделікті өмірдегі ЖИ</p>
 
             <div class="lesson-image">
-                📱
-                <span class="caption">ЖИ — телефонда, картада, интернетте</span>
+                <img src="images/lesson-3.jpg" alt="ЖИ қайда бар">
             </div>
 
             <div class="goal">
@@ -623,8 +616,7 @@
             <p class="subtitle">«Не нәрсені ЖИ-ге жазбау керек?»</p>
 
             <div class="lesson-image">
-                🔒
-                <span class="caption">Жеке деректеріңізді қорғаңыз</span>
+                <img src="images/lesson-4.jpg" alt="Қауіпсіздік ережелері">
             </div>
 
             <div class="goal">
@@ -674,8 +666,7 @@
             <p class="subtitle">«ЖИ дәрігер емес! Не сұрауға болады, не сұрауға болмайды?»</p>
 
             <div class="lesson-image">
-                🏥
-                <span class="caption">ЖИ — көмекші, бірақ дәрігер емес</span>
+                <img src="images/lesson-5.jpg" alt="Денсаулық және ЖИ">
             </div>
 
             <div class="goal">
@@ -698,328 +689,4 @@
             <ul style="margin-left: 25px; margin-bottom: 20px;">
                 <li style="margin-bottom: 10px;">«Қан қысымы деген не? Ол қалай өлшенеді?»</li>
                 <li style="margin-bottom: 10px;">«Дәрігерге баруға қалай дайындалу керек?»</li>
-                <li style="margin-bottom: 10px;">«Қант диабеті бар адам қандай тағамдарды жеуге болмайды?»</li>
-                <li style="margin-bottom: 10px;">«Қан қысымын өлшейтін аспапты қалай дұрыс қолдану керек?»</li>
-            </ul>
-
-            <h2 class="section-title">❌ Не сұрауға БОЛМАЙДЫ (қауіпті):</h2>
-            <ul style="margin-left: 25px; margin-bottom: 20px;">
-                <li style="margin-bottom: 10px;">«Менің басым ауырады. Қандай дәрі ішейін?»</li>
-                <li style="margin-bottom: 10px;">«Менің қан қысымым 160/100. Бұл не деген?»</li>
-                <li style="margin-bottom: 10px;">«Менің белгілерім қандай ауруға ұқсайды?»</li>
-                <li style="margin-bottom: 10px;">«Дәрігер тағайындаған дәріні тоқтатуға бола ма?»</li>
-            </ul>
-
-            <div class="daily-tip">
-                <p>ЖИ-ден жалпы ақпарат алыңыз → дәрігерге барыңыз → нақты диагноз бен емді дәрігерден алыңыз.</p>
-            </div>
-
-            <div class="think-box">
-                <p>Сіз денсаулық туралы ЖИ-ге сұрақ қойдыңыз ба? Қандай сұрақ еді? Жауабы дұрыс болды ма?</p>
-            </div>
-
-            <div class="quiz-box">
-                <div class="quiz-question">ЖИ-ге «Маған қандай дәрі ішу керек?» деп сұрауға бола ма?</div>
-                <button class="quiz-option" onclick="checkAnswer(this, false, 'quiz-5')">Иә, болады</button>
-                <button class="quiz-option" onclick="checkAnswer(this, true, 'quiz-5')">Жоқ, бұл дәрігердің жұмысы</button>
-                <div class="quiz-feedback" id="quiz-5"></div>
-            </div>
-
-            <div class="action-box">
-                <p>Бүгін дәрігерге баратын болсаңыз, ЖИ-ге «Кардиологқа қандай сұрақтар дайындау керек?» деп сұраңыз.</p>
-            </div>
-
-            <button class="finish-btn" data-finish="5">Сабақты аяқтау</button>
-        </div>
-
-        <!-- ===== САБАҚ 6 ===== -->
-        <div class="lesson-content" id="lesson-6">
-            <span class="lesson-badge">6-сабақ · 2-апта</span>
-            <h1>ЖИ-ге сенуге бола ма?</h1>
-            <p class="subtitle">Фейк жаңалықтар мен алаяқтық</p>
-
-            <div class="lesson-image">
-                ⚠️
-                <span class="caption">Сыни тұрғыдан ойлаңыз</span>
-            </div>
-
-            <div class="goal">
-                <strong>🎯 Мақсаты:</strong> Сыни тұрғыдан ойлауға үйрету.
-            </div>
-
-            <p><strong>Мазмұны:</strong> ЖИ кейде қателесетінін, тіпті жалған ақпарат бере алатынын түсіндіру. Суреттер мен дауыстарды ЖИ арқылы жасауға болатынын, сондықтан күмәнді хабарламаларға сенбеу керектігін айту.</p>
-
-            <div class="health-warning">
-                <h4>⚠️ Денсаулық туралы ЖИ жауабына сенбеңіз:</h4>
-                <p>ЖИ денсаулық туралы сұраққа жауап бергенде:</p>
-                <ul>
-                    <li>Кейде ескірген ақпарат береді</li>
-                    <li>Кейде қате жазады, бірақ сенімді дауыспен жазады</li>
-                    <li>Сіздің жеке жағдайыңызды білмейді</li>
-                </ul>
-                <p style="margin-top: 15px;"><strong>Ереже:</strong> ЖИ-ден денсаулық туралы жалпы ақпарат алыңыз, бірақ шешімді дәрігермен бірге қабылдаңыз.</p>
-            </div>
-
-            <div class="example">
-                <strong>💡 Өмірден мысал:</strong> «Егер сізге немереңіздің дауысымен „Апа, ақша керек“ деген қоңырау келсе, бұл — ЖИ алаяқтығы болуы мүмкін. Алдымен немереңізге өзіңіз қоңырау шалып, тексеріңіз».
-            </div>
-
-            <div class="daily-tip">
-                <p>Күмәнді хабарлама келсе — алдымен тексеріңіз, содан кейін ғана сеніңіз.</p>
-            </div>
-
-            <div class="think-box">
-                <p>Сізге күмәнді хабарлама келді делік. Сіз қалай тексересіз?</p>
-            </div>
-
-            <div class="quiz-box">
-                <div class="quiz-question">Немереңіздің дауысымен «Ақша керек» деген қоңырау келсе, не істеу керек?</div>
-                <button class="quiz-option" onclick="checkAnswer(this, false, 'quiz-6')">Дереу ақша аудару</button>
-                <button class="quiz-option" onclick="checkAnswer(this, true, 'quiz-6')">Немереңізге өзіңіз қоңырау шалып тексеру</button>
-                <div class="quiz-feedback" id="quiz-6"></div>
-            </div>
-
-            <div class="action-box">
-                <p>Бүгін отбасыңызға «Егер күмәнді қоңырау келсе, бір-бірімізге тексерейік» деп айтыңыз.</p>
-            </div>
-
-            <button class="finish-btn" data-finish="6">Сабақты аяқтау</button>
-        </div>
-
-        <!-- ===== САБАҚ 7 ===== -->
-        <div class="lesson-content" id="lesson-7">
-            <span class="lesson-badge">7-сабақ · 3-апта</span>
-            <h1>ЖИ құралдары</h1>
-            <p class="subtitle">Сурет және аударма</p>
-
-            <div class="lesson-image">
-                🎨
-                <span class="caption">ЖИ сурет салады, аударады</span>
-            </div>
-
-            <div class="goal">
-                <strong>🎯 Мақсаты:</strong> ЖИ-дің шығармашылық мүмкіндіктерін көрсету.
-            </div>
-
-            <p><strong>Мазмұны:</strong> Сурет салу қосымшаларын көрсету: «Маған көктемгі бақша мен гүлдердің суретін салып бер» деп сұрау. Аударма құралдары: шетелдегі туыстарымен сөйлесу үшін пайдалану.</p>
-
-            <div class="practice">
-                <strong>✅ Тәжірибе:</strong> Әр қатысушы өзіне ұнайтын тақырыпта сурет жасап көреді (мысалы, «менің балалық шағымдағы ауыл»).
-            </div>
-
-            <div class="daily-tip">
-                <p>ЖИ-ге «Менің балалық шағымдағы ауылдың суретін салып бер» деп айтып көріңіз.</p>
-            </div>
-
-            <div class="think-box">
-                <p>Сіз қандай суретті жасағыңыз келеді? Ойлап көріңіз.</p>
-            </div>
-
-            <div class="quiz-box">
-                <div class="quiz-question">ЖИ сурет сала ала ма?</div>
-                <button class="quiz-option" onclick="checkAnswer(this, true, 'quiz-7')">Иә, дұрыс!</button>
-                <button class="quiz-option" onclick="checkAnswer(this, false, 'quiz-7')">Жоқ, тек адамдар ғана салады</button>
-                <div class="quiz-feedback" id="quiz-7"></div>
-            </div>
-
-            <div class="action-box">
-                <p>Бүгін ЖИ-ге бір сурет салып беруін сұраңыз. Нәтижесін отбасыңызға көрсетіңіз.</p>
-            </div>
-
-            <button class="finish-btn" data-finish="7">Сабақты аяқтау</button>
-        </div>
-
-        <!-- ===== САБАҚ 8 ===== -->
-        <div class="lesson-content" id="lesson-8">
-            <span class="lesson-badge">8-сабақ · 3-апта</span>
-            <h1>Қорытынды</h1>
-            <p class="subtitle">«Мен не үйрендім және әрі қарай қалай жалғастырамын?»</p>
-
-            <div class="lesson-image">
-                🏆
-                <span class="caption">Құттықтаймыз! Сіз курсды аяқтадыңыз!</span>
-            </div>
-
-            <div class="goal">
-                <strong>🎯 Мақсаты:</strong> Білімді бекіту, сенімділік қалыптастыру.
-            </div>
-
-            <p><strong>Мазмұны:</strong> Әр қатысушы өз тәжірибесімен бөліседі. ЖИ-ді күнделікті қолданудың қарапайым ережелерін еске салу.</p>
-
-            <div class="health-warning">
-                <h4>🏥 Курстың ең басты қорытындысы:</h4>
-                <ul>
-                    <li><strong>ЖИ — көмекші, бірақ дәрігер емес</strong></li>
-                    <li>Денсаулық туралы жалпы ақпарат алуға болады</li>
-                    <li>Диагноз бен емді тек дәрігер тағайындайды</li>
-                    <li>Күмәнді жағдайда — дәрігерге барыңыз</li>
-                </ul>
-            </div>
-
-            <div class="daily-tip">
-                <p>ЖИ — сіздің көмекшіңіз. Оны қауіпсіз әрі пайдалы қолданыңыз!</p>
-            </div>
-
-            <div class="think-box">
-                <p>Курстан кейін ЖИ-ді қалай қолданасыз? Бір нақты мысал айтыңыз.</p>
-            </div>
-
-            <div class="quiz-box">
-                <div class="quiz-question">ЖИ денсаулық туралы нақты диагноз қоя ала ма?</div>
-                <button class="quiz-option" onclick="checkAnswer(this, false, 'quiz-8')">Иә, қоя алады</button>
-                <button class="quiz-option" onclick="checkAnswer(this, true, 'quiz-8')">Жоқ, тек дәрігер ғана қоя алады</button>
-                <div class="quiz-feedback" id="quiz-8"></div>
-            </div>
-
-            <div class="action-box">
-                <p>Апта ішінде ЖИ-ге бір рет нақты сұрақ қойыңыз (мысалы, дәрігерге баруға дайындалу үшін).</p>
-            </div>
-
-            <button class="finish-btn" data-finish="8">Сабақты аяқтау</button>
-        </div>
-
-    </main>
-
-    <!-- ================= МАРАПАТ POPUP ================= -->
-    <div class="reward-overlay" id="rewardOverlay" onclick="closeReward()"></div>
-    <div class="reward-popup" id="rewardPopup">
-        <div class="reward-emoji" id="rewardEmoji">🏆</div>
-        <div class="reward-title" id="rewardTitle">Жарайсыз!</div>
-        <div class="reward-text" id="rewardText">Сіз бұл сабақты аяқтадыңыз!</div>
-    </div>
-
-    <!-- ================= JAVASCRIPT ================= -->
-    <script>
-        const lessonLinks = document.querySelectorAll('.lesson-link');
-        const lessonContents = document.querySelectorAll('.lesson-content');
-        const finishButtons = document.querySelectorAll('.finish-btn');
-        const progressBar = document.getElementById('progressBar');
-        const progressText = document.getElementById('progressText');
-
-        let completed = JSON.parse(localStorage.getItem('completedLessons')) || [];
-
-        function openLesson(num) {
-            lessonContents.forEach(c => c.classList.remove('active'));
-            lessonLinks.forEach(l => l.classList.remove('active'));
-
-            const content = document.getElementById('lesson-' + num);
-            const link = document.querySelector(`.lesson-link[data-lesson="${num}"]`);
-
-            if (content) content.classList.add('active');
-            if (link) link.classList.add('active');
-
-            document.getElementById('sidebar').classList.remove('open');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        function updateProgress() {
-            const total = 8;
-            const done = completed.length;
-            const percent = (done / total) * 100;
-            progressBar.style.width = percent + '%';
-            progressText.textContent = `${done} / ${total} сабақ өтілді`;
-        }
-
-        function markCompleted() {
-            lessonLinks.forEach(link => {
-                const num = link.dataset.lesson;
-                if (completed.includes(num)) {
-                    link.classList.add('done');
-                } else {
-                    link.classList.remove('done');
-                }
-            });
-
-            finishButtons.forEach(btn => {
-                const num = btn.dataset.finish;
-                if (completed.includes(num)) {
-                    btn.textContent = '✔ Сабақ аяқталды';
-                    btn.classList.add('finished');
-                    btn.disabled = true;
-                } else {
-                    btn.textContent = 'Сабақты аяқтау';
-                    btn.classList.remove('finished');
-                    btn.disabled = false;
-                }
-            });
-
-            updateProgress();
-        }
-
-        function checkAnswer(btn, isCorrect, feedbackId) {
-            const feedback = document.getElementById(feedbackId);
-            const options = btn.parentElement.querySelectorAll('.quiz-option');
-
-            options.forEach(o => {
-                o.classList.remove('correct', 'wrong');
-                o.disabled = true;
-            });
-
-            if (isCorrect) {
-                btn.classList.add('correct');
-                feedback.textContent = '✅ Дұрыс! Жарайсыз!';
-                feedback.className = 'quiz-feedback show good';
-            } else {
-                btn.classList.add('wrong');
-                feedback.textContent = '❌ Дұрыс емес. Дұрыс жауап жасыл түспен белгіленген.';
-                feedback.className = 'quiz-feedback show bad';
-
-                options.forEach(o => {
-                    if (o.getAttribute('onclick').includes('true')) {
-                        o.classList.add('correct');
-                    }
-                });
-            }
-        }
-
-        function showReward(lessonNum) {
-            const popup = document.getElementById('rewardPopup');
-            const overlay = document.getElementById('rewardOverlay');
-            const total = 8;
-            const done = completed.length;
-
-            if (done === total) {
-                document.getElementById('rewardEmoji').textContent = '🎓';
-                document.getElementById('rewardTitle').textContent = 'Құттықтаймыз!';
-                document.getElementById('rewardText').textContent = 'Сіз барлық 8 сабақты аяқтадыңыз! Курс бітті!';
-            } else {
-                document.getElementById('rewardEmoji').textContent = '🏆';
-                document.getElementById('rewardTitle').textContent = 'Жарайсыз!';
-                document.getElementById('rewardText').textContent = `Сіз ${lessonNum}-сабақты аяқтадыңыз! (${done}/${total})`;
-            }
-
-            popup.classList.add('show');
-            overlay.classList.add('show');
-        }
-
-        function closeReward() {
-            document.getElementById('rewardPopup').classList.remove('show');
-            document.getElementById('rewardOverlay').classList.remove('show');
-        }
-
-        lessonLinks.forEach(link => {
-            link.addEventListener('click', () => openLesson(link.dataset.lesson));
-        });
-
-        finishButtons.forEach(btn => {
-            btn.addEventListener('click', () => {
-                const num = btn.dataset.finish;
-                if (!completed.includes(num)) {
-                    completed.push(num);
-                    localStorage.setItem('completedLessons', JSON.stringify(completed));
-                    markCompleted();
-                    showReward(num);
-                }
-            });
-        });
-
-        function toggleSidebar() {
-            document.getElementById('sidebar').classList.toggle('open');
-        }
-
-        openLesson(1);
-        markCompleted();
-    </script>
-
-</body>
-</html>
+                <li style="margin-bottom: 10px;">«Қант диабеті бар а
