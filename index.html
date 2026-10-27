@@ -13,7 +13,6 @@
             color: #1a1a1a;
             font-size: 20px;
             line-height: 1.8;
-            display: flex;
             min-height: 100vh;
         }
 
@@ -26,8 +25,12 @@
             position: fixed;
             top: 0; bottom: 0; left: 0;
             overflow-y: auto;
-            transition: transform 0.3s ease;
+            transition: transform 0.35s ease;
             z-index: 200;
+        }
+
+        .sidebar.hidden {
+            transform: translateX(-100%);
         }
 
         .sidebar h2 {
@@ -113,22 +116,41 @@
         /* ================= НЕГІЗГІ МАЗМҰН ================= */
         .main {
             margin-left: 340px;
-            flex: 1;
             padding: 40px 50px;
             max-width: 900px;
+            transition: margin-left 0.35s ease;
         }
 
-        .menu-btn {
-            display: none;
+        .main.expanded {
+            margin-left: 0;
+            margin-right: auto;
+        }
+
+        /* ================= ТОГГЛ БАТЫРМА ================= */
+        .toggle-btn {
+            position: fixed;
+            top: 20px;
+            left: 360px;
+            z-index: 300;
             background: #1a4a7a;
             color: white;
             border: none;
-            padding: 15px 25px;
-            font-size: 1.1em;
-            border-radius: 10px;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            font-size: 1.2em;
             cursor: pointer;
-            margin-bottom: 25px;
-            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+            transition: left 0.35s ease, background 0.2s;
+        }
+
+        .toggle-btn:hover { background: #143a63; }
+
+        .toggle-btn.collapsed {
+            left: 20px;
         }
 
         /* ================= САБАҚ КАРТОЧКАСЫ ================= */
@@ -438,7 +460,14 @@
             .sidebar { transform: translateX(-100%); }
             .sidebar.open { transform: translateX(0); }
             .main { margin-left: 0; padding: 20px 15px; }
-            .menu-btn { display: block; }
+            .toggle-btn {
+                top: 15px;
+                left: 15px;
+                width: 48px;
+                height: 48px;
+                font-size: 1.3em;
+            }
+            .toggle-btn.collapsed { left: 15px; }
             .lesson-content { padding: 25px 20px; }
             .lesson-content h1 { font-size: 1.5em; }
             .lesson-image { height: 200px; }
@@ -447,6 +476,9 @@
     </style>
 </head>
 <body>
+
+    <!-- ================= ТОГГЛ БАТЫРМА ================= -->
+    <button class="toggle-btn" id="toggleBtn" onclick="toggleSidebar()" title="Панельді жасыру/көрсету">◀</button>
 
     <!-- ================= БҮЙІР ПАНЕЛЬ ================= -->
     <aside class="sidebar" id="sidebar">
@@ -479,8 +511,8 @@
     </aside>
 
     <!-- ================= НЕГІЗГІ МАЗМҰН ================= -->
-    <main class="main">
-        <button class="menu-btn" onclick="toggleSidebar()">☰ Сабақтар тізімі</button>
+    <main class="main" id="main">
+        <div style="height: 50px;"></div>
 
         <!-- ===== САБАҚ 1 ===== -->
         <div class="lesson-content" id="lesson-1">
@@ -883,8 +915,33 @@
         const finishButtons = document.querySelectorAll('.finish-btn');
         const progressBar = document.getElementById('progressBar');
         const progressText = document.getElementById('progressText');
+        const sidebar = document.getElementById('sidebar');
+        const main = document.getElementById('main');
+        const toggleBtn = document.getElementById('toggleBtn');
 
         let completed = JSON.parse(localStorage.getItem('completedLessons')) || [];
+        let sidebarHidden = localStorage.getItem('sidebarHidden') === 'true';
+
+        // Панельді жасыру/көрсету
+        function toggleSidebar() {
+            sidebarHidden = !sidebarHidden;
+            applySidebarState();
+            localStorage.setItem('sidebarHidden', sidebarHidden);
+        }
+
+        function applySidebarState() {
+            if (sidebarHidden) {
+                sidebar.classList.add('hidden');
+                main.classList.add('expanded');
+                toggleBtn.classList.add('collapsed');
+                toggleBtn.textContent = '▶';
+            } else {
+                sidebar.classList.remove('hidden');
+                main.classList.remove('expanded');
+                toggleBtn.classList.remove('collapsed');
+                toggleBtn.textContent = '◀';
+            }
+        }
 
         function openLesson(num) {
             lessonContents.forEach(c => c.classList.remove('active'));
@@ -896,7 +953,6 @@
             if (content) content.classList.add('active');
             if (link) link.classList.add('active');
 
-            document.getElementById('sidebar').classList.remove('open');
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
@@ -986,7 +1042,14 @@
         }
 
         lessonLinks.forEach(link => {
-            link.addEventListener('click', () => openLesson(link.dataset.lesson));
+            link.addEventListener('click', () => {
+                openLesson(link.dataset.lesson);
+                // Мобильде сабақ таңдағанда панельді жабу
+                if (window.innerWidth <= 900) {
+                    sidebarHidden = true;
+                    applySidebarState();
+                }
+            });
         });
 
         finishButtons.forEach(btn => {
@@ -1001,10 +1064,8 @@
             });
         });
 
-        function toggleSidebar() {
-            document.getElementById('sidebar').classList.toggle('open');
-        }
-
+        // Бастапқы күй
+        applySidebarState();
         openLesson(1);
         markCompleted();
     </script>
