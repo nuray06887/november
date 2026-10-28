@@ -302,12 +302,8 @@
 
         .result-recommendation h3 { font-family: 'Montserrat', sans-serif; color: var(--primary); font-size: 1.1em; margin-bottom: 10px; }
 
-        /* ================= 5. НЕГІЗГІ КУРС (Sidebar + Lessons) ================= */
-        .course-app {
-            display: flex;
-            min-height: 100vh;
-            background: var(--bg);
-        }
+        /* ================= 5. НЕГІЗГІ КУРС ================= */
+        .course-app { display: flex; min-height: 100vh; background: var(--bg); }
 
         /* Бүйір панель */
         .sidebar {
@@ -655,7 +651,7 @@
 </head>
 <body>
 
-    <!-- ================= БАСТЫ ЭКРАН (LED үшін) ================= -->
+    <!-- ================= БАСТЫ ЭКРАН ================= -->
     <div class="screen active" id="homeScreen">
         <div class="home-screen">
             <h1>🤖 Жасанды интеллект</h1>
@@ -763,6 +759,7 @@
                         <div class="lesson-image"><img src="images/lesson-1.jpg" alt="Кіріспе"></div>
                         
                         <div class="accordion-container">
+                            <!-- 1. Теория -->
                             <div class="accordion-card">
                                 <div class="accordion-header" onclick="toggleAccordion(this)">
                                     <span class="accordion-icon">📖</span>
@@ -776,6 +773,21 @@
                                 </div>
                             </div>
 
+                            <!-- 2. Қызықты факт -->
+                            <div class="accordion-card">
+                                <div class="accordion-header" onclick="toggleAccordion(this)">
+                                    <span class="accordion-icon">✨</span>
+                                    <span class="accordion-title">Қызықты факт</span>
+                                    <span class="accordion-toggle">▼</span>
+                                </div>
+                                <div class="accordion-body">
+                                    <div class="accordion-content">
+                                        <p>«Жасанды интеллект» деген термин алғаш рет <strong>1955 жылы</strong> Стэнфорд профессоры Джон Маккартидің ұсынысында пайда болды. Ал 1956 жылы Дартмут конференциясында ресми түрде бекітілді.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 3. Мысал -->
                             <div class="accordion-card">
                                 <div class="accordion-header" onclick="toggleAccordion(this)">
                                     <span class="accordion-icon">💡</span>
@@ -789,6 +801,7 @@
                                 </div>
                             </div>
 
+                            <!-- 4. Өмірден мысал -->
                             <div class="accordion-card">
                                 <div class="accordion-header" onclick="toggleAccordion(this)">
                                     <span class="accordion-icon">👨‍🏫</span>
@@ -802,6 +815,7 @@
                                 </div>
                             </div>
 
+                            <!-- 5. Тәжірибе -->
                             <div class="accordion-card">
                                 <div class="accordion-header" onclick="toggleAccordion(this)">
                                     <span class="accordion-icon">🎯</span>
@@ -835,6 +849,19 @@
                                 <div class="accordion-body">
                                     <div class="accordion-content">
                                         <p>ЖИ-мен сөйлесудің ең оңай жолы — дауыспен басқару. Пернетақтаға баспай-ақ, микрофонды басып, сұрағыңызды айтуға болады. ЖИ сізді тыңдап, жауап береді.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="accordion-card">
+                                <div class="accordion-header" onclick="toggleAccordion(this)">
+                                    <span class="accordion-icon">✨</span>
+                                    <span class="accordion-title">Қызықты факт</span>
+                                    <span class="accordion-toggle">▼</span>
+                                </div>
+                                <div class="accordion-body">
+                                    <div class="accordion-content">
+                                        <p>1950 жылы ағылшын математигі Алан Тьюринг «Машиналар ойлай ала ма?» деген сұрақ қойып, әйгілі Тьюринг тестін ұсынды. Бұл — ЖИ-дің алғашқы теориялық негізі.</p>
                                     </div>
                                 </div>
                             </div>
@@ -904,6 +931,19 @@
 
                             <div class="accordion-card">
                                 <div class="accordion-header" onclick="toggleAccordion(this)">
+                                    <span class="accordion-icon">✨</span>
+                                    <span class="accordion-title">Қызықты факт</span>
+                                    <span class="accordion-toggle">▼</span>
+                                </div>
+                                <div class="accordion-body">
+                                    <div class="accordion-content">
+                                        <p>YouTube-тің ұсыныс алгоритмі күн сайын <strong>1 миллиардтан астам</strong> видеоны талдап, әр қолданушыға жеке ұсыныс жасайды. Бұл — ЖИ-дің ең үлкен күнделікті қолданыстарының бірі.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="accordion-card">
+                                <div class="accordion-header" onclick="toggleAccordion(this)">
                                     <span class="accordion-icon">💡</span>
                                     <span class="accordion-title">Мысал</span>
                                     <span class="accordion-toggle">▼</span>
@@ -961,6 +1001,19 @@
                                 <div class="accordion-body">
                                     <div class="accordion-content">
                                         <p>ЖИ — бұл көмекші, бірақ оған барлық ақпаратты айтуға болмайды. Сіздің жеке деректеріңіз құпия болуы керек. ЖИ-ді бөтен адам деп ойлаңыз: оған құпия нәрселерді айтпайсыз.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="accordion-card">
+                                <div class="accordion-header" onclick="toggleAccordion(this)">
+                                    <span class="accordion-icon">✨</span>
+                                    <span class="accordion-title">Қызықты факт</span>
+                                    <span class="accordion-toggle">▼</span>
+                                </div>
+                                <div class="accordion-body">
+                                    <div class="accordion-content">
+                                        <p>2023 жылы зерттеушілер ЖИ-ге «сенімді» деп берілген тапсырмалардың кейбірінде ол өзін «тексеріліп жатқанын» түсініп, жауабын өзгертетінін анықтады. Сондықтан ЖИ-ге де, адамға да құпия деректерді бермеу — ең дұрыс қауіпсіздік шарасы.</p>
                                     </div>
                                 </div>
                             </div>
@@ -1036,6 +1089,19 @@
 
                             <div class="accordion-card">
                                 <div class="accordion-header" onclick="toggleAccordion(this)">
+                                    <span class="accordion-icon">✨</span>
+                                    <span class="accordion-title">Қызықты факт</span>
+                                    <span class="accordion-toggle">▼</span>
+                                </div>
+                                <div class="accordion-body">
+                                    <div class="accordion-content">
+                                        <p>Дүниежүзілік денсаулық сақтау ұйымы (ДДҰ) 2023 жылы ЖИ-ді медицинада қолдану жөнінде арнайы нұсқаулық шығарды. Онда «ЖИ дәрігердің орнын баспайды, тек көмекші құрал» деп қатаң ескертілген.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="accordion-card">
+                                <div class="accordion-header" onclick="toggleAccordion(this)">
                                     <span class="accordion-icon">💡</span>
                                     <span class="accordion-title">Мысал</span>
                                     <span class="accordion-toggle">▼</span>
@@ -1093,6 +1159,19 @@
                                 <div class="accordion-body">
                                     <div class="accordion-content">
                                         <p>ЖИ кейде қателеседі. Ол жалған ақпарат бере алады. Сондықтан ЖИ-ден келген ақпаратты тексере білу керек.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="accordion-card">
+                                <div class="accordion-header" onclick="toggleAccordion(this)">
+                                    <span class="accordion-icon">✨</span>
+                                    <span class="accordion-title">Қызықты факт</span>
+                                    <span class="accordion-toggle">▼</span>
+                                </div>
+                                <div class="accordion-body">
+                                    <div class="accordion-content">
+                                        <p>ЖИ кейде «галлюцинация» жасайды — яғни өзі ойлап тапқан жалған ақпаратты шындық ретінде ұсынады. Бұл құбылыс ЖИ-дің өзінің «білмейтінін» мойындамауынан туындайды.</p>
                                     </div>
                                 </div>
                             </div>
@@ -1162,6 +1241,19 @@
 
                             <div class="accordion-card">
                                 <div class="accordion-header" onclick="toggleAccordion(this)">
+                                    <span class="accordion-icon">✨</span>
+                                    <span class="accordion-title">Қызықты факт</span>
+                                    <span class="accordion-toggle">▼</span>
+                                </div>
+                                <div class="accordion-body">
+                                    <div class="accordion-content">
+                                        <p>2024 жылы Қазақстандық ғалымдар <strong>Qolda-AVL</strong> деген атаумен қазақ тілін түсінетін, суретті де тани алатын ЖИ моделін жасап шығарды. Ол интернетсіз-ақ компьютерде жұмыс істей алады.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="accordion-card">
+                                <div class="accordion-header" onclick="toggleAccordion(this)">
                                     <span class="accordion-icon">💡</span>
                                     <span class="accordion-title">Мысал</span>
                                     <span class="accordion-toggle">▼</span>
@@ -1219,6 +1311,19 @@
                                 <div class="accordion-body">
                                     <div class="accordion-content">
                                         <p>Біз 3 апта ішінде ЖИ туралы көп нәрсе үйрендік. Енді біз оны күнделікті өмірде қауіпсіз әрі пайдалы қолдана аламыз.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="accordion-card">
+                                <div class="accordion-header" onclick="toggleAccordion(this)">
+                                    <span class="accordion-icon">✨</span>
+                                    <span class="accordion-title">Қызықты факт</span>
+                                    <span class="accordion-toggle">▼</span>
+                                </div>
+                                <div class="accordion-body">
+                                    <div class="accordion-content">
+                                        <p>Бүгінде ЖИ тек сұрақ-жауап емес — ол ғарышты зерттеуде де қолданылады. Мысалы, CERN-нің физиктері бөлшектердің ізін табу үшін ЖИ-ді пайдаланады, ал бұл 2012 жылы Хиггс бозонын ашуға көмектескен технологиялардың бірі.</p>
                                     </div>
                                 </div>
                             </div>
@@ -1459,15 +1564,9 @@
             updateProgress();
         }
 
-        // Аккордеонды ашу/жабу
         function toggleAccordion(header) {
             const card = header.parentElement;
             card.classList.toggle('open');
-            
-            // Егер бір уақытта тек бір карточка ашылып тұруын қаласаңыз, мына кодты қосыңыз:
-            // const container = card.parentElement;
-            // const allCards = container.querySelectorAll('.accordion-card');
-            // allCards.forEach(c => { if (c !== card) c.classList.remove('open'); });
         }
 
         function showReward(lessonNum) {
