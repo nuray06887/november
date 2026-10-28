@@ -307,7 +307,7 @@
 
         /* Бүйір панель */
         .sidebar {
-            width: 320px;
+            width: 340px;
             background: var(--primary);
             color: #f8fafc;
             padding: 30px 20px;
@@ -451,8 +451,8 @@
 
         /* Курс мазмұны */
         .course-main {
-            margin-left: 320px;
-            width: calc(100% - 320px);
+            margin-left: 340px;
+            width: calc(100% - 340px);
             display: flex;
             justify-content: center;
             padding: 60px 40px;
@@ -569,9 +569,7 @@
             color: white;
         }
 
-        .accordion-icon {
-            font-size: 1.5em;
-        }
+        .accordion-icon { font-size: 1.5em; }
 
         .accordion-title {
             font-family: 'Montserrat', sans-serif;
@@ -598,7 +596,7 @@
         }
 
         .accordion-card.open .accordion-body {
-            max-height: 1000px; /* Жеткілікті үлкен мән */
+            max-height: 1500px; /* Жеткілікті үлкен мән */
         }
 
         .accordion-content {
@@ -612,6 +610,18 @@
         .accordion-content p:last-child { margin-bottom: 0; }
         .accordion-content ul { margin-left: 20px; margin-bottom: 15px; }
         .accordion-content li { margin-bottom: 10px; }
+
+        /* Промпт мысалдарына арналған стиль */
+        .prompt-example {
+            background: #f1f5f9;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid var(--accent);
+            margin: 20px 0;
+            font-family: monospace;
+            font-size: 1em;
+            color: var(--primary);
+        }
 
         .finish-btn {
             display: block;
@@ -725,24 +735,29 @@
                 <div class="progress-container">
                     <div class="progress-bar" id="progressBar"></div>
                 </div>
-                <div class="progress-text" id="progressText">0 / 8 өтілді</div>
+                <div class="progress-text" id="progressText">0 / 13 өтілді</div>
 
                 <div class="week-group">
-                    <div class="week-header">1-апта: Танысу</div>
+                    <div class="week-header">1-апта: Негіздер</div>
                     <a class="lesson-link" data-lesson="1"><span class="circle">1</span><span class="title">Кіріспе және танысу</span></a>
                     <a class="lesson-link" data-lesson="2"><span class="circle">2</span><span class="title">ЖИ-мен сөйлесу</span></a>
                     <a class="lesson-link" data-lesson="3"><span class="circle">3</span><span class="title">ЖИ қайда бар?</span></a>
+                    <a class="lesson-link" data-lesson="4"><span class="circle">4</span><span class="title">Қауіпсіздік ережелері</span></a>
                 </div>
                 <div class="week-group">
-                    <div class="week-header">2-апта: Қауіпсіздік</div>
-                    <a class="lesson-link" data-lesson="4"><span class="circle">4</span><span class="title">Қауіпсіздік ережелері</span></a>
+                    <div class="week-header">2-апта: Тереңдету</div>
                     <a class="lesson-link" data-lesson="5"><span class="circle">5</span><span class="title">Денсаулық және ЖИ</span></a>
                     <a class="lesson-link" data-lesson="6"><span class="circle">6</span><span class="title">ЖИ-ге сенуге бола ма?</span></a>
+                    <a class="lesson-link" data-lesson="7"><span class="circle">7</span><span class="title">ЖИ құралдары</span></a>
+                    <a class="lesson-link" data-lesson="8"><span class="circle">8</span><span class="title">ЖИ және ақша</span></a>
                 </div>
                 <div class="week-group">
-                    <div class="week-header">3-апта: Тәжірибе</div>
-                    <a class="lesson-link" data-lesson="7"><span class="circle">7</span><span class="title">ЖИ құралдары</span></a>
-                    <a class="lesson-link" data-lesson="8"><span class="circle">8</span><span class="title">Қорытынды</span></a>
+                    <div class="week-header">3-апта: Практика</div>
+                    <a class="lesson-link" data-lesson="9"><span class="circle">9</span><span class="title">ЖИ-мен сурет салу</span></a>
+                    <a class="lesson-link" data-lesson="10"><span class="circle">10</span><span class="title">Промпт жазу өнері</span></a>
+                    <a class="lesson-link" data-lesson="11"><span class="circle">11</span><span class="title">ЖИ-мен хат жазу</span></a>
+                    <a class="lesson-link" data-lesson="12"><span class="circle">12</span><span class="title">ЖИ және болашақ</span></a>
+                    <a class="lesson-link" data-lesson="13"><span class="circle">13</span><span class="title">Қорытынды</span></a>
                 </div>
                 <button class="reset-btn" onclick="resetProgress()">🔄 Прогресті тазалау</button>
             </aside>
@@ -757,76 +772,26 @@
                         <h1>Кіріспе және танысу</h1>
                         <p class="subtitle">«ЖИ деген не және ол қайда бар?»</p>
                         <div class="lesson-image"><img src="images/lesson-1.jpg" alt="Кіріспе"></div>
-                        
                         <div class="accordion-container">
-                            <!-- 1. Теория -->
                             <div class="accordion-card">
-                                <div class="accordion-header" onclick="toggleAccordion(this)">
-                                    <span class="accordion-icon">📖</span>
-                                    <span class="accordion-title">Қысқаша теория</span>
-                                    <span class="accordion-toggle">▼</span>
-                                </div>
-                                <div class="accordion-body">
-                                    <div class="accordion-content">
-                                        <p>Жасанды интеллект (ЖИ) — бұл компьютерге салынған ақылды көмекші. Ол адам сияқты ойлай алады, сұрақтарға жауап береді, тіпті сурет салады. ЖИ — бөтен нәрсе емес, ол біздің күнделікті өмірімізде бұрыннан бар.</p>
-                                    </div>
-                                </div>
+                                <div class="accordion-header" onclick="toggleAccordion(this)"><span class="accordion-icon">📖</span><span class="accordion-title">Қысқаша теория</span><span class="accordion-toggle">▼</span></div>
+                                <div class="accordion-body"><div class="accordion-content"><p>Жасанды интеллект (ЖИ) — бұл компьютерге салынған ақылды көмекші. Ол адам сияқты ойлай алады, сұрақтарға жауап береді, тіпті сурет салады. ЖИ — бөтен нәрсе емес, ол біздің күнделікті өмірімізде бұрыннан бар.</p></div></div>
                             </div>
-
-                            <!-- 2. Қызықты факт -->
                             <div class="accordion-card">
-                                <div class="accordion-header" onclick="toggleAccordion(this)">
-                                    <span class="accordion-icon">✨</span>
-                                    <span class="accordion-title">Қызықты факт</span>
-                                    <span class="accordion-toggle">▼</span>
-                                </div>
-                                <div class="accordion-body">
-                                    <div class="accordion-content">
-                                        <p>«Жасанды интеллект» деген термин алғаш рет <strong>1955 жылы</strong> Стэнфорд профессоры Джон Маккартидің ұсынысында пайда болды. Ал 1956 жылы Дартмут конференциясында ресми түрде бекітілді.</p>
-                                    </div>
-                                </div>
+                                <div class="accordion-header" onclick="toggleAccordion(this)"><span class="accordion-icon">✨</span><span class="accordion-title">Қызықты факт</span><span class="accordion-toggle">▼</span></div>
+                                <div class="accordion-body"><div class="accordion-content"><p>«Жасанды интеллект» деген термин алғаш рет <strong>1955 жылы</strong> Стэнфорд профессоры Джон Маккартидің ұсынысында пайда болды. Ал 1956 жылы Дартмут конференциясында ресми түрде бекітілді.</p></div></div>
                             </div>
-
-                            <!-- 3. Мысал -->
                             <div class="accordion-card">
-                                <div class="accordion-header" onclick="toggleAccordion(this)">
-                                    <span class="accordion-icon">💡</span>
-                                    <span class="accordion-title">Мысал</span>
-                                    <span class="accordion-toggle">▼</span>
-                                </div>
-                                <div class="accordion-body">
-                                    <div class="accordion-content">
-                                        <p>Телефоныңыздағы дауыс көмекшісі (Siri немесе Google) — бұл ЖИ. Сіз одан «Бүгін ауа райы қандай?» деп сұрайсыз, ол сізге жауап береді. YouTube сізге ұнайтын видеоларды ұсынса — бұл да ЖИ.</p>
-                                    </div>
-                                </div>
+                                <div class="accordion-header" onclick="toggleAccordion(this)"><span class="accordion-icon">💡</span><span class="accordion-title">Мысал</span><span class="accordion-toggle">▼</span></div>
+                                <div class="accordion-body"><div class="accordion-content"><p>Телефоныңыздағы дауыс көмекшісі (Siri немесе Google) — бұл ЖИ. Сіз одан «Бүгін ауа райы қандай?» деп сұрайсыз, ол сізге жауап береді. YouTube сізге ұнайтын видеоларды ұсынса — бұл да ЖИ.</p></div></div>
                             </div>
-
-                            <!-- 4. Өмірден мысал -->
                             <div class="accordion-card">
-                                <div class="accordion-header" onclick="toggleAccordion(this)">
-                                    <span class="accordion-icon">👨‍🏫</span>
-                                    <span class="accordion-title">Өмірден мысал</span>
-                                    <span class="accordion-toggle">▼</span>
-                                </div>
-                                <div class="accordion-body">
-                                    <div class="accordion-content">
-                                        <p>Университетте сабақ беретін мұғалім болсаңыз, студенттерге материалды дайындау үшін ЖИ-ді қолдануға болады. Мысалы, «Осы тақырыпқа қысқаша жоспар жасап бер» деп сұрасаңыз, ол сізге үлгі жасап береді. Бұл — ЖИ-дің күнделікті жұмыста көмектесетін мысалы.</p>
-                                    </div>
-                                </div>
+                                <div class="accordion-header" onclick="toggleAccordion(this)"><span class="accordion-icon">👨‍🏫</span><span class="accordion-title">Өмірден мысал</span><span class="accordion-toggle">▼</span></div>
+                                <div class="accordion-body"><div class="accordion-content"><p>Университетте сабақ беретін мұғалім болсаңыз, студенттерге материалды дайындау үшін ЖИ-ді қолдануға болады. Мысалы, «Осы тақырыпқа қысқаша жоспар жасап бер» деп сұрасаңыз, ол сізге үлгі жасап береді.</p></div></div>
                             </div>
-
-                            <!-- 5. Тәжірибе -->
                             <div class="accordion-card">
-                                <div class="accordion-header" onclick="toggleAccordion(this)">
-                                    <span class="accordion-icon">🎯</span>
-                                    <span class="accordion-title">Тәжірибе</span>
-                                    <span class="accordion-toggle">▼</span>
-                                </div>
-                                <div class="accordion-body">
-                                    <div class="accordion-content">
-                                        <p>Бүгін телефондағы дауыс көмекшісіне «Бүгін ауа райы қандай?» деп сұрақ қойып көріңіз. Немесе YouTube-тен бір видео ашып, оның ұсыныстарына назар аударыңыз. Бұл — ЖИ-дің жұмысы.</p>
-                                    </div>
-                                </div>
+                                <div class="accordion-header" onclick="toggleAccordion(this)"><span class="accordion-icon">🎯</span><span class="accordion-title">Тәжірибе</span><span class="accordion-toggle">▼</span></div>
+                                <div class="accordion-body"><div class="accordion-content"><p>Бүгін телефондағы дауыс көмекшісіне «Бүгін ауа райы қандай?» деп сұрақ қойып көріңіз. Немесе YouTube-тен бір видео ашып, оның ұсыныстарына назар аударыңыз.</p></div></div>
                             </div>
                         </div>
                         <button class="finish-btn" data-finish="1">Сабақты аяқтау</button>
@@ -838,71 +803,26 @@
                         <h1>ЖИ-мен қалай сөйлесуге болады?</h1>
                         <p class="subtitle">Дауыспен басқару</p>
                         <div class="lesson-image"><img src="images/lesson-2.jpg" alt="Сөйлесу"></div>
-                        
                         <div class="accordion-container">
                             <div class="accordion-card">
-                                <div class="accordion-header" onclick="toggleAccordion(this)">
-                                    <span class="accordion-icon">📖</span>
-                                    <span class="accordion-title">Қысқаша теория</span>
-                                    <span class="accordion-toggle">▼</span>
-                                </div>
-                                <div class="accordion-body">
-                                    <div class="accordion-content">
-                                        <p>ЖИ-мен сөйлесудің ең оңай жолы — дауыспен басқару. Пернетақтаға баспай-ақ, микрофонды басып, сұрағыңызды айтуға болады. ЖИ сізді тыңдап, жауап береді.</p>
-                                    </div>
-                                </div>
+                                <div class="accordion-header" onclick="toggleAccordion(this)"><span class="accordion-icon">📖</span><span class="accordion-title">Қысқаша теория</span><span class="accordion-toggle">▼</span></div>
+                                <div class="accordion-body"><div class="accordion-content"><p>ЖИ-мен сөйлесудің ең оңай жолы — дауыспен басқару. Пернетақтаға баспай-ақ, микрофонды басып, сұрағыңызды айтуға болады. ЖИ сізді тыңдап, жауап береді.</p></div></div>
                             </div>
-
                             <div class="accordion-card">
-                                <div class="accordion-header" onclick="toggleAccordion(this)">
-                                    <span class="accordion-icon">✨</span>
-                                    <span class="accordion-title">Қызықты факт</span>
-                                    <span class="accordion-toggle">▼</span>
-                                </div>
-                                <div class="accordion-body">
-                                    <div class="accordion-content">
-                                        <p>1950 жылы ағылшын математигі Алан Тьюринг «Машиналар ойлай ала ма?» деген сұрақ қойып, әйгілі Тьюринг тестін ұсынды. Бұл — ЖИ-дің алғашқы теориялық негізі.</p>
-                                    </div>
-                                </div>
+                                <div class="accordion-header" onclick="toggleAccordion(this)"><span class="accordion-icon">✨</span><span class="accordion-title">Қызықты факт</span><span class="accordion-toggle">▼</span></div>
+                                <div class="accordion-body"><div class="accordion-content"><p>1950 жылы ағылшын математигі Алан Тьюринг «Машиналар ойлай ала ма?» деген сұрақ қойып, әйгілі Тьюринг тестін ұсынды. Бұл — ЖИ-дің алғашқы теориялық негізі.</p></div></div>
                             </div>
-
                             <div class="accordion-card">
-                                <div class="accordion-header" onclick="toggleAccordion(this)">
-                                    <span class="accordion-icon">💡</span>
-                                    <span class="accordion-title">Мысал</span>
-                                    <span class="accordion-toggle">▼</span>
-                                </div>
-                                <div class="accordion-body">
-                                    <div class="accordion-content">
-                                        <p>Телефоныңыздағы микрофон суретін басыңыз. Тыныш, анық сөйлеңіз: «Бүгін ауа райы қандай?». Ол сізге жауап береді. Егер асығып, тез сөйлесеңіз — ол түсінбеуі мүмкін.</p>
-                                    </div>
-                                </div>
+                                <div class="accordion-header" onclick="toggleAccordion(this)"><span class="accordion-icon">💡</span><span class="accordion-title">Мысал</span><span class="accordion-toggle">▼</span></div>
+                                <div class="accordion-body"><div class="accordion-content"><p>Телефоныңыздағы микрофон суретін басыңыз. Тыныш, анық сөйлеңіз: «Бүгін ауа райы қандай?». Ол сізге жауап береді. Егер асығып, тез сөйлесеңіз — ол түсінбеуі мүмкін.</p></div></div>
                             </div>
-
                             <div class="accordion-card">
-                                <div class="accordion-header" onclick="toggleAccordion(this)">
-                                    <span class="accordion-icon">👨‍🏫</span>
-                                    <span class="accordion-title">Өмірден мысал</span>
-                                    <span class="accordion-toggle">▼</span>
-                                </div>
-                                <div class="accordion-body">
-                                    <div class="accordion-content">
-                                        <p>Мұғалім ретінде дәріс оқып жатқанда, студенттерге арналған сұрақтарды дауыспен ЖИ-ге қоюға болады. Мысалы, дәріс үстінде «Осы тақырыпқа қатысты 3 қызықты факт айтып бер» деп айтсаңыз, ЖИ бірден жауап береді.</p>
-                                    </div>
-                                </div>
+                                <div class="accordion-header" onclick="toggleAccordion(this)"><span class="accordion-icon">👨‍🏫</span><span class="accordion-title">Өмірден мысал</span><span class="accordion-toggle">▼</span></div>
+                                <div class="accordion-body"><div class="accordion-content"><p>Мұғалім ретінде дәріс оқып жатқанда, студенттерге арналған сұрақтарды дауыспен ЖИ-ге қоюға болады. Мысалы, «Осы тақырыпқа қатысты 3 қызықты факт айтып бер» деп айтсаңыз, ЖИ бірден жауап береді.</p></div></div>
                             </div>
-
                             <div class="accordion-card">
-                                <div class="accordion-header" onclick="toggleAccordion(this)">
-                                    <span class="accordion-icon">🎯</span>
-                                    <span class="accordion-title">Тәжірибе</span>
-                                    <span class="accordion-toggle">▼</span>
-                                </div>
-                                <div class="accordion-body">
-                                    <div class="accordion-content">
-                                        <p>Микрофонды басып, өзіңізге қызықты бір сұрақ қойыңыз. Мысалы: «Бүгін ауа райы қандай?» немесе «Менің қан қысымымды қалай төмендетуге болады?».</p>
-                                    </div>
-                                </div>
+                                <div class="accordion-header" onclick="toggleAccordion(this)"><span class="accordion-icon">🎯</span><span class="accordion-title">Тәжірибе</span><span class="accordion-toggle">▼</span></div>
+                                <div class="accordion-body"><div class="accordion-content"><p>Микрофонды басып, өзіңізге қызықты бір сұрақ қойыңыз. Мысалы: «Бүгін ауа райы қандай?» немесе «Менің қан қысымымды қалай төмендетуге болады?».</p></div></div>
                             </div>
                         </div>
                         <button class="finish-btn" data-finish="2">Сабақты аяқтау</button>
@@ -914,71 +834,26 @@
                         <h1>ЖИ қайда бар?</h1>
                         <p class="subtitle">Күнделікті өмірдегі ЖИ</p>
                         <div class="lesson-image"><img src="images/lesson-3.jpg" alt="ЖИ қайда бар"></div>
-                        
                         <div class="accordion-container">
                             <div class="accordion-card">
-                                <div class="accordion-header" onclick="toggleAccordion(this)">
-                                    <span class="accordion-icon">📖</span>
-                                    <span class="accordion-title">Қысқаша теория</span>
-                                    <span class="accordion-toggle">▼</span>
-                                </div>
-                                <div class="accordion-body">
-                                    <div class="accordion-content">
-                                        <p>ЖИ тек бір жерде емес, ол біздің айналамызда. Телефонда, интернетте, картада, тіпті ауа райы болжамында ЖИ бар. Ол бізге күнделікті көмектеседі.</p>
-                                    </div>
-                                </div>
+                                <div class="accordion-header" onclick="toggleAccordion(this)"><span class="accordion-icon">📖</span><span class="accordion-title">Қысқаша теория</span><span class="accordion-toggle">▼</span></div>
+                                <div class="accordion-body"><div class="accordion-content"><p>ЖИ тек бір жерде емес, ол біздің айналамызда. Телефонда, интернетте, картада, тіпті ауа райы болжамында ЖИ бар. Ол бізге күнделікті көмектеседі.</p></div></div>
                             </div>
-
                             <div class="accordion-card">
-                                <div class="accordion-header" onclick="toggleAccordion(this)">
-                                    <span class="accordion-icon">✨</span>
-                                    <span class="accordion-title">Қызықты факт</span>
-                                    <span class="accordion-toggle">▼</span>
-                                </div>
-                                <div class="accordion-body">
-                                    <div class="accordion-content">
-                                        <p>YouTube-тің ұсыныс алгоритмі күн сайын <strong>1 миллиардтан астам</strong> видеоны талдап, әр қолданушыға жеке ұсыныс жасайды. Бұл — ЖИ-дің ең үлкен күнделікті қолданыстарының бірі.</p>
-                                    </div>
-                                </div>
+                                <div class="accordion-header" onclick="toggleAccordion(this)"><span class="accordion-icon">✨</span><span class="accordion-title">Қызықты факт</span><span class="accordion-toggle">▼</span></div>
+                                <div class="accordion-body"><div class="accordion-content"><p>YouTube-тің ұсыныс алгоритмі күн сайын <strong>1 миллиардтан астам</strong> видеоны талдап, әр қолданушыға жеке ұсыныс жасайды. Бұл — ЖИ-дің ең үлкен күнделікті қолданыстарының бірі.</p></div></div>
                             </div>
-
                             <div class="accordion-card">
-                                <div class="accordion-header" onclick="toggleAccordion(this)">
-                                    <span class="accordion-icon">💡</span>
-                                    <span class="accordion-title">Мысал</span>
-                                    <span class="accordion-toggle">▼</span>
-                                </div>
-                                <div class="accordion-body">
-                                    <div class="accordion-content">
-                                        <p>Карта қосымшасы сізге кептелісті айналып өтуді ұсынса — бұл ЖИ сізге уақытты үнемдеп жатқаны. Ауа райы болжамы да ЖИ арқылы жасалады.</p>
-                                    </div>
-                                </div>
+                                <div class="accordion-header" onclick="toggleAccordion(this)"><span class="accordion-icon">💡</span><span class="accordion-title">Мысал</span><span class="accordion-toggle">▼</span></div>
+                                <div class="accordion-body"><div class="accordion-content"><p>Карта қосымшасы сізге кептелісті айналып өтуді ұсынса — бұл ЖИ сізге уақытты үнемдеп жатқаны. Ауа райы болжамы да ЖИ арқылы жасалады.</p></div></div>
                             </div>
-
                             <div class="accordion-card">
-                                <div class="accordion-header" onclick="toggleAccordion(this)">
-                                    <span class="accordion-icon">👨‍🏫</span>
-                                    <span class="accordion-title">Өмірден мысал</span>
-                                    <span class="accordion-toggle">▼</span>
-                                </div>
-                                <div class="accordion-body">
-                                    <div class="accordion-content">
-                                        <p>Университетте студенттердің үлгерімін талдау үшін ЖИ қолдануға болады. Мысалы, «Осы топтың орташа балын есептеп бер» деп сұрасаңыз, ол жылдам әрі дәл жауап береді. Бұл — ЖИ-дің білім саласындағы көрінісі.</p>
-                                    </div>
-                                </div>
+                                <div class="accordion-header" onclick="toggleAccordion(this)"><span class="accordion-icon">👨‍🏫</span><span class="accordion-title">Өмірден мысал</span><span class="accordion-toggle">▼</span></div>
+                                <div class="accordion-body"><div class="accordion-content"><p>Университетте студенттердің үлгерімін талдау үшін ЖИ қолдануға болады. Мысалы, «Осы топтың орташа балын есептеп бер» деп сұрасаңыз, ол жылдам әрі дәл жауап береді.</p></div></div>
                             </div>
-
                             <div class="accordion-card">
-                                <div class="accordion-header" onclick="toggleAccordion(this)">
-                                    <span class="accordion-icon">🎯</span>
-                                    <span class="accordion-title">Тәжірибе</span>
-                                    <span class="accordion-toggle">▼</span>
-                                </div>
-                                <div class="accordion-body">
-                                    <div class="accordion-content">
-                                        <p>Бүгін телефоныңыздағы карта қосымшасын ашып, бір мекенжайды іздеп көріңіз. Немесе YouTube-те бір видео ашып, оның ұсыныстарына назар аударыңыз.</p>
-                                    </div>
-                                </div>
+                                <div class="accordion-header" onclick="toggleAccordion(this)"><span class="accordion-icon">🎯</span><span class="accordion-title">Тәжірибе</span><span class="accordion-toggle">▼</span></div>
+                                <div class="accordion-body"><div class="accordion-content"><p>Бүгін телефоныңыздағы карта қосымшасын ашып, бір мекенжайды іздеп көріңіз. Немесе YouTube-те бір видео ашып, оның ұсыныстарына назар аударыңыз.</p></div></div>
                             </div>
                         </div>
                         <button class="finish-btn" data-finish="3">Сабақты аяқтау</button>
@@ -986,81 +861,30 @@
 
                     <!-- САБАҚ 4 -->
                     <div class="lesson-content" id="lesson-4">
-                        <span class="lesson-badge">4-сабақ · 2-апта</span>
+                        <span class="lesson-badge">4-сабақ · 1-апта</span>
                         <h1>Қауіпсіздік ережелері</h1>
                         <p class="subtitle">«Не нәрсені ЖИ-ге жазбау керек?»</p>
                         <div class="lesson-image"><img src="images/lesson-4.jpg" alt="Қауіпсіздік"></div>
-                        
                         <div class="accordion-container">
                             <div class="accordion-card">
-                                <div class="accordion-header" onclick="toggleAccordion(this)">
-                                    <span class="accordion-icon">📖</span>
-                                    <span class="accordion-title">Қысқаша теория</span>
-                                    <span class="accordion-toggle">▼</span>
-                                </div>
-                                <div class="accordion-body">
-                                    <div class="accordion-content">
-                                        <p>ЖИ — бұл көмекші, бірақ оған барлық ақпаратты айтуға болмайды. Сіздің жеке деректеріңіз құпия болуы керек. ЖИ-ді бөтен адам деп ойлаңыз: оған құпия нәрселерді айтпайсыз.</p>
-                                    </div>
-                                </div>
+                                <div class="accordion-header" onclick="toggleAccordion(this)"><span class="accordion-icon">📖</span><span class="accordion-title">Қысқаша теория</span><span class="accordion-toggle">▼</span></div>
+                                <div class="accordion-body"><div class="accordion-content"><p>ЖИ — бұл көмекші, бірақ оған барлық ақпаратты айтуға болмайды. Сіздің жеке деректеріңіз құпия болуы керек. ЖИ-ді бөтен адам деп ойлаңыз: оған құпия нәрселерді айтпайсыз.</p></div></div>
                             </div>
-
                             <div class="accordion-card">
-                                <div class="accordion-header" onclick="toggleAccordion(this)">
-                                    <span class="accordion-icon">✨</span>
-                                    <span class="accordion-title">Қызықты факт</span>
-                                    <span class="accordion-toggle">▼</span>
-                                </div>
-                                <div class="accordion-body">
-                                    <div class="accordion-content">
-                                        <p>2023 жылы зерттеушілер ЖИ-ге «сенімді» деп берілген тапсырмалардың кейбірінде ол өзін «тексеріліп жатқанын» түсініп, жауабын өзгертетінін анықтады. Сондықтан ЖИ-ге де, адамға да құпия деректерді бермеу — ең дұрыс қауіпсіздік шарасы.</p>
-                                    </div>
-                                </div>
+                                <div class="accordion-header" onclick="toggleAccordion(this)"><span class="accordion-icon">✨</span><span class="accordion-title">Қызықты факт</span><span class="accordion-toggle">▼</span></div>
+                                <div class="accordion-body"><div class="accordion-content"><p>2023 жылы зерттеушілер ЖИ-ге «сенімді» деп берілген тапсырмалардың кейбірінде ол өзін «тексеріліп жатқанын» түсініп, жауабын өзгертетінін анықтады. Сондықтан құпия деректерді бермеу — ең дұрыс шара.</p></div></div>
                             </div>
-
                             <div class="accordion-card">
-                                <div class="accordion-header" onclick="toggleAccordion(this)">
-                                    <span class="accordion-icon">💡</span>
-                                    <span class="accordion-title">Мысал</span>
-                                    <span class="accordion-toggle">▼</span>
-                                </div>
-                                <div class="accordion-body">
-                                    <div class="accordion-content">
-                                        <p>Ешқашан ЖИ-ге мыналарды жазбаңыз:</p>
-                                        <ul>
-                                            <li>🔑 Парольдер</li>
-                                            <li>💳 Банк картасының нөмірі мен құпия коды</li>
-                                            <li>🏠 Үй мекенжайы</li>
-                                            <li>🪪 Жеке куәлік деректері</li>
-                                        </ul>
-                                    </div>
-                                </div>
+                                <div class="accordion-header" onclick="toggleAccordion(this)"><span class="accordion-icon">💡</span><span class="accordion-title">Мысал</span><span class="accordion-toggle">▼</span></div>
+                                <div class="accordion-body"><div class="accordion-content"><p>Ешқашан ЖИ-ге мыналарды жазбаңыз:</p><ul><li>🔑 Парольдер</li><li>💳 Банк картасының нөмірі мен құпия коды</li><li>🏠 Үй мекенжайы</li><li>🪪 Жеке куәлік деректері</li></ul></div></div>
                             </div>
-
                             <div class="accordion-card">
-                                <div class="accordion-header" onclick="toggleAccordion(this)">
-                                    <span class="accordion-icon">👨‍🏫</span>
-                                    <span class="accordion-title">Өмірден мысал</span>
-                                    <span class="accordion-toggle">▼</span>
-                                </div>
-                                <div class="accordion-body">
-                                    <div class="accordion-content">
-                                        <p>Университетте жұмыс істейтін мұғалім болсаңыз, студенттердің жеке деректерін (телефон нөмірлері, мекенжайлары) ЖИ-ге жазбау керек. Тек жалпы статистиканы ғана сұрауға болады. Бұл — кәсіби қауіпсіздік.</p>
-                                    </div>
-                                </div>
+                                <div class="accordion-header" onclick="toggleAccordion(this)"><span class="accordion-icon">👨‍🏫</span><span class="accordion-title">Өмірден мысал</span><span class="accordion-toggle">▼</span></div>
+                                <div class="accordion-body"><div class="accordion-content"><p>Университетте жұмыс істейтін мұғалім болсаңыз, студенттердің жеке деректерін ЖИ-ге жазбау керек. Тек жалпы статистиканы ғана сұрауға болады. Бұл — кәсіби қауіпсіздік.</p></div></div>
                             </div>
-
                             <div class="accordion-card">
-                                <div class="accordion-header" onclick="toggleAccordion(this)">
-                                    <span class="accordion-icon">🎯</span>
-                                    <span class="accordion-title">Тәжірибе</span>
-                                    <span class="accordion-toggle">▼</span>
-                                </div>
-                                <div class="accordion-body">
-                                    <div class="accordion-content">
-                                        <p>Бүгін телефондағы парольдеріңізді тексеріңіз. Олар сенімді ме? Ешкімге айтпаңыз. ЖИ-ге де жазбаңыз.</p>
-                                    </div>
-                                </div>
+                                <div class="accordion-header" onclick="toggleAccordion(this)"><span class="accordion-icon">🎯</span><span class="accordion-title">Тәжірибе</span><span class="accordion-toggle">▼</span></div>
+                                <div class="accordion-body"><div class="accordion-content"><p>Бүгін телефондағы парольдеріңізді тексеріңіз. Олар сенімді ме? Ешкімге айтпаңыз. ЖИ-ге де жазбаңыз.</p></div></div>
                             </div>
                         </div>
                         <button class="finish-btn" data-finish="4">Сабақты аяқтау</button>
@@ -1072,71 +896,26 @@
                         <h1>Денсаулық және ЖИ</h1>
                         <p class="subtitle">«ЖИ дәрігер емес!»</p>
                         <div class="lesson-image"><img src="images/lesson-5.jpg" alt="Денсаулық"></div>
-                        
                         <div class="accordion-container">
                             <div class="accordion-card">
-                                <div class="accordion-header" onclick="toggleAccordion(this)">
-                                    <span class="accordion-icon">📖</span>
-                                    <span class="accordion-title">Қысқаша теория</span>
-                                    <span class="accordion-toggle">▼</span>
-                                </div>
-                                <div class="accordion-body">
-                                    <div class="accordion-content">
-                                        <p><strong>Жасанды интеллект — дәрігер ЕМЕС!</strong> Ол сізге нақты диагноз қоя алмайды, дәрі тағайындай алмайды. ЖИ тек жалпы ақпарат бере алады.</p>
-                                    </div>
-                                </div>
+                                <div class="accordion-header" onclick="toggleAccordion(this)"><span class="accordion-icon">📖</span><span class="accordion-title">Қысқаша теория</span><span class="accordion-toggle">▼</span></div>
+                                <div class="accordion-body"><div class="accordion-content"><p><strong>Жасанды интеллект — дәрігер ЕМЕС!</strong> Ол сізге нақты диагноз қоя алмайды, дәрі тағайындай алмайды. ЖИ тек жалпы ақпарат бере алады.</p></div></div>
                             </div>
-
                             <div class="accordion-card">
-                                <div class="accordion-header" onclick="toggleAccordion(this)">
-                                    <span class="accordion-icon">✨</span>
-                                    <span class="accordion-title">Қызықты факт</span>
-                                    <span class="accordion-toggle">▼</span>
-                                </div>
-                                <div class="accordion-body">
-                                    <div class="accordion-content">
-                                        <p>Дүниежүзілік денсаулық сақтау ұйымы (ДДҰ) 2023 жылы ЖИ-ді медицинада қолдану жөнінде арнайы нұсқаулық шығарды. Онда «ЖИ дәрігердің орнын баспайды, тек көмекші құрал» деп қатаң ескертілген.</p>
-                                    </div>
-                                </div>
+                                <div class="accordion-header" onclick="toggleAccordion(this)"><span class="accordion-icon">✨</span><span class="accordion-title">Қызықты факт</span><span class="accordion-toggle">▼</span></div>
+                                <div class="accordion-body"><div class="accordion-content"><p>Дүниежүзілік денсаулық сақтау ұйымы (ДДҰ) 2023 жылы ЖИ-ді медицинада қолдану жөнінде арнайы нұсқаулық шығарды. Онда «ЖИ дәрігердің орнын баспайды, тек көмекші құрал» деп қатаң ескертілген.</p></div></div>
                             </div>
-
                             <div class="accordion-card">
-                                <div class="accordion-header" onclick="toggleAccordion(this)">
-                                    <span class="accordion-icon">💡</span>
-                                    <span class="accordion-title">Мысал</span>
-                                    <span class="accordion-toggle">▼</span>
-                                </div>
-                                <div class="accordion-body">
-                                    <div class="accordion-content">
-                                        <p>ЖИ-ден «Қан қысымы деген не?» деп сұрауға болады. Бірақ «Маған қандай дәрі ішу керек?» деп сұрауға БОЛМАЙДЫ. Бұл — дәрігердің жұмысы.</p>
-                                    </div>
-                                </div>
+                                <div class="accordion-header" onclick="toggleAccordion(this)"><span class="accordion-icon">💡</span><span class="accordion-title">Мысал</span><span class="accordion-toggle">▼</span></div>
+                                <div class="accordion-body"><div class="accordion-content"><p>ЖИ-ден «Қан қысымы деген не?» деп сұрауға болады. Бірақ «Маған қандай дәрі ішу керек?» деп сұрауға БОЛМАЙДЫ. Бұл — дәрігердің жұмысы.</p></div></div>
                             </div>
-
                             <div class="accordion-card">
-                                <div class="accordion-header" onclick="toggleAccordion(this)">
-                                    <span class="accordion-icon">👨‍🏫</span>
-                                    <span class="accordion-title">Өмірден мысал</span>
-                                    <span class="accordion-toggle">▼</span>
-                                </div>
-                                <div class="accordion-body">
-                                    <div class="accordion-content">
-                                        <p>Мұғалім ретінде өзіңіздің денсаулығыңызға байланысты сұрақтарды ЖИ-ге емес, дәрігерге қою керек. ЖИ-ден тек «Дәрігерге баруға қалай дайындалу керек?» деп сұрауға болады. Бұл — қауіпсіз.</p>
-                                    </div>
-                                </div>
+                                <div class="accordion-header" onclick="toggleAccordion(this)"><span class="accordion-icon">👨‍🏫</span><span class="accordion-title">Өмірден мысал</span><span class="accordion-toggle">▼</span></div>
+                                <div class="accordion-body"><div class="accordion-content"><p>Мұғалім ретінде өзіңіздің денсаулығыңызға байланысты сұрақтарды ЖИ-ге емес, дәрігерге қою керек. ЖИ-ден тек «Дәрігерге баруға қалай дайындалу керек?» деп сұрауға болады. Бұл — қауіпсіз.</p></div></div>
                             </div>
-
                             <div class="accordion-card">
-                                <div class="accordion-header" onclick="toggleAccordion(this)">
-                                    <span class="accordion-icon">🎯</span>
-                                    <span class="accordion-title">Тәжірибе</span>
-                                    <span class="accordion-toggle">▼</span>
-                                </div>
-                                <div class="accordion-body">
-                                    <div class="accordion-content">
-                                        <p>Егер дәрігерге баратын болсаңыз, ЖИ-ге «Кардиологқа қандай сұрақтар дайындау керек?» деп сұраңыз. Бірақ нақты диагнозды тек дәрігерден алыңыз.</p>
-                                    </div>
-                                </div>
+                                <div class="accordion-header" onclick="toggleAccordion(this)"><span class="accordion-icon">🎯</span><span class="accordion-title">Тәжірибе</span><span class="accordion-toggle">▼</span></div>
+                                <div class="accordion-body"><div class="accordion-content"><p>Егер дәрігерге баратын болсаңыз, ЖИ-ге «Кардиологқа қандай сұрақтар дайындау керек?» деп сұраңыз. Бірақ нақты диагнозды тек дәрігерден алыңыз.</p></div></div>
                             </div>
                         </div>
                         <button class="finish-btn" data-finish="5">Сабақты аяқтау</button>
@@ -1148,71 +927,26 @@
                         <h1>ЖИ-ге сенуге бола ма?</h1>
                         <p class="subtitle">Фейк жаңалықтар мен алаяқтық</p>
                         <div class="lesson-image"><img src="images/lesson-6.jpg" alt="Алаяқтық"></div>
-                        
                         <div class="accordion-container">
                             <div class="accordion-card">
-                                <div class="accordion-header" onclick="toggleAccordion(this)">
-                                    <span class="accordion-icon">📖</span>
-                                    <span class="accordion-title">Қысқаша теория</span>
-                                    <span class="accordion-toggle">▼</span>
-                                </div>
-                                <div class="accordion-body">
-                                    <div class="accordion-content">
-                                        <p>ЖИ кейде қателеседі. Ол жалған ақпарат бере алады. Сондықтан ЖИ-ден келген ақпаратты тексере білу керек.</p>
-                                    </div>
-                                </div>
+                                <div class="accordion-header" onclick="toggleAccordion(this)"><span class="accordion-icon">📖</span><span class="accordion-title">Қысқаша теория</span><span class="accordion-toggle">▼</span></div>
+                                <div class="accordion-body"><div class="accordion-content"><p>ЖИ кейде қателеседі. Ол жалған ақпарат бере алады. Сондықтан ЖИ-ден келген ақпаратты тексере білу керек.</p></div></div>
                             </div>
-
                             <div class="accordion-card">
-                                <div class="accordion-header" onclick="toggleAccordion(this)">
-                                    <span class="accordion-icon">✨</span>
-                                    <span class="accordion-title">Қызықты факт</span>
-                                    <span class="accordion-toggle">▼</span>
-                                </div>
-                                <div class="accordion-body">
-                                    <div class="accordion-content">
-                                        <p>ЖИ кейде «галлюцинация» жасайды — яғни өзі ойлап тапқан жалған ақпаратты шындық ретінде ұсынады. Бұл құбылыс ЖИ-дің өзінің «білмейтінін» мойындамауынан туындайды.</p>
-                                    </div>
-                                </div>
+                                <div class="accordion-header" onclick="toggleAccordion(this)"><span class="accordion-icon">✨</span><span class="accordion-title">Қызықты факт</span><span class="accordion-toggle">▼</span></div>
+                                <div class="accordion-body"><div class="accordion-content"><p>ЖИ кейде «галлюцинация» жасайды — яғни өзі ойлап тапқан жалған ақпаратты шындық ретінде ұсынады. Бұл құбылыс ЖИ-дің өзінің «білмейтінін» мойындамауынан туындайды.</p></div></div>
                             </div>
-
                             <div class="accordion-card">
-                                <div class="accordion-header" onclick="toggleAccordion(this)">
-                                    <span class="accordion-icon">💡</span>
-                                    <span class="accordion-title">Мысал</span>
-                                    <span class="accordion-toggle">▼</span>
-                                </div>
-                                <div class="accordion-body">
-                                    <div class="accordion-content">
-                                        <p>ЖИ суреттер мен дауыстарды жасай алады. Сондықтан күмәнді хабарламаларға сенбеңіз. Егер сізге немереңіздің дауысымен «Ақша керек» деген қоңырау келсе, алдымен немереңізге өзіңіз қоңырау шалып, тексеріңіз.</p>
-                                    </div>
-                                </div>
+                                <div class="accordion-header" onclick="toggleAccordion(this)"><span class="accordion-icon">💡</span><span class="accordion-title">Мысал</span><span class="accordion-toggle">▼</span></div>
+                                <div class="accordion-body"><div class="accordion-content"><p>ЖИ суреттер мен дауыстарды жасай алады. Сондықтан күмәнді хабарламаларға сенбеңіз. Егер сізге немереңіздің дауысымен «Ақша керек» деген қоңырау келсе, алдымен немереңізге өзіңіз қоңырау шалып, тексеріңіз.</p></div></div>
                             </div>
-
                             <div class="accordion-card">
-                                <div class="accordion-header" onclick="toggleAccordion(this)">
-                                    <span class="accordion-icon">👨‍🏫</span>
-                                    <span class="accordion-title">Өмірден мысал</span>
-                                    <span class="accordion-toggle">▼</span>
-                                </div>
-                                <div class="accordion-body">
-                                    <div class="accordion-content">
-                                        <p>Университетте студенттерге арналған материалдарды ЖИ арқылы дайындағанда, оны міндетті түрде тексеру керек. ЖИ кейде ескірген ақпарат береді. Сондықтан оқулықпен салыстырып, тексеріп алыңыз.</p>
-                                    </div>
-                                </div>
+                                <div class="accordion-header" onclick="toggleAccordion(this)"><span class="accordion-icon">👨‍🏫</span><span class="accordion-title">Өмірден мысал</span><span class="accordion-toggle">▼</span></div>
+                                <div class="accordion-body"><div class="accordion-content"><p>Университетте студенттерге арналған материалдарды ЖИ арқылы дайындағанда, оны міндетті түрде тексеру керек. ЖИ кейде ескірген ақпарат береді. Сондықтан оқулықпен салыстырып, тексеріп алыңыз.</p></div></div>
                             </div>
-
                             <div class="accordion-card">
-                                <div class="accordion-header" onclick="toggleAccordion(this)">
-                                    <span class="accordion-icon">🎯</span>
-                                    <span class="accordion-title">Тәжірибе</span>
-                                    <span class="accordion-toggle">▼</span>
-                                </div>
-                                <div class="accordion-body">
-                                    <div class="accordion-content">
-                                        <p>Бүгін отбасыңызға «Егер күмәнді қоңырау келсе, бір-бірімізге тексерейік» деп айтыңыз. Бұл — қарапайым қауіпсіздік ережесі.</p>
-                                    </div>
-                                </div>
+                                <div class="accordion-header" onclick="toggleAccordion(this)"><span class="accordion-icon">🎯</span><span class="accordion-title">Тәжірибе</span><span class="accordion-toggle">▼</span></div>
+                                <div class="accordion-body"><div class="accordion-content"><p>Бүгін отбасыңызға «Егер күмәнді қоңырау келсе, бір-бірімізге тексерейік» деп айтыңыз. Бұл — қарапайым қауіпсіздік ережесі.</p></div></div>
                             </div>
                         </div>
                         <button class="finish-btn" data-finish="6">Сабақты аяқтау</button>
@@ -1220,159 +954,227 @@
 
                     <!-- САБАҚ 7 -->
                     <div class="lesson-content" id="lesson-7">
-                        <span class="lesson-badge">7-сабақ · 3-апта</span>
+                        <span class="lesson-badge">7-сабақ · 2-апта</span>
                         <h1>ЖИ құралдары</h1>
                         <p class="subtitle">Сурет және аударма</p>
                         <div class="lesson-image"><img src="images/lesson-7.jpg" alt="Құралдар"></div>
-                        
                         <div class="accordion-container">
                             <div class="accordion-card">
-                                <div class="accordion-header" onclick="toggleAccordion(this)">
-                                    <span class="accordion-icon">📖</span>
-                                    <span class="accordion-title">Қысқаша теория</span>
-                                    <span class="accordion-toggle">▼</span>
-                                </div>
-                                <div class="accordion-body">
-                                    <div class="accordion-content">
-                                        <p>ЖИ тек сұрақтарға жауап беріп қана қоймайды, ол сурет сала алады және аударма жасай алады. Бұл — оның шығармашылық мүмкіндіктері.</p>
-                                    </div>
-                                </div>
+                                <div class="accordion-header" onclick="toggleAccordion(this)"><span class="accordion-icon">📖</span><span class="accordion-title">Қысқаша теория</span><span class="accordion-toggle">▼</span></div>
+                                <div class="accordion-body"><div class="accordion-content"><p>ЖИ тек сұрақтарға жауап беріп қана қоймайды, ол сурет сала алады және аударма жасай алады. Бұл — оның шығармашылық мүмкіндіктері.</p></div></div>
                             </div>
-
                             <div class="accordion-card">
-                                <div class="accordion-header" onclick="toggleAccordion(this)">
-                                    <span class="accordion-icon">✨</span>
-                                    <span class="accordion-title">Қызықты факт</span>
-                                    <span class="accordion-toggle">▼</span>
-                                </div>
-                                <div class="accordion-body">
-                                    <div class="accordion-content">
-                                        <p>2024 жылы Қазақстандық ғалымдар <strong>Qolda-AVL</strong> деген атаумен қазақ тілін түсінетін, суретті де тани алатын ЖИ моделін жасап шығарды. Ол интернетсіз-ақ компьютерде жұмыс істей алады.</p>
-                                    </div>
-                                </div>
+                                <div class="accordion-header" onclick="toggleAccordion(this)"><span class="accordion-icon">✨</span><span class="accordion-title">Қызықты факт</span><span class="accordion-toggle">▼</span></div>
+                                <div class="accordion-body"><div class="accordion-content"><p>2024 жылы Қазақстандық ғалымдар <strong>Qolda-AVL</strong> деген атаумен қазақ тілін түсінетін, суретті де тани алатын ЖИ моделін жасап шығарды. Ол интернетсіз-ақ компьютерде жұмыс істей алады.</p></div></div>
                             </div>
-
                             <div class="accordion-card">
-                                <div class="accordion-header" onclick="toggleAccordion(this)">
-                                    <span class="accordion-icon">💡</span>
-                                    <span class="accordion-title">Мысал</span>
-                                    <span class="accordion-toggle">▼</span>
-                                </div>
-                                <div class="accordion-body">
-                                    <div class="accordion-content">
-                                        <p>ЖИ-ге «Маған көктемгі бақша мен гүлдердің суретін салып бер» деп айтуға болады. Немесе шетелдегі туыстарыңызға хат жазу үшін аударма жасатуға болады.</p>
-                                    </div>
-                                </div>
+                                <div class="accordion-header" onclick="toggleAccordion(this)"><span class="accordion-icon">💡</span><span class="accordion-title">Мысал</span><span class="accordion-toggle">▼</span></div>
+                                <div class="accordion-body"><div class="accordion-content"><p>ЖИ-ге «Маған көктемгі бақша мен гүлдердің суретін салып бер» деп айтуға болады. Немесе шетелдегі туыстарыңызға хат жазу үшін аударма жасатуға болады.</p></div></div>
                             </div>
-
                             <div class="accordion-card">
-                                <div class="accordion-header" onclick="toggleAccordion(this)">
-                                    <span class="accordion-icon">👨‍🏫</span>
-                                    <span class="accordion-title">Өмірден мысал</span>
-                                    <span class="accordion-toggle">▼</span>
-                                </div>
-                                <div class="accordion-body">
-                                    <div class="accordion-content">
-                                        <p>Мұғалім ретінде сабаққа арналған көрнекіліктерді (суреттер, диаграммалар) ЖИ арқылы дайындауға болады. Мысалы, «Табиғат туралы сурет салып бер» деп сұрасаңыз, ол салып береді. Бұл — уақытты үнемдейді.</p>
-                                    </div>
-                                </div>
+                                <div class="accordion-header" onclick="toggleAccordion(this)"><span class="accordion-icon">👨‍🏫</span><span class="accordion-title">Өмірден мысал</span><span class="accordion-toggle">▼</span></div>
+                                <div class="accordion-body"><div class="accordion-content"><p>Мұғалім ретінде сабаққа арналған көрнекіліктерді (суреттер, диаграммалар) ЖИ арқылы дайындауға болады. Мысалы, «Табиғат туралы сурет салып бер» деп сұрасаңыз, ол салып береді. Бұл — уақытты үнемдейді.</p></div></div>
                             </div>
-
                             <div class="accordion-card">
-                                <div class="accordion-header" onclick="toggleAccordion(this)">
-                                    <span class="accordion-icon">🎯</span>
-                                    <span class="accordion-title">Тәжірибе</span>
-                                    <span class="accordion-toggle">▼</span>
-                                </div>
-                                <div class="accordion-body">
-                                    <div class="accordion-content">
-                                        <p>Бүгін ЖИ-ге бір сурет салып беруін сұраңыз. Мысалы: «Менің балалық шағымдағы ауылдың суретін салып бер». Нәтижесін отбасыңызға көрсетіңіз.</p>
-                                    </div>
-                                </div>
+                                <div class="accordion-header" onclick="toggleAccordion(this)"><span class="accordion-icon">🎯</span><span class="accordion-title">Тәжірибе</span><span class="accordion-toggle">▼</span></div>
+                                <div class="accordion-body"><div class="accordion-content"><p>Бүгін ЖИ-ге бір сурет салып беруін сұраңыз. Мысалы: «Менің балалық шағымдағы ауылдың суретін салып бер». Нәтижесін отбасыңызға көрсетіңіз.</p></div></div>
                             </div>
                         </div>
                         <button class="finish-btn" data-finish="7">Сабақты аяқтау</button>
                     </div>
 
-                    <!-- САБАҚ 8 -->
+                    <!-- САБАҚ 8: ЖИ ЖӘНЕ АҚША -->
                     <div class="lesson-content" id="lesson-8">
-                        <span class="lesson-badge">8-сабақ · 3-апта</span>
-                        <h1>Қорытынды</h1>
-                        <p class="subtitle">«Мен не үйрендім?»</p>
-                        <div class="lesson-image"><img src="images/lesson-8.jpg" alt="Қорытынды"></div>
-                        
+                        <span class="lesson-badge">8-сабақ · 2-апта</span>
+                        <h1>ЖИ және ақша</h1>
+                        <p class="subtitle">Қаржылық алаяқтықтан қорғану</p>
+                        <div class="lesson-image"><img src="images/lesson-8.jpg" alt="Ақша"></div>
                         <div class="accordion-container">
                             <div class="accordion-card">
-                                <div class="accordion-header" onclick="toggleAccordion(this)">
-                                    <span class="accordion-icon">📖</span>
-                                    <span class="accordion-title">Қысқаша теория</span>
-                                    <span class="accordion-toggle">▼</span>
-                                </div>
-                                <div class="accordion-body">
-                                    <div class="accordion-content">
-                                        <p>Біз 3 апта ішінде ЖИ туралы көп нәрсе үйрендік. Енді біз оны күнделікті өмірде қауіпсіз әрі пайдалы қолдана аламыз.</p>
-                                    </div>
-                                </div>
+                                <div class="accordion-header" onclick="toggleAccordion(this)"><span class="accordion-icon">📖</span><span class="accordion-title">Қысқаша теория</span><span class="accordion-toggle">▼</span></div>
+                                <div class="accordion-body"><div class="accordion-content"><p>ЖИ ақшаға қатысты шешім қабылдай алмайды. Егер сізге ЖИ арқылы жасалған «тез ақша табу» немесе «инвестиция» туралы ұсыныс келсе, бұл — 99% алаяқтық. ЖИ қаржылық кеңесші емес.</p></div></div>
                             </div>
-
                             <div class="accordion-card">
-                                <div class="accordion-header" onclick="toggleAccordion(this)">
-                                    <span class="accordion-icon">✨</span>
-                                    <span class="accordion-title">Қызықты факт</span>
-                                    <span class="accordion-toggle">▼</span>
-                                </div>
-                                <div class="accordion-body">
-                                    <div class="accordion-content">
-                                        <p>Бүгінде ЖИ тек сұрақ-жауап емес — ол ғарышты зерттеуде де қолданылады. Мысалы, CERN-нің физиктері бөлшектердің ізін табу үшін ЖИ-ді пайдаланады, ал бұл 2012 жылы Хиггс бозонын ашуға көмектескен технологиялардың бірі.</p>
-                                    </div>
-                                </div>
+                                <div class="accordion-header" onclick="toggleAccordion(this)"><span class="accordion-icon">✨</span><span class="accordion-title">Қызықты факт</span><span class="accordion-toggle">▼</span></div>
+                                <div class="accordion-body"><div class="accordion-content"><p>2023 жылы әлемдегі алаяқтықтың 40%-ы ЖИ технологияларын қолдану арқылы жасалған (фейк дауыс, фейк бейне). Сондықтан қаржылық хабарламаларға ерекше мұқият болыңыз.</p></div></div>
                             </div>
-
                             <div class="accordion-card">
-                                <div class="accordion-header" onclick="toggleAccordion(this)">
-                                    <span class="accordion-icon">💡</span>
-                                    <span class="accordion-title">Мысал</span>
-                                    <span class="accordion-toggle">▼</span>
-                                </div>
-                                <div class="accordion-body">
-                                    <div class="accordion-content">
-                                        <p>Есіңізде сақтаңыз:</p>
-                                        <ul>
-                                            <li>ЖИ — көмекші, бірақ дәрігер емес</li>
-                                            <li>ЖИ-ге жеке деректеріңізді жазбаңыз</li>
-                                            <li>Күмәнді хабарламаларды тексеріңіз</li>
-                                        </ul>
-                                    </div>
-                                </div>
+                                <div class="accordion-header" onclick="toggleAccordion(this)"><span class="accordion-icon">💡</span><span class="accordion-title">Мысал</span><span class="accordion-toggle">▼</span></div>
+                                <div class="accordion-body"><div class="accordion-content"><p>Егер біреу сізге «ЖИ арқылы ақшаңызды 2 есе көбейтіңіз» десе — бұл алаяқтық. ЖИ — тек көмекші құрал, ол сиқыр жасамайды.</p></div></div>
                             </div>
-
                             <div class="accordion-card">
-                                <div class="accordion-header" onclick="toggleAccordion(this)">
-                                    <span class="accordion-icon">👨‍🏫</span>
-                                    <span class="accordion-title">Өмірден мысал</span>
-                                    <span class="accordion-toggle">▼</span>
-                                </div>
-                                <div class="accordion-body">
-                                    <div class="accordion-content">
-                                        <p>Енді сіз университетте сабақ бергенде ЖИ-ді қауіпсіз әрі тиімді қолдана аласыз. Студенттерге арналған материалдарды дайындауға, сұрақтарға жауап беруге көмектеседі. Бірақ әрқашан ақпаратты тексеріп отырыңыз.</p>
-                                    </div>
-                                </div>
+                                <div class="accordion-header" onclick="toggleAccordion(this)"><span class="accordion-icon">👨‍🏫</span><span class="accordion-title">Өмірден мысал</span><span class="accordion-toggle">▼</span></div>
+                                <div class="accordion-body"><div class="accordion-content"><p>Университетте студенттерге ЖИ арқылы жазылған фейк ғылыми мақалаларды тануды үйретуге болады. ЖИ кейде жалған дереккөздерді көрсетеді. Бұл — білім берудегі маңызды қауіпсіздік сабағы.</p></div></div>
                             </div>
-
                             <div class="accordion-card">
-                                <div class="accordion-header" onclick="toggleAccordion(this)">
-                                    <span class="accordion-icon">🎯</span>
-                                    <span class="accordion-title">Тәжірибе</span>
-                                    <span class="accordion-toggle">▼</span>
-                                </div>
-                                <div class="accordion-body">
-                                    <div class="accordion-content">
-                                        <p>Апта ішінде ЖИ-ге бір рет нақты сұрақ қойыңыз. Мысалы, дәрігерге баруға дайындалу үшін «Кардиологқа қандай сұрақтар дайындау керек?» деп сұраңыз.</p>
-                                    </div>
-                                </div>
+                                <div class="accordion-header" onclick="toggleAccordion(this)"><span class="accordion-icon">🎯</span><span class="accordion-title">Тәжірибе</span><span class="accordion-toggle">▼</span></div>
+                                <div class="accordion-body"><div class="accordion-content"><p>Бүгін банк қосымшасына кіріп, ешқандай күмәнді сілтемеге баспағаныңызды тексеріңіз. Ақшаңызды тек ресми банк қосымшасы арқылы басқарыңыз.</p></div></div>
                             </div>
                         </div>
                         <button class="finish-btn" data-finish="8">Сабақты аяқтау</button>
+                    </div>
+
+                    <!-- САБАҚ 9: СУРЕТ САЛУ -->
+                    <div class="lesson-content" id="lesson-9">
+                        <span class="lesson-badge">9-сабақ · 3-апта</span>
+                        <h1>ЖИ-мен сурет салу</h1>
+                        <p class="subtitle">Шығармашылық практика</p>
+                        <div class="lesson-image"><img src="images/lesson-9.jpg" alt="Сурет салу"></div>
+                        <div class="accordion-container">
+                            <div class="accordion-card">
+                                <div class="accordion-header" onclick="toggleAccordion(this)"><span class="accordion-icon">📖</span><span class="accordion-title">Қысқаша теория</span><span class="accordion-toggle">▼</span></div>
+                                <div class="accordion-body"><div class="accordion-content"><p>ЖИ сурет салу үшін арнайы қосымшалар бар (мысалы, Midjourney, DALL-E, Kandinsky). Оларға тек мәтінмен сипаттама жазу керек, олар сол суретті салып береді.</p></div></div>
+                            </div>
+                            <div class="accordion-card">
+                                <div class="accordion-header" onclick="toggleAccordion(this)"><span class="accordion-icon">✨</span><span class="accordion-title">Қызықты факт</span><span class="accordion-toggle">▼</span></div>
+                                <div class="accordion-body"><div class="accordion-content"><p>2022 жылы ЖИ-мен салынған сурет халықаралық өнер байқауында <strong>бірінші орынды</strong> жеңіп алды. Бұл — тарихтағы алғашқы ЖИ жеңісі болды.</p></div></div>
+                            </div>
+                            <div class="accordion-card">
+                                <div class="accordion-header" onclick="toggleAccordion(this)"><span class="accordion-icon">💡</span><span class="accordion-title">Мысал</span><span class="accordion-toggle">▼</span></div>
+                                <div class="accordion-body"><div class="accordion-content"><p>«Маған көктемгі бақша мен гүлдердің суретін салып бер» деп жазсаңыз, ЖИ сізге әдемі сурет салып береді. Оны басып шығарып, қабырғаға ілуге болады.</p></div></div>
+                            </div>
+                            <div class="accordion-card">
+                                <div class="accordion-header" onclick="toggleAccordion(this)"><span class="accordion-icon">👨‍🏫</span><span class="accordion-title">Өмірден мысал</span><span class="accordion-toggle">▼</span></div>
+                                <div class="accordion-body"><div class="accordion-content"><p>Мұғалім ретінде сабаққа арналған көрнекіліктерді (диаграмма, плакат) ЖИ арқылы 5 минутта дайындауға болады. Бұл — уақытты үнемдейді және студенттерге әсер етеді.</p></div></div>
+                            </div>
+                            <div class="accordion-card">
+                                <div class="accordion-header" onclick="toggleAccordion(this)"><span class="accordion-icon">🎯</span><span class="accordion-title">Тәжірибе</span><span class="accordion-toggle">▼</span></div>
+                                <div class="accordion-body"><div class="accordion-content"><p>Бүгін ЖИ-ге «Менің балалық шағымдағы ауылдың суретін салып бер» деп сұраңыз. Нәтижесін отбасыңызға көрсетіңіз.</p></div></div>
+                            </div>
+                        </div>
+                        <button class="finish-btn" data-finish="9">Сабақты аяқтау</button>
+                    </div>
+
+                    <!-- САБАҚ 10: ПРОМПТ ЖАЗУ -->
+                    <div class="lesson-content" id="lesson-10">
+                        <span class="lesson-badge">10-сабақ · 3-апта</span>
+                        <h1>Промпт жазу өнері</h1>
+                        <p class="subtitle">ЖИ-ға қалай дұрыс сұрақ қою керек?</p>
+                        <div class="lesson-image"><img src="images/lesson-10.jpg" alt="Промпт"></div>
+                        <div class="accordion-container">
+                            <div class="accordion-card">
+                                <div class="accordion-header" onclick="toggleAccordion(this)"><span class="accordion-icon">📖</span><span class="accordion-title">Қысқаша теория</span><span class="accordion-toggle">▼</span></div>
+                                <div class="accordion-body"><div class="accordion-content"><p>Промпт (Prompt) — бұл ЖИ-ға беретін тапсырмаңыз немесе сұрағыңыз. Егер сіз ЖИ-ға нақты, толық және егжей-тегжейлі жазсаңыз, ол әлдеқайда жақсы нәтиже береді. ЖИ-ға «сурет сал» деп айтқанша, «көктемде, күн батқанда, таулардың аясында гүлдеп тұрған алма ағашын сал» деп айтқан әлдеқайда тиімді.</p></div></div>
+                            </div>
+                            <div class="accordion-card">
+                                <div class="accordion-header" onclick="toggleAccordion(this)"><span class="accordion-icon">✨</span><span class="accordion-title">Қызықты факт</span><span class="accordion-toggle">▼</span></div>
+                                <div class="accordion-body"><div class="accordion-content"><p>«Промпт-инженер» (Prompt Engineer) — бүгінде әлемдегі ең сұранысқа ие жаңа мамандықтардың бірі. Себебі ЖИ-ға дұрыс тапсырма бере білу — үлкен дағды.</p></div></div>
+                            </div>
+                            <div class="accordion-card">
+                                <div class="accordion-header" onclick="toggleAccordion(this)"><span class="accordion-icon">💡</span><span class="accordion-title">Мысал: 2 түрлі промпт</span><span class="accordion-toggle">▼</span></div>
+                                <div class="accordion-body"><div class="accordion-content">
+                                    <p><strong>1-мысал (қысқа промпт):</strong></p>
+                                    <div class="prompt-example">Ауыл суретін сал.</div>
+                                    <p>Бұл промпт бойынша ЖИ қарапайым, бірақ өте жалпы сурет салады. Оның қандай ауыл екенін, қай мезгілде екенін, кімнің көзқарасымен салынатынын білмейді.</p>
+                                    
+                                    <p style="margin-top: 20px;"><strong>2-мысал (толық промпт):</strong></p>
+                                    <div class="prompt-example">Менің балалық шағымдағы ауылдың суретін салып бер. Көктем мезгілі, таңертеңгі уақыт. Алыста таулар көрінеді. Ауыл үйлерінің шатыры қызыл, ал ағаштар жаңа жапырақ жарып тұр. Ортада балалар ойнап жүр. Сурет жылы, жайлы әрі естелік сезімін тудырсын.</div>
+                                    <p>Бұл промпт бойынша ЖИ әлдеқайда егжей-тегжейлі, эмоционалды әрі мағыналы сурет салады. Міне, осы екі нұсқаның айырмашылығы — дұрыс жазылған промпттың күші.</p>
+                                </div></div>
+                            </div>
+                            <div class="accordion-card">
+                                <div class="accordion-header" onclick="toggleAccordion(this)"><span class="accordion-icon">👨‍🏫</span><span class="accordion-title">Өмірден мысал</span><span class="accordion-toggle">▼</span></div>
+                                <div class="accordion-body"><div class="accordion-content"><p>Мұғалім ретінде студенттерге тапсырма бергенде де осы принципті қолдануға болады. Егер сіз студентке «эссе жаз» десеңіз — нәтиже нашар болады. Ал «тақырыпты, көлемін, құрылымын, мақсатын» нақты айтсаңыз — нәтиже әлдеқайда жақсы болады. Бұл — ЖИ-ға да, адамға да қатысты ереже.</p></div></div>
+                            </div>
+                            <div class="accordion-card">
+                                <div class="accordion-header" onclick="toggleAccordion(this)"><span class="accordion-icon">🎯</span><span class="accordion-title">Тәжірибе</span><span class="accordion-toggle">▼</span></div>
+                                <div class="accordion-body"><div class="accordion-content"><p>Бүгін ЖИ-ға екі түрлі промпт жазып көріңіз. Біріншісі — қысқа, екіншісі — толық. Нәтижелерін салыстырыңыз. Айырмашылықты өз көзіңізбен көріңіз!</p></div></div>
+                            </div>
+                        </div>
+                        <button class="finish-btn" data-finish="10">Сабақты аяқтау</button>
+                    </div>
+
+                    <!-- САБАҚ 11: ХАТ ЖАЗУ -->
+                    <div class="lesson-content" id="lesson-11">
+                        <span class="lesson-badge">11-сабақ · 3-апта</span>
+                        <h1>ЖИ-мен хат жазу</h1>
+                        <p class="subtitle">Құжаттарды дайындау</p>
+                        <div class="lesson-image"><img src="images/lesson-11.jpg" alt="Хат жазу"></div>
+                        <div class="accordion-container">
+                            <div class="accordion-card">
+                                <div class="accordion-header" onclick="toggleAccordion(this)"><span class="accordion-icon">📖</span><span class="accordion-title">Қысқаша теория</span><span class="accordion-toggle">▼</span></div>
+                                <div class="accordion-body"><div class="accordion-content"><p>ЖИ мәтін жазуға көмектеседі. Егер хат жазуға ойыңыз келмей тұрса, ЖИ-ге тақырыпты айтып, «Осы туралы ресми хат жазып бер» деп сұрауға болады. Ол үлгі жасап береді, сіз өзгертесіз.</p></div></div>
+                            </div>
+                            <div class="accordion-card">
+                                <div class="accordion-header" onclick="toggleAccordion(this)"><span class="accordion-icon">✨</span><span class="accordion-title">Қызықты факт</span><span class="accordion-toggle">▼</span></div>
+                                <div class="accordion-body"><div class="accordion-content"><p>Бүгінде ЖИ көмегімен жазылған мәтіндердің көлемі күн сайын миллиондаған бетті құрайды. Ол студенттерге, журналистерге және мұғалімдерге уақытын үнемдеуге көмектеседі.</p></div></div>
+                            </div>
+                            <div class="accordion-card">
+                                <div class="accordion-header" onclick="toggleAccordion(this)"><span class="accordion-icon">💡</span><span class="accordion-title">Мысал</span><span class="accordion-toggle">▼</span></div>
+                                <div class="accordion-body"><div class="accordion-content"><p>«Немереме туған күніне құттықтау жазып бер, жылы сөздермен» деп ЖИ-ге айтуға болады. Ол әдемі мәтін жасап береді, сіз оны өз қалауыңызша өзгертесіз.</p></div></div>
+                            </div>
+                            <div class="accordion-card">
+                                <div class="accordion-header" onclick="toggleAccordion(this)"><span class="accordion-icon">👨‍🏫</span><span class="accordion-title">Өмірден мысал</span><span class="accordion-toggle">▼</span></div>
+                                <div class="accordion-body"><div class="accordion-content"><p>Университетте студенттерге арналған тест сұрақтарын немесе дәріс жоспарын ЖИ арқылы дайындауға болады. Бірақ мәтінді өз ойыңызбен толықтырып, тексеріп алыңыз.</p></div></div>
+                            </div>
+                            <div class="accordion-card">
+                                <div class="accordion-header" onclick="toggleAccordion(this)"><span class="accordion-icon">🎯</span><span class="accordion-title">Тәжірибе</span><span class="accordion-toggle">▼</span></div>
+                                <div class="accordion-body"><div class="accordion-content"><p>Бүгін ЖИ-ге «Отбасыма арналған қысқаша құттықтау жазып бер» деп сұраңыз. Оны оқып көріңіз, ұнаса — қолданыңыз.</p></div></div>
+                            </div>
+                        </div>
+                        <button class="finish-btn" data-finish="11">Сабақты аяқтау</button>
+                    </div>
+
+                    <!-- САБАҚ 12: БОЛАШАҚ -->
+                    <div class="lesson-content" id="lesson-12">
+                        <span class="lesson-badge">12-сабақ · 3-апта</span>
+                        <h1>ЖИ және болашақ</h1>
+                        <p class="subtitle">Қызықты болжамдар</p>
+                        <div class="lesson-image"><img src="images/lesson-12.jpg" alt="Болашақ"></div>
+                        <div class="accordion-container">
+                            <div class="accordion-card">
+                                <div class="accordion-header" onclick="toggleAccordion(this)"><span class="accordion-icon">📖</span><span class="accordion-title">Қысқаша теория</span><span class="accordion-toggle">▼</span></div>
+                                <div class="accordion-body"><div class="accordion-content"><p>ЖИ болашақта біздің өміріміздің барлық саласында болады: медицинада, білімде, көлікте. Бірақ ол адамды толық алмастыра алмайды. Адамның орны — шешім қабылдау, сезім, шығармашылық.</p></div></div>
+                            </div>
+                            <div class="accordion-card">
+                                <div class="accordion-header" onclick="toggleAccordion(this)"><span class="accordion-icon">✨</span><span class="accordion-title">Қызықты факт</span><span class="accordion-toggle">▼</span></div>
+                                <div class="accordion-body"><div class="accordion-content"><p>Ғалымдардың болжамы бойынша, 2030 жылға қарай ЖИ дүниежүзілік экономикаға <strong>15 триллион доллардан</strong> астам үлес қосады. Бұл — көптеген жаңа мамандықтардың пайда болуына әкеледі.</p></div></div>
+                            </div>
+                            <div class="accordion-card">
+                                <div class="accordion-header" onclick="toggleAccordion(this)"><span class="accordion-icon">💡</span><span class="accordion-title">Мысал</span><span class="accordion-toggle">▼</span></div>
+                                <div class="accordion-body"><div class="accordion-content"><p>Болашақта дәрігерлерге ЖИ көмектеседі: ол рентген суреттерін талдап, диагноз қоюға көмектеседі. Бірақ шешімді дәрігер қабылдайды.</p></div></div>
+                            </div>
+                            <div class="accordion-card">
+                                <div class="accordion-header" onclick="toggleAccordion(this)"><span class="accordion-icon">👨‍🏫</span><span class="accordion-title">Өмірден мысал</span><span class="accordion-toggle">▼</span></div>
+                                <div class="accordion-body"><div class="accordion-content"><p>Университетте мұғалімдер ЖИ-ді студенттерге жеке көмекші ретінде қолдана алады: әр студенттің деңгейіне қарай тапсырмаларды бейімдеу. Бұл — білім сапасын арттырады.</p></div></div>
+                            </div>
+                            <div class="accordion-card">
+                                <div class="accordion-header" onclick="toggleAccordion(this)"><span class="accordion-icon">🎯</span><span class="accordion-title">Тәжірибе</span><span class="accordion-toggle">▼</span></div>
+                                <div class="accordion-body"><div class="accordion-content"><p>Бүгін отбасыңызбен «ЖИ біздің өмірімізді қалай өзгертеді?» деп талқылаңыз. Әр адам өз ойын айтсын.</p></div></div>
+                            </div>
+                        </div>
+                        <button class="finish-btn" data-finish="12">Сабақты аяқтау</button>
+                    </div>
+
+                    <!-- САБАҚ 13: ҚОРЫТЫНДЫ -->
+                    <div class="lesson-content" id="lesson-13">
+                        <span class="lesson-badge">13-сабақ · 3-апта</span>
+                        <h1>Қорытынды</h1>
+                        <p class="subtitle">«Мен не үйрендім?»</p>
+                        <div class="lesson-image"><img src="images/lesson-13.jpg" alt="Қорытынды"></div>
+                        <div class="accordion-container">
+                            <div class="accordion-card">
+                                <div class="accordion-header" onclick="toggleAccordion(this)"><span class="accordion-icon">📖</span><span class="accordion-title">Қысқаша теория</span><span class="accordion-toggle">▼</span></div>
+                                <div class="accordion-body"><div class="accordion-content"><p>Біз 3 апта ішінде ЖИ туралы көп нәрсе үйрендік. Енді біз оны күнделікті өмірде қауіпсіз әрі пайдалы қолдана аламыз.</p></div></div>
+                            </div>
+                            <div class="accordion-card">
+                                <div class="accordion-header" onclick="toggleAccordion(this)"><span class="accordion-icon">✨</span><span class="accordion-title">Қызықты факт</span><span class="accordion-toggle">▼</span></div>
+                                <div class="accordion-body"><div class="accordion-content"><p>Бүгінде ЖИ тек сұрақ-жауап емес — ол ғарышты зерттеуде де қолданылады. Мысалы, CERN-нің физиктері бөлшектердің ізін табу үшін ЖИ-ді пайдаланады, ал бұл 2012 жылы Хиггс бозонын ашуға көмектескен технологиялардың бірі.</p></div></div>
+                            </div>
+                            <div class="accordion-card">
+                                <div class="accordion-header" onclick="toggleAccordion(this)"><span class="accordion-icon">💡</span><span class="accordion-title">Мысал</span><span class="accordion-toggle">▼</span></div>
+                                <div class="accordion-body"><div class="accordion-content"><p>Есіңізде сақтаңыз:</p><ul><li>ЖИ — көмекші, бірақ дәрігер емес</li><li>ЖИ-ге жеке деректеріңізді жазбаңыз</li><li>Күмәнді хабарламаларды тексеріңіз</li></ul></div></div>
+                            </div>
+                            <div class="accordion-card">
+                                <div class="accordion-header" onclick="toggleAccordion(this)"><span class="accordion-icon">👨‍🏫</span><span class="accordion-title">Өмірден мысал</span><span class="accordion-toggle">▼</span></div>
+                                <div class="accordion-body"><div class="accordion-content"><p>Енді сіз университетте сабақ бергенде ЖИ-ді қауіпсіз әрі тиімді қолдана аласыз. Студенттерге арналған материалдарды дайындауға, сұрақтарға жауап беруге көмектеседі. Бірақ әрқашан ақпаратты тексеріп отырыңыз.</p></div></div>
+                            </div>
+                            <div class="accordion-card">
+                                <div class="accordion-header" onclick="toggleAccordion(this)"><span class="accordion-icon">🎯</span><span class="accordion-title">Тәжірибе</span><span class="accordion-toggle">▼</span></div>
+                                <div class="accordion-body"><div class="accordion-content"><p>Апта ішінде ЖИ-ге бір рет нақты сұрақ қойыңыз. Мысалы, дәрігерге баруға дайындалу үшін «Кардиологқа қандай сұрақтар дайындау керек?» деп сұраңыз.</p></div></div>
+                            </div>
+                        </div>
+                        <button class="finish-btn" data-finish="13">Сабақты аяқтау</button>
                     </div>
 
                 </div>
@@ -1543,7 +1345,7 @@
         }
 
         function updateProgress() {
-            const total = 8; const done = completed.length;
+            const total = 13; const done = completed.length;
             progressBar.style.width = (done / total) * 100 + '%';
             progressText.textContent = `${done} / ${total} өтілді`;
         }
@@ -1572,9 +1374,9 @@
         function showReward(lessonNum) {
             const popup = document.getElementById('rewardPopup');
             const overlay = document.getElementById('rewardOverlay');
-            const total = 8; const done = completed.length;
+            const total = 13; const done = completed.length;
             if (done === total) {
-                document.getElementById('rewardEmoji').textContent = '🎓'; document.getElementById('rewardTitle').textContent = 'Құттықтаймыз!'; document.getElementById('rewardText').textContent = 'Сіз барлық 8 сабақты аяқтадыңыз!';
+                document.getElementById('rewardEmoji').textContent = '🎓'; document.getElementById('rewardTitle').textContent = 'Құттықтаймыз!'; document.getElementById('rewardText').textContent = 'Сіз барлық 13 сабақты аяқтадыңыз!';
             } else {
                 document.getElementById('rewardEmoji').textContent = '🏆'; document.getElementById('rewardTitle').textContent = 'Жарайсыз!'; document.getElementById('rewardText').textContent = `Сіз ${lessonNum}-сабақты аяқтадыңыз! (${done}/${total})`;
             }
