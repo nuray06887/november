@@ -18,6 +18,7 @@
             --border: #e2e8f0;
             --success: #10b981;
             --danger: #ef4444;
+            --success-bg: #ecfdf5;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -82,7 +83,7 @@
             display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 25px;
         }
 
-        /* Скриншоттағыдай карточка дизайны */
+        /* Карточка дизайны */
         .lesson-card {
             background: white; border: 1px solid var(--border); border-radius: 16px; padding: 25px;
             transition: all 0.3s; cursor: pointer; display: flex; flex-direction: column; position: relative;
@@ -92,21 +93,43 @@
             transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0, 51, 160, 0.1); border-color: var(--primary-light);
         }
 
+        /* Аяқталған сабақтың стилі (ЖАСЫЛ) */
+        .lesson-card.completed {
+            background: var(--success-bg);
+            border: 2px solid var(--success);
+        }
+        .lesson-card.completed .card-tag {
+            background: var(--success);
+            color: white;
+        }
+        .lesson-card.completed .card-title {
+            color: var(--success);
+        }
+        .lesson-card.completed::after {
+            content: '✅';
+            position: absolute;
+            top: 20px; right: 20px;
+            font-size: 1.5em;
+        }
+
         .card-tag {
             display: inline-flex; align-items: center; gap: 6px; background: #e0e7ff; color: var(--primary);
             font-size: 0.8em; font-weight: 600; padding: 6px 12px; border-radius: 8px; margin-bottom: 15px; align-self: flex-start;
+            transition: 0.3s;
         }
         
-        .card-title { font-family: 'Montserrat', sans-serif; font-size: 1.25em; font-weight: 700; margin-bottom: 10px; color: var(--text); }
+        .card-title { font-family: 'Montserrat', sans-serif; font-size: 1.25em; font-weight: 700; margin-bottom: 10px; color: var(--text); transition: 0.3s; }
         .card-desc { font-size: 0.95em; color: var(--text-light); margin-bottom: 20px; flex-grow: 1; }
         
         .card-footer { display: flex; justify-content: space-between; align-items: center; font-size: 0.85em; color: var(--text-light); border-top: 1px solid var(--border); padding-top: 15px; }
         .card-author { display: flex; align-items: center; gap: 10px; }
         .author-avatar { width: 32px; height: 32px; background: var(--primary); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 0.8em; }
+        .lesson-card.completed .author-avatar { background: var(--success); }
         
         .card-badge { background: #f1f5f9; padding: 4px 10px; border-radius: 6px; font-weight: 600; }
+        .lesson-card.completed .card-badge { background: rgba(16, 185, 129, 0.2); color: var(--success); }
 
-        /* ================= ОҚУ ИНТЕРФЕЙСІ (ІШІНДЕ) ================= */
+        /* ================= ОҚУ ИНТЕРФЕЙСІ ================= */
         .course-header { background: white; border-bottom: 1px solid var(--border); padding: 20px 40px; position: sticky; top: 0; z-index: 100; display: flex; flex-direction: column; gap: 15px; }
         .header-top { display: flex; justify-content: space-between; align-items: center; font-size: 0.95em; font-weight: 600; color: var(--primary); }
         .back-btn { background: transparent; border: none; color: var(--primary); font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 5px; font-size: 1em; }
@@ -255,7 +278,7 @@
         </div>
     </div>
 
-    <!-- ================= 2. САБАҚТАР КАТАЛОГЫ (Скриншоттағыдай) ================= -->
+    <!-- ================= 2. САБАҚТАР КАТАЛОГЫ ================= -->
     <div class="screen" id="catalogScreen">
         <div class="catalog-screen">
             <div class="catalog-header">
@@ -266,132 +289,93 @@
             <!-- 1-АПТА -->
             <h2 class="week-title">1-апта: Негіздер</h2>
             <div class="lessons-grid">
-                <div class="lesson-card" onclick="openLesson(1)">
+                <div class="lesson-card" id="card-1" onclick="openLesson(1)">
                     <div class="card-tag">📖 Сабақ 1</div>
                     <div class="card-title">Кіріспе және танысу</div>
                     <div class="card-desc">Жасанды интеллект деген не және ол қайда қолданылады?</div>
-                    <div class="card-footer">
-                        <div class="card-author"><div class="author-avatar">А</div> AI Курс</div>
-                        <div class="card-badge">3 қадам</div>
-                    </div>
+                    <div class="card-footer"><div class="card-author"><div class="author-avatar">А</div> AI Курс</div><div class="card-badge">5 қадам</div></div>
                 </div>
-                <div class="lesson-card" onclick="openLesson(2)">
+                <div class="lesson-card" id="card-2" onclick="openLesson(2)">
                     <div class="card-tag">📖 Сабақ 2</div>
                     <div class="card-title">ЖИ-мен сөйлесу</div>
                     <div class="card-desc">Дауыс көмекшілерімен жұмыс істеу негіздері.</div>
-                    <div class="card-footer">
-                        <div class="card-author"><div class="author-avatar">А</div> AI Курс</div>
-                        <div class="card-badge">3 қадам</div>
-                    </div>
+                    <div class="card-footer"><div class="card-author"><div class="author-avatar">А</div> AI Курс</div><div class="card-badge">5 қадам</div></div>
                 </div>
-                <div class="lesson-card" onclick="openLesson(3)">
+                <div class="lesson-card" id="card-3" onclick="openLesson(3)">
                     <div class="card-tag">📖 Сабақ 3</div>
                     <div class="card-title">ЖИ қайда бар?</div>
                     <div class="card-desc">Күнделікті өмірдегі ЖИ-дің көріністері.</div>
-                    <div class="card-footer">
-                        <div class="card-author"><div class="author-avatar">А</div> AI Курс</div>
-                        <div class="card-badge">3 қадам</div>
-                    </div>
+                    <div class="card-footer"><div class="card-author"><div class="author-avatar">А</div> AI Курс</div><div class="card-badge">5 қадам</div></div>
                 </div>
-                <div class="lesson-card" onclick="openLesson(4)">
+                <div class="lesson-card" id="card-4" onclick="openLesson(4)">
                     <div class="card-tag">🛡️ Сабақ 4</div>
                     <div class="card-title">Қауіпсіздік ережелері</div>
                     <div class="card-desc">Жеке деректерді қалай қорғауға болады?</div>
-                    <div class="card-footer">
-                        <div class="card-author"><div class="author-avatar">А</div> AI Курс</div>
-                        <div class="card-badge">3 қадам</div>
-                    </div>
+                    <div class="card-footer"><div class="card-author"><div class="author-avatar">А</div> AI Курс</div><div class="card-badge">5 қадам</div></div>
                 </div>
             </div>
 
             <!-- 2-АПТА -->
             <h2 class="week-title">2-апта: Тереңдету</h2>
             <div class="lessons-grid">
-                <div class="lesson-card" onclick="openLesson(5)">
+                <div class="lesson-card" id="card-5" onclick="openLesson(5)">
                     <div class="card-tag">🏥 Сабақ 5</div>
                     <div class="card-title">Денсаулық және ЖИ</div>
                     <div class="card-desc">ЖИ дәрігер емес. Денсаулық туралы қандай сұрақтар қоюға болады?</div>
-                    <div class="card-footer">
-                        <div class="card-author"><div class="author-avatar">А</div> AI Курс</div>
-                        <div class="card-badge">3 қадам</div>
-                    </div>
+                    <div class="card-footer"><div class="card-author"><div class="author-avatar">А</div> AI Курс</div><div class="card-badge">5 қадам</div></div>
                 </div>
-                <div class="lesson-card" onclick="openLesson(6)">
+                <div class="lesson-card" id="card-6" onclick="openLesson(6)">
                     <div class="card-tag">🕵️ Сабақ 6</div>
                     <div class="card-title">ЖИ-ге сенуге бола ма?</div>
                     <div class="card-desc">Фейк жаңалықтар мен алаяқтықтан қорғану.</div>
-                    <div class="card-footer">
-                        <div class="card-author"><div class="author-avatar">А</div> AI Курс</div>
-                        <div class="card-badge">3 қадам</div>
-                    </div>
+                    <div class="card-footer"><div class="card-author"><div class="author-avatar">А</div> AI Курс</div><div class="card-badge">5 қадам</div></div>
                 </div>
-                <div class="lesson-card" onclick="openLesson(7)">
+                <div class="lesson-card" id="card-7" onclick="openLesson(7)">
                     <div class="card-tag">🎨 Сабақ 7</div>
                     <div class="card-title">ЖИ құралдары</div>
                     <div class="card-desc">Сурет салу және мәтінді аудару мүмкіндіктері.</div>
-                    <div class="card-footer">
-                        <div class="card-author"><div class="author-avatar">А</div> AI Курс</div>
-                        <div class="card-badge">3 қадам</div>
-                    </div>
+                    <div class="card-footer"><div class="card-author"><div class="author-avatar">А</div> AI Курс</div><div class="card-badge">5 қадам</div></div>
                 </div>
-                <div class="lesson-card" onclick="openLesson(8)">
+                <div class="lesson-card" id="card-8" onclick="openLesson(8)">
                     <div class="card-tag">💳 Сабақ 8</div>
                     <div class="card-title">ЖИ және ақша</div>
                     <div class="card-desc">Қаржылық алаяқтықтан қорғану жолдары.</div>
-                    <div class="card-footer">
-                        <div class="card-author"><div class="author-avatar">А</div> AI Курс</div>
-                        <div class="card-badge">3 қадам</div>
-                    </div>
+                    <div class="card-footer"><div class="card-author"><div class="author-avatar">А</div> AI Курс</div><div class="card-badge">5 қадам</div></div>
                 </div>
             </div>
 
             <!-- 3-АПТА -->
             <h2 class="week-title">3-апта: Практика</h2>
             <div class="lessons-grid">
-                <div class="lesson-card" onclick="openLesson(9)">
+                <div class="lesson-card" id="card-9" onclick="openLesson(9)">
                     <div class="card-tag">🖼️ Сабақ 9</div>
                     <div class="card-title">ЖИ-мен сурет салу</div>
                     <div class="card-desc">Шығармашылық практика және визуалды өнер.</div>
-                    <div class="card-footer">
-                        <div class="card-author"><div class="author-avatar">А</div> AI Курс</div>
-                        <div class="card-badge">3 қадам</div>
-                    </div>
+                    <div class="card-footer"><div class="card-author"><div class="author-avatar">А</div> AI Курс</div><div class="card-badge">5 қадам</div></div>
                 </div>
-                <div class="lesson-card" onclick="openLesson(10)">
+                <div class="lesson-card" id="card-10" onclick="openLesson(10)">
                     <div class="card-tag">📝 Сабақ 10</div>
                     <div class="card-title">Промпт жазу өнері</div>
                     <div class="card-desc">ЖИ-ға қалай дұрыс сұрақ қою керек? (Промпттар)</div>
-                    <div class="card-footer">
-                        <div class="card-author"><div class="author-avatar">А</div> AI Курс</div>
-                        <div class="card-badge">3 қадам</div>
-                    </div>
+                    <div class="card-footer"><div class="card-author"><div class="author-avatar">А</div> AI Курс</div><div class="card-badge">5 қадам</div></div>
                 </div>
-                <div class="lesson-card" onclick="openLesson(11)">
+                <div class="lesson-card" id="card-11" onclick="openLesson(11)">
                     <div class="card-tag">✉️ Сабақ 11</div>
                     <div class="card-title">ЖИ-мен хат жазу</div>
                     <div class="card-desc">Құттықтаулар мен құжаттарды дайындау.</div>
-                    <div class="card-footer">
-                        <div class="card-author"><div class="author-avatar">А</div> AI Курс</div>
-                        <div class="card-badge">3 қадам</div>
-                    </div>
+                    <div class="card-footer"><div class="card-author"><div class="author-avatar">А</div> AI Курс</div><div class="card-badge">5 қадам</div></div>
                 </div>
-                <div class="lesson-card" onclick="openLesson(12)">
+                <div class="lesson-card" id="card-12" onclick="openLesson(12)">
                     <div class="card-tag">🚀 Сабақ 12</div>
                     <div class="card-title">ЖИ және болашақ</div>
                     <div class="card-desc">Алдағы уақыттағы технологиялардың дамуы.</div>
-                    <div class="card-footer">
-                        <div class="card-author"><div class="author-avatar">А</div> AI Курс</div>
-                        <div class="card-badge">3 қадам</div>
-                    </div>
+                    <div class="card-footer"><div class="card-author"><div class="author-avatar">А</div> AI Курс</div><div class="card-badge">5 қадам</div></div>
                 </div>
-                <div class="lesson-card" onclick="openLesson(13)">
+                <div class="lesson-card" id="card-13" onclick="openLesson(13)">
                     <div class="card-tag">🎓 Сабақ 13</div>
                     <div class="card-title">Қорытынды</div>
                     <div class="card-desc">Барлық білімді бекіту және тестілеу.</div>
-                    <div class="card-footer">
-                        <div class="card-author"><div class="author-avatar">А</div> AI Курс</div>
-                        <div class="card-badge">3 қадам</div>
-                    </div>
+                    <div class="card-footer"><div class="card-author"><div class="author-avatar">А</div> AI Курс</div><div class="card-badge">5 қадам</div></div>
                 </div>
             </div>
         </div>
@@ -404,13 +388,12 @@
             <div class="header-top">
                 <button class="back-btn" onclick="showScreen('catalogScreen')">← Каталогқа қайту</button>
                 <span id="courseTitleHeader">Кіріспе және танысу</span>
-                <span id="stepCounter">Қадам 1 / 3</span>
+                <span id="stepCounter">Қадам 1 / 5</span>
             </div>
             <div class="progress-bar-container" id="progressBarContainer"></div>
         </div>
 
         <div class="course-body">
-            <!-- Бұл жерге JS арқылы ағымдағы сабақтың мазмұны шығады -->
             <div id="lessonContentArea"></div>
         </div>
     </div>
@@ -460,142 +443,149 @@
             window.scrollTo(0, 0);
         }
 
-        // ================= КУРС МӘЛІМЕТТЕРІ (БАЗА) =================
-        // Осы жерде барлық 13 сабақтың мазмұны сақталады
+        // ================= КУРС МӘЛІМЕТТЕРІ (5 ҚАДАМДАН) =================
         const lessonsData = {
             1: {
                 title: "Кіріспе және танысу",
                 photo: "images/lesson-1.jpg",
                 steps: [
-                    {
-                        type: "theory", label: "ТЕОРИЯ", title: "ЖИ деген не?",
-                        content: `<p><strong>Жасанды интеллект (ЖИ)</strong> — бұл компьютерлік жүйелердің адам интеллектісін қажет ететін тапсырмаларды орындау қабілеті.</p>
-                                  <p>Біз ЖИ-ді күнделікті өмірде байқамай-ақ қолданып жүрміз. Ол смартфондарымызда, әлеуметтік желілерде және банк жүйелерінде жұмыс істейді.</p>
-                                  <div class="code-block">
-                                      <div class="code-header"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span>AI_Architecture.txt</span></div>
-                                      <div class="code-content"><span class="code-comment"># Жасанды интеллекттің негізгі бағыттары</span><br><span class="code-keyword">1. Машиналық оқыту</span> — деректерден үйрену<br><span class="code-keyword">2. Нейрондық желілер</span> — мидың жұмысын модельдеу<br><span class="code-keyword">3. Компьютерлік көру</span> — суреттерді тану</div>
-                                  </div>`
-                    },
-                    {
-                        type: "fact", label: "ҚЫЗЫҚТЫ ФАКТ", title: "Тарихқа шолу",
-                        content: `<p>«Жасанды интеллект» деген термин алғаш рет <strong>1955 жылы</strong> Стэнфорд профессоры Джон Маккартидің ұсынысында пайда болды.</p>
-                                  <div class="fact-box"><div class="fact-icon">🦉</div><div class="fact-content"><h4>БІЛЕСІЗ БЕ?</h4><p>Алғашқы ЖИ бағдарламасы 1956 жылы жазылды. Қазіргі ЖИ болса, адам тәрізді еркін сөйлесіп, күрделі код жаза алады.</p></div></div>`
-                    },
-                    {
-                        type: "quiz", label: "СҰРАҚ", title: "Біліміңізді тексеріңіз",
-                        question: "Жасанды интеллект дегеніміз не?",
-                        options: ["Компьютерге салынған ақылды көмекші", "Жаңа телефон моделі", "Интернет жылдамдығы", "Теледидар түрі"],
-                        correct: 0,
-                        explanation: "ЖИ — бұл компьютерге салынған ақылды көмекші, ол адам сияқты ойлай алады."
-                    }
+                    { type: "theory", label: "1-ТЕОРИЯ", title: "ЖИ деген не?", content: `<p><strong>Жасанды интеллект (ЖИ)</strong> — бұл компьютерлік жүйелердің адам интеллектісін қажет ететін тапсырмаларды орындау қабілеті.</p><p>Ол деректерді талдап, шешім қабылдай алады.</p>` },
+                    { type: "example", label: "2-МЫСАЛ", title: "Қарапайым мысал", content: `<p>Сіз смартфонда ауа райын сұрайсыз. ЖИ деректерді жинап, сізге дәл болжам береді.</p>` },
+                    { type: "fact", label: "3-ҚЫЗЫҚТЫ ФАКТ", title: "Тарихтан", content: `<p>«Жасанды интеллект» термині 1955 жылы пайда болды. Алғашқы бағдарлама 1956 жылы жазылды.</p>` },
+                    { type: "life", label: "4-ӨМІРДЕН МЫСАЛ", title: "Күнделікті өмірде", content: `<p>Банктер несие беру кезінде ЖИ қолданады. Ол клиенттің төлем қабілеттілігін тез есептейді.</p>` },
+                    { type: "quiz", label: "5-ТЕСТ", title: "Бекіту", question: "Жасанды интеллект дегеніміз не?", options: ["Компьютерге салынған ақылды көмекші", "Жаңа телефон моделі", "Интернет жылдамдығы", "Теледидар түрі"], correct: 0, explanation: "ЖИ — бұл компьютерге салынған ақылды көмекші, ол адам сияқты ойлай алады." }
                 ]
             },
             2: {
                 title: "ЖИ-мен сөйлесу",
                 photo: "images/lesson-2.jpg",
                 steps: [
-                    { type: "theory", label: "ТЕОРИЯ", title: "Дауыспен басқару", content: `<p>ЖИ-мен сөйлесудің ең оңай жолы — дауыспен басқару. Пернетақтаға баспай-ақ, микрофонды басып, сұрағыңызды айтуға болады.</p>` },
-                    { type: "fact", label: "ҚЫЗЫҚТЫ ФАКТ", title: "Тьюринг тесті", content: `<p>1950 жылы Алан Тьюринг «Машиналар ойлай ала ма?» деген сұрақ қойып, әйгілі тестін ұсынды.</p>` },
-                    { type: "quiz", label: "СҰРАҚ", title: "Тексеріп көріңіз", question: "Дауыс көмекшісі — бұл ЖИ-дің бір түрі ме?", options: ["Иә", "Жоқ"], correct: 0, explanation: "Иә, дауыс көмекшілері ЖИ негізінде жұмыс істейді." }
+                    { type: "theory", label: "1-ТЕОРИЯ", title: "Дауыспен басқару", content: `<p>ЖИ-мен сөйлесудің ең оңай жолы — дауыспен басқару. Микрофонды басып, сұрағыңызды айтуға болады.</p>` },
+                    { type: "example", label: "2-МЫСАЛ", title: "Siri немесе Google", content: `<p>«Бүгін ауа райы қандай?» деп сұрасаңыз, ол бірден жауап береді. Бұл — дауыс көмекшісінің жұмысы.</p>` },
+                    { type: "fact", label: "3-ҚЫЗЫҚТЫ ФАКТ", title: "Тьюринг тесті", content: `<p>1950 жылы Алан Тьюринг «Машиналар ойлай ала ма?» деген сұрақ қойып, әйгілі тестін ұсынды.</p>` },
+                    { type: "life", label: "4-ӨМІРДЕН МЫСАЛ", title: "Көлікте", content: `<p>Көлікте навигаторға дауыспен мекенжай айтсаңыз, ол жолды көрсетеді. Бұл да ЖИ.</p>` },
+                    { type: "quiz", label: "5-ТЕСТ", title: "Бекіту", question: "Дауыс көмекшісі — бұл ЖИ-дің бір түрі ме?", options: ["Иә", "Жоқ"], correct: 0, explanation: "Иә, дауыс көмекшілері ЖИ негізінде жұмыс істейді." }
                 ]
             },
             3: {
                 title: "ЖИ қайда бар?",
                 photo: "images/lesson-3.jpg",
                 steps: [
-                    { type: "theory", label: "ТЕОРИЯ", title: "Күнделікті өмірдегі ЖИ", content: `<p>ЖИ тек бір жерде емес, ол біздің айналамызда. Телефонда, интернетте, картада, тіпті ауа райы болжамында ЖИ бар.</p>` },
-                    { type: "fact", label: "ҚЫЗЫҚТЫ ФАКТ", title: "YouTube алгоритмі", content: `<p>YouTube-тің ұсыныс алгоритмі күн сайын 1 миллиардтан астам видеоны талдап, әр қолданушыға жеке ұсыныс жасайды.</p>` },
-                    { type: "quiz", label: "СҰРАҚ", title: "Тексеріп көріңіз", question: "YouTube ұсыныстары — ЖИ жұмысы ма?", options: ["Иә", "Жоқ"], correct: 0, explanation: "Иә, бұл алгоритм ЖИ арқылы жұмыс істейді." }
+                    { type: "theory", label: "1-ТЕОРИЯ", title: "Айналамыздағы ЖИ", content: `<p>ЖИ тек бір жерде емес, ол біздің айналамызда. Телефонда, интернетте, картада ЖИ бар.</p>` },
+                    { type: "example", label: "2-МЫСАЛ", title: "Карталар", content: `<p>Карта қосымшасы кептелісті айналып өтуді ұсынса — бұл ЖИ сізге уақытты үнемдеп жатқаны.</p>` },
+                    { type: "fact", label: "3-ҚЫЗЫҚТЫ ФАКТ", title: "YouTube алгоритмі", content: `<p>YouTube-тің ұсыныс алгоритмі күн сайын 1 миллиардтан астам видеоны талдап, ұсыныс жасайды.</p>` },
+                    { type: "life", label: "4-ӨМІРДЕН МЫСАЛ", title: "Әлеуметтік желілер", content: `<p>Instagram сізге ұнайтын видеоларды көрсетсе, бұл да ЖИ алгоритмінің жұмысы.</p>` },
+                    { type: "quiz", label: "5-ТЕСТ", title: "Бекіту", question: "YouTube ұсыныстары — ЖИ жұмысы ма?", options: ["Иә", "Жоқ"], correct: 0, explanation: "Иә, бұл алгоритм ЖИ арқылы жұмыс істейді." }
                 ]
             },
             4: {
                 title: "Қауіпсіздік ережелері",
                 photo: "images/lesson-4.jpg",
                 steps: [
-                    { type: "theory", label: "ТЕОРИЯ", title: "Жеке деректерді қорғау", content: `<p>ЖИ — бұл өте қуатты құрал, бірақ оны қолданғанда қауіпсіздік ережелерін қатаң сақтау керек. Парольдер мен карта деректерін ешқашан ЖИ-ге жазбаңыз.</p>` },
-                    { type: "fact", label: "ҚЫЗЫҚТЫ ФАКТ", title: "ЖИ өзін тексере алады", content: `<p>2023 жылы зерттеушілер ЖИ-дің кейде өзін «тексеріліп жатқанын» түсініп, жауабын өзгертетінін анықтады.</p>` },
-                    { type: "quiz", label: "СҰРАҚ", title: "Тексеріп көріңіз", question: "ЖИ-ге банк картасының нөмірін жазуға бола ма?", options: ["Иә", "Жоқ, ешқашан!"], correct: 1, explanation: "Жеке деректерді ЖИ-ге ешқашан жазбау керек. Бұл қауіпсіздік ережесі." }
+                    { type: "theory", label: "1-ТЕОРИЯ", title: "Жеке деректер", content: `<p>ЖИ — қуатты құрал, бірақ оған парольдер мен карта деректерін жазбаңыз.</p>` },
+                    { type: "example", label: "2-МЫСАЛ", title: "Қауіпті сұрақ", content: `<p>«Менің картамның нөмірі 1234...» деп жазбаңыз. Бұл ақпарат қауіпсіз емес.</p>` },
+                    { type: "fact", label: "3-ҚЫЗЫҚТЫ ФАКТ", title: "ЖИ өзін тексере алады", content: `<p>2023 жылы зерттеушілер ЖИ-дің кейде өзін «тексеріліп жатқанын» түсінетінін анықтады.</p>` },
+                    { type: "life", label: "4-ӨМІРДЕН МЫСАЛ", title: "Алаяқтық", content: `<p>Белгісіз сілтемеге баспаңыз. ЖИ арқылы жасалған фейк сайттар көп.</p>` },
+                    { type: "quiz", label: "5-ТЕСТ", title: "Бекіту", question: "ЖИ-ге банк картасының нөмірін жазуға бола ма?", options: ["Иә", "Жоқ, ешқашан!"], correct: 1, explanation: "Жеке деректерді ЖИ-ге ешқашан жазбау керек. Бұл қауіпсіздік ережесі." }
                 ]
             },
             5: {
                 title: "Денсаулық және ЖИ",
                 photo: "images/lesson-5.jpg",
                 steps: [
-                    { type: "theory", label: "ТЕОРИЯ", title: "ЖИ дәрігер емес", content: `<p><strong>Жасанды интеллект — дәрігер ЕМЕС!</strong> Ол сізге нақты диагноз қоя алмайды, дәрі тағайындай алмайды. ЖИ тек жалпы ақпарат бере алады.</p>` },
-                    { type: "fact", label: "ҚЫЗЫҚТЫ ФАКТ", title: "ДДҰ ескертуі", content: `<p>Дүниежүзілік денсаулық сақтау ұйымы 2023 жылы «ЖИ дәрігердің орнын баспайды, тек көмекші құрал» деп қатаң ескертті.</p>` },
-                    { type: "quiz", label: "СҰРАҚ", title: "Тексеріп көріңіз", question: "Денсаулық туралы нақты кімге жүгіну керек?", options: ["ЖИ-ге", "Дәрігерге"], correct: 1, explanation: "Нақты диагноз бен емді тек дәрігер тағайындай алады." }
+                    { type: "theory", label: "1-ТЕОРИЯ", title: "ЖИ дәрігер емес", content: `<p><strong>ЖИ — дәрігер ЕМЕС!</strong> Ол нақты диагноз қоя алмайды. Тек жалпы ақпарат береді.</p>` },
+                    { type: "example", label: "2-МЫСАЛ", title: "Қан қысымы", content: `<p>«Қан қысымы деген не?» деп сұрауға болады. Бірақ «Маған қандай дәрі ішу керек?» деп сұрауға болмайды.</p>` },
+                    { type: "fact", label: "3-ҚЫЗЫҚТЫ ФАКТ", title: "ДДҰ ескертуі", content: `<p>ДДҰ 2023 жылы «ЖИ дәрігердің орнын баспайды» деп қатаң ескертті.</p>` },
+                    { type: "life", label: "4-ӨМІРДЕН МЫСАЛ", title: "Дәрігерге дайындық", content: `<p>ЖИ-ге «Кардиологқа қандай сұрақтар дайындау керек?» деп сұрауға болады.</p>` },
+                    { type: "quiz", label: "5-ТЕСТ", title: "Бекіту", question: "Денсаулық туралы нақты кімге жүгіну керек?", options: ["ЖИ-ге", "Дәрігерге"], correct: 1, explanation: "Нақты диагноз бен емді тек дәрігер тағайындай алады." }
                 ]
             },
             6: {
                 title: "ЖИ-ге сенуге бола ма?",
                 photo: "images/lesson-6.jpg",
                 steps: [
-                    { type: "theory", label: "ТЕОРИЯ", title: "Фейк жаңалықтар", content: `<p>ЖИ кейде қателеседі. Ол жалған ақпарат бере алады. Сондықтан ЖИ-ден келген ақпаратты тексере білу керек.</p>` },
-                    { type: "fact", label: "ҚЫЗЫҚТЫ ФАКТ", title: "Галлюцинация", content: `<p>ЖИ кейде «галлюцинация» жасайды — өзі ойлап тапқан жалған ақпаратты шындық ретінде ұсынады.</p>` },
-                    { type: "quiz", label: "СҰРАҚ", title: "Тексеріп көріңіз", question: "Күмәнді хабарлама келсе не істеу керек?", options: ["Дереу сену", "Тексеру"], correct: 1, explanation: "Күмәнді хабарлама келсе — алдымен тексеріңіз, содан кейін ғана сеніңіз." }
+                    { type: "theory", label: "1-ТЕОРИЯ", title: "Фейк ақпарат", content: `<p>ЖИ кейде қателеседі. Ол жалған ақпарат бере алады. Сондықтан тексере білу керек.</p>` },
+                    { type: "example", label: "2-МЫСАЛ", title: "Фейк жаңалық", content: `<p>ЖИ арқылы жазылған жалған жаңалықтар әлеуметтік желілерде жиі тарайды.</p>` },
+                    { type: "fact", label: "3-ҚЫЗЫҚТЫ ФАКТ", title: "Галлюцинация", content: `<p>ЖИ кейде «галлюцинация» жасайды — өзі ойлап тапқан ақпаратты шындық ретінде ұсынады.</p>` },
+                    { type: "life", label: "4-ӨМІРДЕН МЫСАЛ", title: "Қоңырау", content: `<p>Немереңіздің дауысымен «Ақша керек» деген қоңырау келсе, өзіңіз тексеріңіз.</p>` },
+                    { type: "quiz", label: "5-ТЕСТ", title: "Бекіту", question: "Күмәнді хабарлама келсе не істеу керек?", options: ["Дереу сену", "Тексеру"], correct: 1, explanation: "Күмәнді хабарлама келсе — алдымен тексеріңіз." }
                 ]
             },
             7: {
                 title: "ЖИ құралдары",
                 photo: "images/lesson-7.jpg",
                 steps: [
-                    { type: "theory", label: "ТЕОРИЯ", title: "Сурет және аударма", content: `<p>ЖИ тек сұрақтарға жауап беріп қана қоймайды, ол сурет сала алады және аударма жасай алады.</p>` },
-                    { type: "fact", label: "ҚЫЗЫҚТЫ ФАКТ", title: "Qolda-AVL", content: `<p>2024 жылы Қазақстандық ғалымдар қазақ тілін түсінетін Qolda-AVL атты ЖИ моделін жасап шығарды.</p>` },
-                    { type: "quiz", label: "СҰРАҚ", title: "Тексеріп көріңіз", question: "ЖИ сурет сала ала ма?", options: ["Иә", "Жоқ"], correct: 0, explanation: "Иә, заманауи ЖИ модельдері сурет сала алады." }
+                    { type: "theory", label: "1-ТЕОРИЯ", title: "Шығармашылық", content: `<p>ЖИ сурет сала алады және аударма жасай алады.</p>` },
+                    { type: "example", label: "2-МЫСАЛ", title: "Сурет салу", content: `<p>«Маған көктемгі бақшаның суретін салып бер» деп сұрауға болады.</p>` },
+                    { type: "fact", label: "3-ҚЫЗЫҚТЫ ФАКТ", title: "Qolda-AVL", content: `<p>2024 жылы қазақстандық ғалымдар қазақ тілін түсінетін ЖИ моделін жасады.</p>` },
+                    { type: "life", label: "4-ӨМІРДЕН МЫСАЛ", title: "Аударма", content: `<p>Шетелдегі туыстарыңызға хат жазсаңыз, ЖИ аударып бере алады.</p>` },
+                    { type: "quiz", label: "5-ТЕСТ", title: "Бекіту", question: "ЖИ сурет сала ала ма?", options: ["Иә", "Жоқ"], correct: 0, explanation: "Иә, заманауи ЖИ модельдері сурет сала алады." }
                 ]
             },
             8: {
                 title: "ЖИ және ақша",
                 photo: "images/lesson-8.jpg",
                 steps: [
-                    { type: "theory", label: "ТЕОРИЯ", title: "Қаржылық қауіпсіздік", content: `<p>ЖИ ақшаға қатысты шешім қабылдай алмайды. «Тез ақша табу» туралы ұсыныстар — 99% алаяқтық.</p>` },
-                    { type: "fact", label: "ҚЫЗЫҚТЫ ФАКТ", title: "Алаяқтық статистикасы", content: `<p>2023 жылы әлемдегі алаяқтықтың 40%-ы ЖИ технологияларын қолдану арқылы жасалған (фейк дауыс, бейне).</p>` },
-                    { type: "quiz", label: "СҰРАҚ", title: "Тексеріп көріңіз", question: "«ЖИ арқылы ақшаңызды 2 есе көбейтіңіз» деген ұсыныс — бұл не?", options: ["Тамаша мүмкіндік", "Алаяқтық"], correct: 1, explanation: "Бұл — таза алаяқтық. ЖИ сиқыр жасамайды." }
+                    { type: "theory", label: "1-ТЕОРИЯ", title: "Қаржылық қауіпсіздік", content: `<p>ЖИ ақшаға қатысты шешім қабылдай алмайды. «Тез ақша табу» — алаяқтық.</p>` },
+                    { type: "example", label: "2-МЫСАЛ", title: "Инвестиция", content: `<p>«ЖИ арқылы ақшаңызды 2 есе көбейтіңіз» деген ұсыныс — таза алаяқтық.</p>` },
+                    { type: "fact", label: "3-ҚЫЗЫҚТЫ ФАКТ", title: "Статистика", content: `<p>2023 жылы әлемдегі алаяқтықтың 40%-ы ЖИ технологияларын қолдану арқылы жасалған.</p>` },
+                    { type: "life", label: "4-ӨМІРДЕН МЫСАЛ", title: "Банк қосымшасы", content: `<p>Ақшаңызды тек ресми банк қосымшасы арқылы басқарыңыз.</p>` },
+                    { type: "quiz", label: "5-ТЕСТ", title: "Бекіту", question: "«ЖИ арқылы ақшаңызды 2 есе көбейтіңіз» деген ұсыныс — бұл не?", options: ["Тамаша мүмкіндік", "Алаяқтық"], correct: 1, explanation: "Бұл — таза алаяқтық. ЖИ сиқыр жасамайды." }
                 ]
             },
             9: {
                 title: "ЖИ-мен сурет салу",
                 photo: "images/lesson-9.jpg",
                 steps: [
-                    { type: "theory", label: "ТЕОРИЯ", title: "Шығармашылық", content: `<p>ЖИ сурет салу үшін арнайы қосымшалар бар (Midjourney, DALL-E). Оларға тек мәтінмен сипаттама жазу керек.</p>` },
-                    { type: "fact", label: "ҚЫЗЫҚТЫ ФАКТ", title: "ЖИ жеңісі", content: `<p>2022 жылы ЖИ-мен салынған сурет халықаралық өнер байқауында бірінші орынды жеңіп алды.</p>` },
-                    { type: "quiz", label: "СҰРАҚ", title: "Тексеріп көріңіз", question: "ЖИ-ге сурет салдыру үшін не жазу керек?", options: ["Тек «сурет сал» деу", "Нақты сипаттама (промпт) жазу"], correct: 1, explanation: "Нақты сипаттама жазсаңыз, сурет әлдеқайда сапалы шығады." }
+                    { type: "theory", label: "1-ТЕОРИЯ", title: "Сурет құралдары", content: `<p>ЖИ сурет салу үшін арнайы қосымшалар бар (Midjourney, DALL-E).</p>` },
+                    { type: "example", label: "2-МЫСАЛ", title: "Сипаттама", content: `<p>«Көктемгі таулардың аясындағы ауылды сал» деп жазсаңыз, сурет салып береді.</p>` },
+                    { type: "fact", label: "3-ҚЫЗЫҚТЫ ФАКТ", title: "ЖИ жеңісі", content: `<p>2022 жылы ЖИ-мен салынған сурет халықаралық байқауда бірінші орынды жеңіп алды.</p>` },
+                    { type: "life", label: "4-ӨМІРДЕН МЫСАЛ", title: "Мұғалімдерге", content: `<p>Мұғалімдер сабаққа арналған көрнекіліктерді ЖИ арқылы 5 минутта дайындай алады.</p>` },
+                    { type: "quiz", label: "5-ТЕСТ", title: "Бекіту", question: "ЖИ-ге сурет салдыру үшін не жазу керек?", options: ["Тек «сурет сал» деу", "Нақты сипаттама (промпт) жазу"], correct: 1, explanation: "Нақты сипаттама жазсаңыз, сурет әлдеқайда сапалы шығады." }
                 ]
             },
             10: {
                 title: "Промпт жазу өнері",
                 photo: "images/lesson-10.jpg",
                 steps: [
-                    { type: "theory", label: "ТЕОРИЯ", title: "Промпт деген не?", content: `<p>Промпт — бұл ЖИ-ға беретін тапсырмаңыз. Егжей-тегжейлі жазсаңыз, нәтиже әлдеқайда жақсы болады.</p>` },
-                    { type: "fact", label: "ҚЫЗЫҚТЫ ФАКТ", title: "Жаңа мамандық", content: `<p>«Промпт-инженер» — бүгінде әлемдегі ең сұранысқа ие жаңа мамандықтардың бірі.</p>` },
-                    { type: "quiz", label: "СҰРАҚ", title: "Тексеріп көріңіз", question: "Қай промпт жақсырақ нәтиже береді?", options: ["«Ауыл суретін сал»", "«Көктемдегі таулардың аясындағы ауылды сал»"], correct: 1, explanation: "Толық және нақты жазылған промпт әлдеқайда жақсы нәтиже береді." }
+                    { type: "theory", label: "1-ТЕОРИЯ", title: "Промпт деген не?", content: `<p>Промпт — бұл ЖИ-ға беретін тапсырмаңыз. Егжей-тегжейлі жазсаңыз, нәтиже жақсы болады.</p>` },
+                    { type: "example", label: "2-МЫСАЛ", title: "Салыстыру", content: `<p>«Ауыл суретін сал» (нашар) vs «Көктемдегі таулардың аясындағы ауылды сал» (жақсы).</p>` },
+                    { type: "fact", label: "3-ҚЫЗЫҚТЫ ФАКТ", title: "Жаңа мамандық", content: `<p>«Промпт-инженер» — бүгінде әлемдегі ең сұранысқа ие жаңа мамандықтардың бірі.</p>` },
+                    { type: "life", label: "4-ӨМІРДЕН МЫСАЛ", title: "Мұғалімдерге", content: `<p>Студенттерге тапсырма бергенде нақты талаптарды жазыңыз. Бұл ЖИ-ға да, адамға да қатысты.</p>` },
+                    { type: "quiz", label: "5-ТЕСТ", title: "Бекіту", question: "Қай промпт жақсырақ нәтиже береді?", options: ["«Ауыл суретін сал»", "«Көктемдегі таулардың аясындағы ауылды сал»"], correct: 1, explanation: "Толық және нақты жазылған промпт әлдеқайда жақсы нәтиже береді." }
                 ]
             },
             11: {
                 title: "ЖИ-мен хат жазу",
                 photo: "images/lesson-11.jpg",
                 steps: [
-                    { type: "theory", label: "ТЕОРИЯ", title: "Мәтін жасау", content: `<p>ЖИ мәтін жазуға көмектеседі. Хат, құттықтау немесе құжат дайындауға болады.</p>` },
-                    { type: "fact", label: "ҚЫЗЫҚТЫ ФАКТ", title: "Миллиондаған бет", content: `<p>Бүгінде ЖИ көмегімен жазылған мәтіндердің көлемі күн сайын миллиондаған бетті құрайды.</p>` },
-                    { type: "quiz", label: "СҰРАҚ", title: "Тексеріп көріңіз", question: "ЖИ-мен құттықтау жазуға бола ма?", options: ["Иә", "Жоқ"], correct: 0, explanation: "Иә, ЖИ әдемі құттықтау мәтінін жасап бере алады." }
+                    { type: "theory", label: "1-ТЕОРИЯ", title: "Мәтін жасау", content: `<p>ЖИ мәтін жазуға көмектеседі. Хат, құттықтау немесе құжат дайындауға болады.</p>` },
+                    { type: "example", label: "2-МЫСАЛ", title: "Құттықтау", content: `<p>«Немереме туған күніне құттықтау жазып бер» деп сұрауға болады.</p>` },
+                    { type: "fact", label: "3-ҚЫЗЫҚТЫ ФАКТ", title: "Миллиондаған бет", content: `<p>Бүгінде ЖИ көмегімен жазылған мәтіндердің көлемі күн сайын миллиондаған бетті құрайды.</p>` },
+                    { type: "life", label: "4-ӨМІРДЕН МЫСАЛ", title: "Мұғалімдерге", content: `<p>Дәріс жоспарын ЖИ арқылы дайындауға болады. Бірақ мәтінді өз ойыңызбен толықтырыңыз.</p>` },
+                    { type: "quiz", label: "5-ТЕСТ", title: "Бекіту", question: "ЖИ-мен құттықтау жазуға бола ма?", options: ["Иә", "Жоқ"], correct: 0, explanation: "Иә, ЖИ әдемі құттықтау мәтінін жасап бере алады." }
                 ]
             },
             12: {
                 title: "ЖИ және болашақ",
                 photo: "images/lesson-12.jpg",
                 steps: [
-                    { type: "theory", label: "ТЕОРИЯ", title: "Болашақ технологиялары", content: `<p>ЖИ болашақта біздің өміріміздің барлық саласында болады: медицинада, білімде, көлікте.</p>` },
-                    { type: "fact", label: "ҚЫЗЫҚТЫ ФАКТ", title: "Экономикалық әсер", content: `<p>2030 жылға қарай ЖИ дүниежүзілік экономикаға 15 триллион доллардан астам үлес қосады деп болжануда.</p>` },
-                    { type: "quiz", label: "СҰРАҚ", title: "Тексеріп көріңіз", question: "ЖИ адамды толық алмастыра ала ма?", options: ["Иә", "Жоқ, адамның орны бөлек"], correct: 1, explanation: "ЖИ — көмекші. Шешім қабылдау, сезім және шығармашылық — адамның орны." }
+                    { type: "theory", label: "1-ТЕОРИЯ", title: "Болашақ технологиялары", content: `<p>ЖИ болашақта өміріміздің барлық саласында болады: медицинада, білімде, көлікте.</p>` },
+                    { type: "example", label: "2-МЫСАЛ", title: "Медицина", content: `<p>Болашақта дәрігерлерге ЖИ рентген суреттерін талдауға көмектеседі.</p>` },
+                    { type: "fact", label: "3-ҚЫЗЫҚТЫ ФАКТ", title: "Экономикалық әсер", content: `<p>2030 жылға қарай ЖИ дүниежүзілік экономикаға 15 триллион доллардан астам үлес қосады деп болжануда.</p>` },
+                    { type: "life", label: "4-ӨМІРДЕН МЫСАЛ", title: "Білім беру", content: `<p>Мұғалімдер ЖИ-ді студенттерге жеке көмекші ретінде қолдана алады.</p>` },
+                    { type: "quiz", label: "5-ТЕСТ", title: "Бекіту", question: "ЖИ адамды толық алмастыра ала ма?", options: ["Иә", "Жоқ, адамның орны бөлек"], correct: 1, explanation: "ЖИ — көмекші. Шешім қабылдау, сезім және шығармашылық — адамның орны." }
                 ]
             },
             13: {
                 title: "Қорытынды",
                 photo: "images/lesson-13.jpg",
                 steps: [
-                    { type: "theory", label: "ТЕОРИЯ", title: "Курс қорытындысы", content: `<p>Біз 3 апта ішінде ЖИ туралы көп нәрсе үйрендік. Енді біз оны күнделікті өмірде қауіпсіз әрі пайдалы қолдана аламыз.</p>` },
-                    { type: "fact", label: "ҚЫЗЫҚТЫ ФАКТ", title: "Ғарыш және ЖИ", content: `<p>CERN-нің физиктері бөлшектердің ізін табу үшін ЖИ-ді пайдаланады. Бұл 2012 жылы Хиггс бозонын ашуға көмектесті.</p>` },
-                    { type: "quiz", label: "СҰРАҚ", title: "Соңғы тест", question: "Курстың ең басты қорытындысы қандай?", options: ["ЖИ — дәрігер", "ЖИ — көмекші, бірақ оның шектеулері бар"], correct: 1, explanation: "ЖИ — көмекші. Бірақ денсаулық пен қауіпсіздік мәселелерінде адамдарға (дәрігерге, маманға) жүгіну керек." }
+                    { type: "theory", label: "1-ТЕОРИЯ", title: "Курс қорытындысы", content: `<p>Біз 3 апта ішінде ЖИ туралы көп нәрсе үйрендік. Енді оны қауіпсіз қолдана аламыз.</p>` },
+                    { type: "example", label: "2-МЫСАЛ", title: "Білімді қолдану", content: `<p>Үйде ЖИ-ге сурет салдырып, немесе хат жазып көріңіз.</p>` },
+                    { type: "fact", label: "3-ҚЫЗЫҚТЫ ФАКТ", title: "Ғарыш және ЖИ", content: `<p>CERN-нің физиктері бөлшектердің ізін табу үшін ЖИ-ді пайдаланады.</p>` },
+                    { type: "life", label: "4-ӨМІРДЕН МЫСАЛ", title: "Мұғалімдерге", content: `<p>Енді сіз ЖИ-ді сабақ беру барысында қауіпсіз әрі тиімді қолдана аласыз.</p>` },
+                    { type: "quiz", label: "5-ТЕСТ", title: "Соңғы тест", question: "Курстың ең басты қорытындысы қандай?", options: ["ЖИ — дәрігер", "ЖИ — көмекші, бірақ оның шектеулері бар"], correct: 1, explanation: "ЖИ — көмекші. Бірақ денсаулық пен қауіпсіздік мәселелерінде маманға жүгіну керек." }
                 ]
             }
         };
@@ -604,6 +594,23 @@
         let currentLessonId = 1;
         let currentStepIndex = 0;
         let currentSteps = [];
+
+        // Аяқталған сабақтарды localStorage-тен жүктеу
+        let completedLessons = JSON.parse(localStorage.getItem('completedLessons')) || [];
+        
+        // Бет жүктелгенде карточкалардың түсін жаңарту
+        function updateCardStatus() {
+            for (let i = 1; i <= 13; i++) {
+                const card = document.getElementById('card-' + i);
+                if (card) {
+                    if (completedLessons.includes(i)) {
+                        card.classList.add('completed');
+                    } else {
+                        card.classList.remove('completed');
+                    }
+                }
+            }
+        }
 
         function openLesson(id) {
             currentLessonId = id;
@@ -621,7 +628,7 @@
             const step = currentSteps[currentStepIndex];
             const totalSteps = currentSteps.length;
 
-            // Прогресс барды жасау
+            // Прогресс бар
             const progressContainer = document.getElementById('progressBarContainer');
             progressContainer.innerHTML = '';
             for (let i = 0; i < totalSteps; i++) {
@@ -632,17 +639,23 @@
             }
             document.getElementById('stepCounter').textContent = `Қадам ${currentStepIndex + 1} / ${totalSteps}`;
 
-            // Карточка мазмұнын жасау
+            // Карточка мазмұны
             let html = `<div class="step-card active">`;
             
-            // Фото (тек 1-қадамда көрсету)
+            // Фото тек 1-қадамда
             if (currentStepIndex === 0 && lesson.photo) {
                 html += `<img src="${lesson.photo}" alt="${lesson.title}" class="lesson-photo" onerror="this.style.display='none'">`;
             }
 
+            let icon = '🤖';
+            if (step.type === 'fact') icon = '✨';
+            if (step.type === 'example') icon = '💡';
+            if (step.type === 'life') icon = '👨‍🏫';
+            if (step.type === 'quiz') icon = '🎯';
+
             html += `
                 <div class="step-header">
-                    <div class="step-icon">${step.type === 'theory' ? '🤖' : (step.type === 'fact' ? '✨' : '🎯')}</div>
+                    <div class="step-icon">${icon}</div>
                     <div>
                         <div class="step-label">${step.label}</div>
                         <div class="step-title">${step.title}</div>
@@ -651,9 +664,7 @@
                 <div class="step-content">
             `;
 
-            if (step.type === 'theory' || step.type === 'fact') {
-                html += step.content;
-            } else if (step.type === 'quiz') {
+            if (step.type === 'quiz') {
                 html += `<div class="question-title">${step.question}</div>`;
                 step.options.forEach((opt, idx) => {
                     html += `
@@ -672,18 +683,18 @@
                         </div>
                     </div>
                 `;
+            } else {
+                html += step.content;
             }
 
             html += `</div><div class="nav-buttons">`;
 
-            // Артқа батырмасы
             if (currentStepIndex > 0) {
                 html += `<button class="nav-btn prev" onclick="prevStep()">← Артқа</button>`;
             } else {
                 html += `<button class="nav-btn prev" style="visibility: hidden;">← Артқа</button>`;
             }
 
-            // Келесі батырмасы
             if (currentStepIndex < totalSteps - 1) {
                 const disabled = step.type === 'quiz' ? 'disabled' : '';
                 html += `<button class="nav-btn next" onclick="nextStep()" ${disabled} id="nextBtn">Келесі →</button>`;
@@ -709,7 +720,6 @@
             }
         }
 
-        // ТҮЗЕТІЛГЕН ТЕСТ ЛОГИКАСЫ
         function checkAnswer(btn, isCorrect, feedbackId, explanation) {
             const parent = btn.parentElement;
             const options = parent.querySelectorAll('.option-btn');
@@ -737,7 +747,6 @@
                 feedback.className = 'feedback-box wrong show';
                 fbIcon.textContent = '❌';
                 fbTitle.textContent = 'Қате!';
-                // Мұнда енді дұрыс жауаптың мәтіні толық жазылады
                 fbText.textContent = explanation;
             }
 
@@ -746,6 +755,12 @@
         }
 
         function finishLesson() {
+            // Сабақты аяқталды деп белгілеу
+            if (!completedLessons.includes(currentLessonId)) {
+                completedLessons.push(currentLessonId);
+                localStorage.setItem('completedLessons', JSON.stringify(completedLessons));
+            }
+            updateCardStatus();
             showScreen('catalogScreen');
         }
 
@@ -831,6 +846,7 @@
         }
 
         window.addEventListener('load', () => {
+            updateCardStatus(); // Бет жүктелгенде аяқталған сабақтарды жаңарту
             const urlParams = new URLSearchParams(window.location.search);
             if (urlParams.get('test') === 'true') {
                 showScreen('testScreen');
