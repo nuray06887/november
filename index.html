@@ -67,11 +67,75 @@
         }
         .start-course-btn:hover { background: var(--primary-light); transform: translateY(-3px); box-shadow: 0 15px 35px rgba(0, 51, 160, 0.4); }
 
+        /* ================= КАТАЛОГ БАННЕРІ (HERO) ================= */
+        .catalog-hero {
+            position: relative;
+            width: 100%;
+            height: 400px;
+            border-radius: 24px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            display: flex;
+            align-items: flex-end;
+        }
+
+        .hero-bg-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 1;
+            transition: transform 0.8s ease;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(0, 20, 60, 0.95) 0%, rgba(0, 20, 60, 0.4) 50%, rgba(0, 0, 0, 0) 100%);
+            z-index: 2;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 3;
+            padding: 50px;
+            width: 100%;
+            color: white;
+            transform: translateY(0);
+            transition: transform 0.4s ease;
+        }
+
+        .catalog-hero:hover .hero-bg-image { transform: scale(1.05); }
+        .catalog-hero:hover .hero-content { transform: translateY(-10px); }
+
+        .hero-content h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 3em;
+            font-weight: 800;
+            margin-bottom: 15px;
+            color: #ffffff;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+            letter-spacing: -0.5px;
+        }
+
+        .hero-content p {
+            font-size: 1.2em;
+            color: #e2e8f0;
+            max-width: 600px;
+            line-height: 1.6;
+            text-shadow: 0 1px 5px rgba(0,0,0,0.5);
+        }
+
         /* ================= КАТАЛОГ ================= */
         .catalog-screen { padding: 60px 20px; max-width: 1200px; margin: 0 auto; }
         .catalog-header { text-align: center; margin-bottom: 50px; }
         .catalog-header h1 { font-size: 2.5em; color: var(--primary); margin-bottom: 10px; }
-        .catalog-header p { color: var(--text-light); font-size: 1.1em; }
 
         .week-title { font-size: 1.5em; font-weight: 700; color: var(--primary); margin: 40px 0 20px; padding-bottom: 10px; border-bottom: 2px solid var(--border); }
 
@@ -86,7 +150,6 @@
         .lesson-card.completed { background: var(--success-bg); border: 2px solid var(--success); }
         .lesson-card.completed .card-tag { background: var(--success); color: white; }
         .lesson-card.completed .card-title { color: var(--success); }
-        /* Өтілген карточканың бұрышындағы белгі */
         .lesson-card.completed::after { content: '✅'; position: absolute; top: 20px; right: 20px; font-size: 1.5em; }
 
         .card-tag { display: inline-flex; align-items: center; gap: 6px; background: #e0e7ff; color: var(--primary); font-size: 0.8em; font-weight: 600; padding: 6px 12px; border-radius: 8px; margin-bottom: 15px; align-self: flex-start; transition: 0.3s; }
@@ -230,6 +293,10 @@
             body { font-size: 16px; }
             .home-content { padding: 30px 20px; }
             .home-screen h1 { font-size: 2.2em; }
+            .catalog-hero { height: 300px; border-radius: 16px; }
+            .hero-content { padding: 25px 20px; }
+            .hero-content h1 { font-size: 2em; }
+            .hero-content p { font-size: 1em; }
             .step-card { padding: 30px 20px; }
             .step-title { font-size: 1.6em; }
             .lesson-photo { height: 250px; }
@@ -275,9 +342,19 @@
     <!-- ================= 2. САБАҚТАР КАТАЛОГЫ ================= -->
     <div class="screen" id="catalogScreen">
         <div class="catalog-screen">
-            <div class="catalog-header">
+            
+            <!-- ЖАҢА: Әдемі баннер (Hero section) -->
+            <div class="catalog-hero">
+                <img src="images/hero-bg.jpg" alt="AI Technology" class="hero-bg-image" onerror="this.src='https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=2000&auto=format&fit=crop'">
+                <div class="hero-overlay"></div>
+                <div class="hero-content">
+                    <h1>Жасанды интеллект әлемі</h1>
+                    <p>Болашақ технологияларын бүгіннен бастап үйреніңіз. Интерактивті курс.</p>
+                </div>
+            </div>
+
+            <div class="catalog-header" style="margin-top: 40px;">
                 <h1>Курс сабақтары</h1>
-                <p>3 аптаға бөлінген 13 интерактивті сабақ</p>
             </div>
 
             <!-- 1-АПТА -->
@@ -809,7 +886,6 @@
             }
         }
 
-        // Жаңа логика: Егер сабақ өтілген болса, қайтару мүмкіндігін ұсыну
         function openLesson(id) {
             const lesson = lessonsData[id];
             
@@ -818,7 +894,6 @@
                 return;
             }
 
-            // Егер сабақ бұрын аяқталған болса
             if (completedLessons.includes(id)) {
                 if (confirm(`${id}-сабақ аяқталған. Оны қайтадан «аяқталмаған» күйге қайтарғыңыз келе ме?`)) {
                     completedLessons = completedLessons.filter(item => item !== id);
@@ -828,7 +903,6 @@
                 return;
             }
 
-            // Егер аяқталмаған болса, сабақты ашу
             currentLessonId = id;
             currentStepIndex = 0;
             currentSteps = lesson.steps;
@@ -837,9 +911,8 @@
             renderStep();
         }
 
-        // Кішкентай ✕ батырмасын басқан кездегі функция
         function resetLesson(event, lessonId) {
-            event.stopPropagation(); // Карточканың өзі ашылып кетпеуі үшін
+            event.stopPropagation();
 
             if (confirm('Бұл сабақты «өтілмеген» күйге қайтарғыңыз келе ме?')) {
                 completedLessons = completedLessons.filter(id => id !== lessonId);
@@ -848,7 +921,6 @@
             }
         }
 
-        // Осы жердегі функция суреттерді қадамдарға қосады
         function renderStep() {
             const lesson = lessonsData[currentLessonId];
             const step = currentSteps[currentStepIndex];
@@ -866,12 +938,10 @@
 
             let html = `<div class="step-card active">`;
             
-            // 1-ҚАДАМ: Егер бұл бірінші қадам болса және сабақтың негізгі суреті болса
             if (currentStepIndex === 0 && lesson.photo) {
                 html += `<img src="${lesson.photo}" alt="${lesson.title}" class="lesson-photo" onerror="this.style.display='none'">`;
             }
 
-            // Егер ағымдағы қадамда өзінің жеке суреті болса
             if (step.photo) {
                 html += `<img src="${step.photo}" alt="${step.title}" class="lesson-photo" onerror="this.style.display='none'">`;
             }
@@ -949,7 +1019,6 @@
             }
         }
 
-        // ТҮЗЕТІЛГЕН ФУНКЦИЯ
         function checkAnswer(btn, isCorrect, feedbackId, explanation) {
             const parent = btn.parentElement;
             const options = parent.querySelectorAll('.option-btn');
@@ -980,7 +1049,6 @@
                 fbText.textContent = explanation;
             }
 
-            // КЕЛЕСІ БАТЫРМАСЫН ТІКЕЛЕЙ ID АРҚЫЛЫ ІЗДЕУ (Бұрынғы қате осында болған)
             const nextBtn = document.getElementById('nextBtn'); 
             if (nextBtn) {
                 nextBtn.disabled = false;
