@@ -86,6 +86,7 @@
         .lesson-card.completed { background: var(--success-bg); border: 2px solid var(--success); }
         .lesson-card.completed .card-tag { background: var(--success); color: white; }
         .lesson-card.completed .card-title { color: var(--success); }
+        /* Өтілген карточканың бұрышындағы белгі */
         .lesson-card.completed::after { content: '✅'; position: absolute; top: 20px; right: 20px; font-size: 1.5em; }
 
         .card-tag { display: inline-flex; align-items: center; gap: 6px; background: #e0e7ff; color: var(--primary); font-size: 0.8em; font-weight: 600; padding: 6px 12px; border-radius: 8px; margin-bottom: 15px; align-self: flex-start; transition: 0.3s; }
@@ -98,6 +99,27 @@
         .lesson-card.completed .author-avatar { background: var(--success); }
         .card-badge { background: #f1f5f9; padding: 4px 10px; border-radius: 6px; font-weight: 600; }
         .lesson-card.completed .card-badge { background: rgba(16, 185, 129, 0.2); color: var(--success); }
+
+        /* Кішкентай қайтару батырмасы */
+        .reset-card-btn {
+            display: none;
+            background: transparent;
+            border: 1px solid transparent;
+            color: var(--success);
+            font-size: 1em;
+            cursor: pointer;
+            padding: 4px 8px;
+            border-radius: 6px;
+            transition: all 0.2s;
+            line-height: 1;
+            font-family: inherit;
+        }
+        .lesson-card.completed .reset-card-btn { display: block; }
+        .reset-card-btn:hover {
+            background: rgba(16, 185, 129, 0.15);
+            color: var(--danger);
+            border-color: rgba(239, 68, 68, 0.3);
+        }
 
         /* ================= ОҚУ ИНТЕРФЕЙСІ ================= */
         .course-header { background: white; border-bottom: 1px solid var(--border); padding: 20px 40px; position: sticky; top: 0; z-index: 100; display: flex; flex-direction: column; gap: 15px; }
@@ -265,25 +287,49 @@
                     <div class="card-tag">📖 Сабақ 1</div>
                     <div class="card-title">ЖИ деген не?</div>
                     <div class="card-desc">Жасанды интеллектке кіріспе және негізгі түсініктер.</div>
-                    <div class="card-footer"><div class="card-author"><div class="author-avatar">А</div> AI Курс</div><div class="card-badge">15 қадам</div></div>
+                    <div class="card-footer">
+                        <div class="card-author"><div class="author-avatar">А</div> AI Курс</div>
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <div class="card-badge">15 қадам</div>
+                            <button class="reset-card-btn" onclick="resetLesson(event, 1)" title="Сабақты қайтару">✕</button>
+                        </div>
+                    </div>
                 </div>
                 <div class="lesson-card" id="card-2" onclick="openLesson(2)">
                     <div class="card-tag">📖 Сабақ 2</div>
                     <div class="card-title">Алғашқы сөйлесу</div>
                     <div class="card-desc">Чат-боттар және дауыс көмекшілерімен жұмыс.</div>
-                    <div class="card-footer"><div class="card-author"><div class="author-avatar">А</div> AI Курс</div><div class="card-badge">15 қадам</div></div>
+                    <div class="card-footer">
+                        <div class="card-author"><div class="author-avatar">А</div> AI Курс</div>
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <div class="card-badge">15 қадам</div>
+                            <button class="reset-card-btn" onclick="resetLesson(event, 2)" title="Сабақты қайтару">✕</button>
+                        </div>
+                    </div>
                 </div>
                 <div class="lesson-card" id="card-3" onclick="openLesson(3)">
                     <div class="card-tag">📖 Сабақ 3</div>
                     <div class="card-title">ЖИ біздің айналамызда</div>
                     <div class="card-desc">Күнделікті өмірдегі ЖИ-дің көріністері.</div>
-                    <div class="card-footer"><div class="card-author"><div class="author-avatar">А</div> AI Курс</div><div class="card-badge">15 қадам</div></div>
+                    <div class="card-footer">
+                        <div class="card-author"><div class="author-avatar">А</div> AI Курс</div>
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <div class="card-badge">15 қадам</div>
+                            <button class="reset-card-btn" onclick="resetLesson(event, 3)" title="Сабақты қайтару">✕</button>
+                        </div>
+                    </div>
                 </div>
                 <div class="lesson-card" id="card-4" onclick="openLesson(4)">
                     <div class="card-tag">🛡️ Сабақ 4</div>
                     <div class="card-title">Қауіпсіздік және деректер</div>
                     <div class="card-desc">Жеке деректерді қалай қорғауға болады?</div>
-                    <div class="card-footer"><div class="card-author"><div class="author-avatar">А</div> AI Курс</div><div class="card-badge">15 қадам</div></div>
+                    <div class="card-footer">
+                        <div class="card-author"><div class="author-avatar">А</div> AI Курс</div>
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <div class="card-badge">15 қадам</div>
+                            <button class="reset-card-btn" onclick="resetLesson(event, 4)" title="Сабақты қайтару">✕</button>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -294,25 +340,49 @@
                     <div class="card-tag">🏥 Сабақ 5</div>
                     <div class="card-title">Денсаулық және ЖИ</div>
                     <div class="card-desc">ЖИ дәрігер емес. Денсаулық туралы қандай сұрақтар қоюға болады?</div>
-                    <div class="card-footer"><div class="card-author"><div class="author-avatar">А</div> AI Курс</div><div class="card-badge">15 қадам</div></div>
+                    <div class="card-footer">
+                        <div class="card-author"><div class="author-avatar">А</div> AI Курс</div>
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <div class="card-badge">15 қадам</div>
+                            <button class="reset-card-btn" onclick="resetLesson(event, 5)" title="Сабақты қайтару">✕</button>
+                        </div>
+                    </div>
                 </div>
                 <div class="lesson-card" id="card-6" onclick="openLesson(6)">
                     <div class="card-tag">🕵️ Сабақ 6</div>
                     <div class="card-title">Сенімділік және фейк</div>
                     <div class="card-desc">Фейк жаңалықтар мен галлюцинациялардан қорғану.</div>
-                    <div class="card-footer"><div class="card-author"><div class="author-avatar">А</div> AI Курс</div><div class="card-badge">15 қадам</div></div>
+                    <div class="card-footer">
+                        <div class="card-author"><div class="author-avatar">А</div> AI Курс</div>
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <div class="card-badge">15 қадам</div>
+                            <button class="reset-card-btn" onclick="resetLesson(event, 6)" title="Сабақты қайтару">✕</button>
+                        </div>
+                    </div>
                 </div>
                 <div class="lesson-card" id="card-7" onclick="openLesson(7)">
                     <div class="card-tag">🚨 Сабақ 7</div>
                     <div class="card-title">Алаяқтан қорғану</div>
                     <div class="card-desc">Қазақстанға тән алаяқтық түрлері және қорғану жолдары.</div>
-                    <div class="card-footer"><div class="card-author"><div class="author-avatar">А</div> AI Курс</div><div class="card-badge">15 қадам</div></div>
+                    <div class="card-footer">
+                        <div class="card-author"><div class="author-avatar">А</div> AI Курс</div>
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <div class="card-badge">15 қадам</div>
+                            <button class="reset-card-btn" onclick="resetLesson(event, 7)" title="Сабақты қайтару">✕</button>
+                        </div>
+                    </div>
                 </div>
                 <div class="lesson-card" id="card-8" onclick="openLesson(8)">
                     <div class="card-tag">📝 Сабақ 8</div>
                     <div class="card-title">Промпт жазу өнері</div>
                     <div class="card-desc">ЖИ-ға қалай дұрыс сұрақ қою керек? (Промпттар)</div>
-                    <div class="card-footer"><div class="card-author"><div class="author-avatar">А</div> AI Курс</div><div class="card-badge">15 қадам</div></div>
+                    <div class="card-footer">
+                        <div class="card-author"><div class="author-avatar">А</div> AI Курс</div>
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <div class="card-badge">15 қадам</div>
+                            <button class="reset-card-btn" onclick="resetLesson(event, 8)" title="Сабақты қайтару">✕</button>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -323,31 +393,61 @@
                     <div class="card-tag">👨‍🏫 Сабақ 9</div>
                     <div class="card-title">Сабақ жоспары</div>
                     <div class="card-desc">Мұғалімдерге арналған ЖИ көмегімен жоспар құру.</div>
-                    <div class="card-footer"><div class="card-author"><div class="author-avatar">А</div> AI Курс</div><div class="card-badge">15 қадам</div></div>
+                    <div class="card-footer">
+                        <div class="card-author"><div class="author-avatar">А</div> AI Курс</div>
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <div class="card-badge">15 қадам</div>
+                            <button class="reset-card-btn" onclick="resetLesson(event, 9)" title="Сабақты қайтару">✕</button>
+                        </div>
+                    </div>
                 </div>
                 <div class="lesson-card" id="card-10" onclick="openLesson(10)">
                     <div class="card-tag">✉️ Сабақ 10</div>
                     <div class="card-title">Хат және құжат</div>
                     <div class="card-desc">Құттықтаулар, өтініштер және ресми хаттар.</div>
-                    <div class="card-footer"><div class="card-author"><div class="author-avatar">А</div> AI Курс</div><div class="card-badge">15 қадам</div></div>
+                    <div class="card-footer">
+                        <div class="card-author"><div class="author-avatar">А</div> AI Курс</div>
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <div class="card-badge">15 қадам</div>
+                            <button class="reset-card-btn" onclick="resetLesson(event, 10)" title="Сабақты қайтару">✕</button>
+                        </div>
+                    </div>
                 </div>
                 <div class="lesson-card" id="card-11" onclick="openLesson(11)">
                     <div class="card-tag">🎨 Сабақ 11</div>
                     <div class="card-title">Сурет және аударма</div>
                     <div class="card-desc">Шығармашылық және тілдік мүмкіндіктер.</div>
-                    <div class="card-footer"><div class="card-author"><div class="author-avatar">А</div> AI Курс</div><div class="card-badge">15 қадам</div></div>
+                    <div class="card-footer">
+                        <div class="card-author"><div class="author-avatar">А</div> AI Курс</div>
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <div class="card-badge">15 қадам</div>
+                            <button class="reset-card-btn" onclick="resetLesson(event, 11)" title="Сабақты қайтару">✕</button>
+                        </div>
+                    </div>
                 </div>
                 <div class="lesson-card" id="card-12" onclick="openLesson(12)">
                     <div class="card-tag">⚖️ Сабақ 12</div>
                     <div class="card-title">Этика және адалдық</div>
                     <div class="card-desc">Оқушы жұмысы және ЖИ-ді дұрыс қолдану.</div>
-                    <div class="card-footer"><div class="card-author"><div class="author-avatar">А</div> AI Курс</div><div class="card-badge">15 қадам</div></div>
+                    <div class="card-footer">
+                        <div class="card-author"><div class="author-avatar">А</div> AI Курс</div>
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <div class="card-badge">15 қадам</div>
+                            <button class="reset-card-btn" onclick="resetLesson(event, 12)" title="Сабақты қайтару">✕</button>
+                        </div>
+                    </div>
                 </div>
                 <div class="lesson-card" id="card-13" onclick="openLesson(13)">
                     <div class="card-tag">🎓 Сабақ 13</div>
                     <div class="card-title">Болашақ және қорытынды</div>
                     <div class="card-desc">Алдағы уақыттағы технологиялар және жалпы тест.</div>
-                    <div class="card-footer"><div class="card-author"><div class="author-avatar">А</div> AI Курс</div><div class="card-badge">15 қадам</div></div>
+                    <div class="card-footer">
+                        <div class="card-author"><div class="author-avatar">А</div> AI Курс</div>
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <div class="card-badge">15 қадам</div>
+                            <button class="reset-card-btn" onclick="resetLesson(event, 13)" title="Сабақты қайтару">✕</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -709,20 +809,43 @@
             }
         }
 
+        // Жаңа логика: Егер сабақ өтілген болса, қайтару мүмкіндігін ұсыну
         function openLesson(id) {
-            currentLessonId = id;
-            currentStepIndex = 0;
             const lesson = lessonsData[id];
             
             if (!lesson.steps || lesson.steps.length === 0) {
-                alert("Бұл сабақтың материалы дайындалып жатыр. 1-сабақты қарап көріңіз!");
+                alert("Бұл сабақтың материалы дайындал жатыр.");
                 return;
             }
 
+            // Егер сабақ бұрын аяқталған болса
+            if (completedLessons.includes(id)) {
+                if (confirm(`${id}-сабақ аяқталған. Оны қайтадан «аяқталмаған» күйге қайтарғыңыз келе ме?`)) {
+                    completedLessons = completedLessons.filter(item => item !== id);
+                    localStorage.setItem('completedLessons', JSON.stringify(completedLessons));
+                    updateCardStatus();
+                }
+                return;
+            }
+
+            // Егер аяқталмаған болса, сабақты ашу
+            currentLessonId = id;
+            currentStepIndex = 0;
             currentSteps = lesson.steps;
             document.getElementById('courseTitleHeader').textContent = `${id}-сабақ: ${lesson.title}`;
             showScreen('courseScreen');
             renderStep();
+        }
+
+        // Кішкентай ✕ батырмасын басқан кездегі функция
+        function resetLesson(event, lessonId) {
+            event.stopPropagation(); // Карточканың өзі ашылып кетпеуі үшін
+
+            if (confirm('Бұл сабақты «өтілмеген» күйге қайтарғыңыз келе ме?')) {
+                completedLessons = completedLessons.filter(id => id !== lessonId);
+                localStorage.setItem('completedLessons', JSON.stringify(completedLessons));
+                updateCardStatus();
+            }
         }
 
         // Осы жердегі функция суреттерді қадамдарға қосады
@@ -748,7 +871,7 @@
                 html += `<img src="${lesson.photo}" alt="${lesson.title}" class="lesson-photo" onerror="this.style.display='none'">`;
             }
 
-            // Егер ағымдағы қадамда өзінің жеке суреті болса (мысалы, 7-қадамдағы Алиса)
+            // Егер ағымдағы қадамда өзінің жеке суреті болса
             if (step.photo) {
                 html += `<img src="${step.photo}" alt="${step.title}" class="lesson-photo" onerror="this.style.display='none'">`;
             }
@@ -826,7 +949,7 @@
             }
         }
 
-        // ТҮЗЕТІЛГЕН ФУНКЦИЯ: Келесі батырмасын дұрыс іздеу
+        // ТҮЗЕТІЛГЕН ФУНКЦИЯ
         function checkAnswer(btn, isCorrect, feedbackId, explanation) {
             const parent = btn.parentElement;
             const options = parent.querySelectorAll('.option-btn');
@@ -835,7 +958,6 @@
             const fbTitle = document.getElementById(feedbackId + '-title');
             const fbText = document.getElementById(feedbackId + '-text');
 
-            // Барлық батырмаларды бұғаттау
             options.forEach(o => {
                 o.classList.remove('correct', 'wrong');
                 o.style.pointerEvents = 'none';
@@ -858,7 +980,7 @@
                 fbText.textContent = explanation;
             }
 
-            // КЕЛЕСІ БАТЫРМАСЫН ТІКЕЛЕЙ ID АРҚЫЛЫ ІЗДЕУ
+            // КЕЛЕСІ БАТЫРМАСЫН ТІКЕЛЕЙ ID АРҚЫЛЫ ІЗДЕУ (Бұрынғы қате осында болған)
             const nextBtn = document.getElementById('nextBtn'); 
             if (nextBtn) {
                 nextBtn.disabled = false;
