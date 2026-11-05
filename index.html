@@ -415,7 +415,7 @@
             window.scrollTo(0, 0);
         }
 
-        // ================= КУРС МӘЛІМЕТТЕРІ (ЖАҢА 13 САБАҚ, 15 ҚАДАМ) =================
+        // ================= КУРС МӘЛІМЕТТЕРІ (БАРЛЫҚ 13 САБАҚ, 15 ҚАДАМ) =================
         const lessonsData = {
             1: {
                 title: "ЖИ деген не?",
@@ -826,6 +826,7 @@
             }
         }
 
+        // ТҮЗЕТІЛГЕН ФУНКЦИЯ: Келесі батырмасын дұрыс іздеу
         function checkAnswer(btn, isCorrect, feedbackId, explanation) {
             const parent = btn.parentElement;
             const options = parent.querySelectorAll('.option-btn');
@@ -834,6 +835,7 @@
             const fbTitle = document.getElementById(feedbackId + '-title');
             const fbText = document.getElementById(feedbackId + '-text');
 
+            // Барлық батырмаларды бұғаттау
             options.forEach(o => {
                 o.classList.remove('correct', 'wrong');
                 o.style.pointerEvents = 'none';
@@ -856,8 +858,11 @@
                 fbText.textContent = explanation;
             }
 
-            const nextBtn = parent.querySelector('.nav-btn.next');
-            if (nextBtn) nextBtn.disabled = false;
+            // КЕЛЕСІ БАТЫРМАСЫН ТІКЕЛЕЙ ID АРҚЫЛЫ ІЗДЕУ
+            const nextBtn = document.getElementById('nextBtn'); 
+            if (nextBtn) {
+                nextBtn.disabled = false;
+            }
         }
 
         function finishLesson() {
